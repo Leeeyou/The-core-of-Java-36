@@ -142,19 +142,15 @@ public static void main(String[] args) throws InterruptedException {
 
 我将其简化为下面的伪代码，问题是暴露在 HTTP/2 客户端中，这是个非常现代的反应式风格的 API，非常推荐学习使用。
 
+```java
 /// Thread HttpClient-6-SelectorManager:
-
-readLock.lock\(\);
-
-writeLock.lock\(\);
-
+readLock.lock();
+writeLock.lock();
 // 持有 readLock/writeLock，调用 close（）需要获得 closeLock
-
-close\(\);
-
+close();
 // Thread HttpClient-6-Worker-2 持有 closeLock
-
-implCloseSelectableChannel \(\); // 想获得 readLock
+implCloseSelectableChannel (); // 想获得 readLock
+```
 
 在 close 发生时， HttpClient-6-SelectorManager 线程持有 readLock/writeLock，试图获得 closeLock；与此同时，另一个 HttpClient-6-Worker-2 线程，持有 closeLock，试图获得 readLock，这就不可避免地进入了死锁。
 
