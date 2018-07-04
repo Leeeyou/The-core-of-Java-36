@@ -76,7 +76,9 @@ public class DeadLockSample extends Thread {
 
 其次，调用 jstack 获取线程栈：
 
-${JAVA\_HOME}\bin\jstack your\_pid
+```java
+${JAVA_HOME}\bin\jstack your_pid
+```
 
 然后，分析得到的输出，具体片段如下：
 
