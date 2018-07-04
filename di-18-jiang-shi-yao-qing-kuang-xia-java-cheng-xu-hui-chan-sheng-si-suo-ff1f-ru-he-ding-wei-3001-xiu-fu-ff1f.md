@@ -156,6 +156,8 @@ implCloseSelectableChannel (); // 想获得 readLock
 
 这里比较难懂的地方在于，closeLock 的持有状态（就是我标记为绿色的部分）并没有在线程栈中显示出来，请参考我在下图中标记的部分。
 
+![](/assets/1530691524606.jpg)
+
 更加具体来说，请查看SocketChannelImpl的 663 行，对比 implCloseSelectableChannel\(\) 方法实现和AbstractInterruptibleChannel.close\(\)在 109 行的代码，这里就不展示代码了。
 
 所以，从程序设计的角度反思，如果我们赋予一段程序太多的职责，出现“既要…又要…”的情况时，可能就需要我们审视下设计思路或目的是否合理了。对于类库，因为其基础、共享的定位，比应用开发往往更加令人苦恼，需要仔细斟酌之间的平衡。
