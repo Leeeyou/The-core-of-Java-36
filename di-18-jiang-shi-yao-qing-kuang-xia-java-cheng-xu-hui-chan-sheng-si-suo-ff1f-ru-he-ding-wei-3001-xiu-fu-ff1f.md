@@ -30,7 +30,41 @@
 
 在分析开始之前，先以一个基本的死锁程序为例，我在这里只用了两个嵌套的 synchronized 去获取锁，具体如下：
 
+```java
+public class DeadLockSample extends Thread {
+    private String first;
+    private String second;
+    public DeadLockSample(String name, String first, String second) {
+        super(name);
+        this.first = first;
+        this.second = second;
+    }
 
+    public  void run() {
+        synchronized (first) {
+            System.out.println(this.getName() + " obtained: " + first);
+            try {
+                Thread.sleep(1000L);
+                synchronized (second) {
+                    System.out.println(this.getName() + " obtained: " + second);
+                }
+            } catch (InterruptedException e) {
+                // Do nothing
+            }
+        }
+    }
+    public static void main(String[] args) throws InterruptedException {
+        String lockA = "lockA";
+        String lockB = "lockB";
+        DeadLockSample t1 = new DeadLockSample("Thread1", lockA, lockB);
+        DeadLockSample t2 = new DeadLockSample("Thread2", lockB, lockA);
+        t1.start();
+        t2.start();
+        t1.join();
+        t2.join();
+    }
+}
+```
 
 这个程序编译执行后，几乎每次都可以重现死锁，请看下面截取的输出。另外，这里有个比较有意思的地方，为什么我先调用 Thread1 的 start，但是 Thread2 却先打印出来了呢？这就是因为线程调度依赖于（操作系统）调度器，虽然你可以通过优先级之类进行影响，但是具体情况是不确定的。
 
