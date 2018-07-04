@@ -180,7 +180,7 @@ implCloseSelectableChannel (); // 想获得 readLock
 
 ![](/assets/1530691541649.jpg)
 
-第三种方法
+**第三种方法**
 
 使用带超时的方法，为程序带来更多可控性。
 
