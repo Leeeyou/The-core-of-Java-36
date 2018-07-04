@@ -134,7 +134,7 @@ public static void main(String[] args) throws InterruptedException {
 
 所以，我们可以据此分析可能的避免死锁的思路和方法。
 
-第一种方法
+**第一种方法**
 
 如果可能的话，尽量避免使用多个锁，并且只有需要时才持有锁。否则，即使是非常精通并发编程的工程师，也难免会掉进坑里，嵌套的 synchronized 或者 lock 非常容易出问题。
 
