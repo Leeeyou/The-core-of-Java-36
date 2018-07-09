@@ -14,7 +14,7 @@
 
 不知道你有没有注意到，java.util.concurrent 包提供的容器（Queue、List、Set）、Map，从命名上可以大概区分为 Concurrent、CopyOnWrite和 Blocking\* 等三类，同样是线程安全容器，可以简单认为：
 
-Concurrent 类型没有类似 CopyOnWrite 之类容器相对较重的修改开销。
+* Concurrent 类型没有类似 CopyOnWrite 之类容器相对较重的修改开销。
 
 但是，凡事都是有代价的，Concurrent 往往提供了较低的遍历一致性。你可以这样理解所谓的弱一致性，例如，当利用迭代器遍历时，如果容器发生修改，迭代器仍然可以继续进行遍历。
 
