@@ -54,25 +54,18 @@
 
 从行为特征来看，绝大部分 Queue 都是实现了 BlockingQueue 接口。在常规队列操作基础上，Blocking 意味着其提供了特定的等待性操作，获取时（take）等待元素进队，或者插入时（put）等待队列出现空位。
 
-/\*\*
-
-\* 获取并移除队列头结点，如果必要，其会等待直到队列出现元素
-
+```java
+/**
+* 获取并移除队列头结点，如果必要，其会等待直到队列出现元素
 …
-
-\*/
-
-E take\(\) throws InterruptedException;
-
-/\*\*
-
-\* 插入元素，如果队列已满，则等待直到队列出现空闲空间
-
+*/
+E take() throws InterruptedException;
+/**
+* 插入元素，如果队列已满，则等待直到队列出现空闲空间
 …
-
-\*/
-
-void put\(E e\) throws InterruptedException;
+*/
+void put(E e) throws InterruptedException;
+```
 
 另一个 BlockingQueue 经常被考察的点，就是是否有界（Bounded、Unbounded），这一点也往往会影响我们在应用开发中的选择，我这里简单总结一下。
 
