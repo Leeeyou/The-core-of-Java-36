@@ -8,9 +8,9 @@
 
 关于问题中它们的区别：
 
-Concurrent 类型基于 lock-free，在常见的多线程访问场景，一般可以提供较高吞吐量。
+* Concurrent 类型基于 lock-free，在常见的多线程访问场景，一般可以提供较高吞吐量。
 
-而 LinkedBlockingQueue 内部则是基于锁，并提供了 BlockingQueue 的等待性方法。
+* 而 LinkedBlockingQueue 内部则是基于锁，并提供了 BlockingQueue 的等待性方法。
 
 不知道你有没有注意到，java.util.concurrent 包提供的容器（Queue、List、Set）、Map，从命名上可以大概区分为 Concurrent、CopyOnWrite和 Blocking\* 等三类，同样是线程安全容器，可以简单认为：
 
@@ -43,8 +43,6 @@ Concurrent 类型没有类似 CopyOnWrite 之类容器相对较重的修改开�
 线程安全队列一览
 
 我在专栏第 8 讲中介绍过，常见的集合中如 LinkedList 是个 Deque，只不过不是线程安全的。下面这张图是 Java 并发类库提供的各种各样的线程安全队列实现，注意，图中并未将非线程安全部分包含进来。
-
-
 
 我们可以从不同的角度进行分类，从基本的数据结构的角度分析，有两个特别的Deque实现，ConcurrentLinkedDeque 和 LinkedBlockingDeque。Deque 的侧重点是支持对队列头尾都进行插入和删除，所以提供了特定的方法，如:
 
