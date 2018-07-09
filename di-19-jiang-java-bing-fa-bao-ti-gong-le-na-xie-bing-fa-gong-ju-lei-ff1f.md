@@ -252,7 +252,7 @@ Java 并发类库还提供了Phaser，功能与 CountDownLatch 很接近，但�
 
 接下来，我来梳理下并发包里提供的线程安全 Map、List 和 Set。首先，请参考下面的类图。
 
-
+![](/assets/搜狗截图20180709095639.png)
 
 你可以看到，总体上种类和结构还是比较简单的，如果我们的应用侧重于 Map 放入或者获取的速度，而不在乎顺序，大多推荐使用 ConcurrentHashMap，反之则使用 ConcurrentSkipListMap；如果我们需要对大量数据进行非常频繁地修改，ConcurrentSkipListMap 也可能表现出优势。
 
