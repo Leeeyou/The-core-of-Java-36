@@ -204,7 +204,43 @@ CountDownLatch 的调度方式相对简单，后一批次的线程进行 await�
 
 如果用 CyclicBarrier 来表达这个场景呢？我们知道 CyclicBarrier 其实反映的是线程并行运行时的协调，在下面的示例里，从逻辑上，5 个工作线程其实更像是代表了 5 个可以就绪的空车，而不再是 5 个乘客，对比前面 CountDownLatch 的例子更有助于我们区别它们的抽象模型，请看下面的示例代码：
 
-
+```java
+import java.util.concurrent.BrokenBarrierException;
+import java.util.concurrent.CyclicBarrier;
+public class CyclicBarrierSample {
+    public static void main(String[] args) throws InterruptedException {
+        CyclicBarrier barrier = new CyclicBarrier(5, new Runnable() {
+            @Override
+            public void run() {
+                System.out.println("Action...GO again!");
+            }
+        });
+        for (int i = 0; i < 5; i++) {
+            Thread t = new Thread(new CyclicWorker(barrier));
+            t.start();
+        }
+    }
+    static class CyclicWorker implements Runnable {
+        private CyclicBarrier barrier;
+        public CyclicWorker(CyclicBarrier barrier) {
+            this.barrier = barrier;
+        }
+        @Override
+        public void run() {
+            try {
+                for (int i=0; i<3 ; i++){
+                    System.out.println("Executed!");
+                    barrier.await();
+                }
+            } catch (BrokenBarrierException e) {
+                e.printStackTrace();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+}
+```
 
 为了让输出更能表达运行时序，我使用了 CyclicBarrier 特有的 barrierAction，当屏障被触发时，Java 会自动调度该动作。因为 CyclicBarrier 会自动进行重置，所以这个逻辑其实可以非常自然的支持更多排队人数。其编译输出如下：
 
