@@ -46,9 +46,9 @@
 
 我们可以从不同的角度进行分类，从基本的数据结构的角度分析，有两个特别的Deque实现，ConcurrentLinkedDeque 和 LinkedBlockingDeque。**Deque 的侧重点是支持对队列头尾都进行插入和删除**，所以提供了特定的方法，如:
 
-尾部插入时需要的addLast\(e\)、offerLast\(e\)。
+* 尾部插入时需要的addLast\(e\)、offerLast\(e\)。
 
-尾部删除所需要的removeLast\(\)、pollLast\(\)。
+* 尾部删除所需要的removeLast\(\)、pollLast\(\)。
 
 从上面这些角度，能够理解 ConcurrentLinkedDeque 和 LinkedBlockingQueue 的主要功能区别，也就足够日常开发的需要了。但是如果我们深入一些，通常会更加关注下面这些方面。
 
