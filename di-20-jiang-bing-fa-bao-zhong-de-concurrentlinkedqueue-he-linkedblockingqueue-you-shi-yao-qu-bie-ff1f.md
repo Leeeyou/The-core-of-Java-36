@@ -100,49 +100,29 @@ private final Condition notFull = putLock.newCondition();
 
 下面的 take 方法与 ArrayBlockingQueue 中的实现，也是有不同的，由于其内部结构是链表，需要自己维护元素数量值，请参考下面的代码。
 
-public E take\(\) throws InterruptedException {
-
-```
-final E x;
-
-final int c;
-
-final AtomicInteger count = this.count;
-
-final ReentrantLock takeLock = this.takeLock;
-
-takeLock.lockInterruptibly\(\);
-
-try {
-
-    while \(count.get\(\) == 0\) {
-
-        notEmpty.await\(\);
-
+```java
+public E take() throws InterruptedException {
+    final E x;
+    final int c;
+    final AtomicInteger count = this.count;
+    final ReentrantLock takeLock = this.takeLock;
+    takeLock.lockInterruptibly();
+    try {
+        while (count.get() == 0) {
+            notEmpty.await();
+        }
+        x = dequeue();
+        c = count.getAndDecrement();
+        if (c > 1)
+            notEmpty.signal();
+    } finally {
+        takeLock.unlock();
     }
-
-    x = dequeue\(\);
-
-    c = count.getAndDecrement\(\);
-
-    if \(c &gt; 1\)
-
-        notEmpty.signal\(\);
-
-} finally {
-
-    takeLock.unlock\(\);
-
+    if (c == capacity)
+        signalNotFull();
+    return x;
 }
-
-if \(c == capacity\)
-
-    signalNotFull\(\);
-
-return x;
 ```
-
-}
 
 类似 ConcurrentLinkedQueue 等，则是基于 CAS 的无锁技术，不需要在每个操作时使用锁，所以扩展性表现要更加优异。
 
