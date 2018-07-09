@@ -264,7 +264,7 @@ Java 并发类库还提供了Phaser，功能与 CountDownLatch 很接近，但�
 
 关于两个 CopyOnWrite 容器，其实 CopyOnWriteArraySet 是通过包装了 CopyOnWriteArrayList 来实现的，所以在学习时，我们可以专注于理解一种。
 
-首先，CopyOnWrite 到底是什么意思呢？它的原理是，任何修改操作，如 add、set、remove，都会拷贝原数组，修改后替换原来的数组，通过这种防御性的方式，实现另类的线程安全。请看下面的代码片段，我进行注释的地方，可以清晰地理解其逻辑。
+首先，CopyOnWrite 到底是什么意思呢？**它的原理是，任何修改操作，如 add、set、remove，都会拷贝原数组，修改后替换原来的数组，通过这种防御性的方式，实现另类的线程安全。**请看下面的代码片段，我进行注释的地方，可以清晰地理解其逻辑。
 
 ```java
 public boolean add(E e) {
