@@ -258,39 +258,23 @@ Java 并发类库还提供了Phaser，功能与 CountDownLatch 很接近，但�
 
 首先，CopyOnWrite 到底是什么意思呢？它的原理是，任何修改操作，如 add、set、remove，都会拷贝原数组，修改后替换原来的数组，通过这种防御性的方式，实现另类的线程安全。请看下面的代码片段，我进行注释的地方，可以清晰地理解其逻辑。
 
-public boolean add\(E e\) {
-
-```
-synchronized \(lock\) {
-
-    Object\[\] elements = getArray\(\);
-
-    int len = elements.length;
-
-       // 拷贝
-
-    Object\[\] newElements = Arrays.copyOf\(elements, len + 1\);
-
-    newElements\[len\] = e;
-
-       // 替换
-
-    setArray\(newElements\);
-
-    return true;
-
-        }
-```
-
+```java
+public boolean add(E e) {
+    synchronized (lock) {
+        Object[] elements = getArray();
+        int len = elements.length;
+           // 拷贝
+        Object[] newElements = Arrays.copyOf(elements, len + 1);
+        newElements[len] = e;
+           // 替换
+        setArray(newElements);
+        return true;
+            }
 }
-
-final void setArray\(Object\[\] a\) {
-
-```
-array = a;
-```
-
+final void setArray(Object[] a) {
+    array = a;
 }
+```
 
 所以这种数据结构，相对比较适合读多写少的操作，不然修改的开销还是非常明显的。
 
