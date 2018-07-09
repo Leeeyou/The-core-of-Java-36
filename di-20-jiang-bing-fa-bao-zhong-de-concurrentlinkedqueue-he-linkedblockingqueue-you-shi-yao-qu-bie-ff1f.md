@@ -132,135 +132,72 @@ public E take() throws InterruptedException {
 
 在实际开发中，我提到过 Queue 被广泛使用在生产者 - 消费者场景，比如利用 BlockingQueue 来实现，由于其提供的等待机制，我们可以少操心很多协调工作，你可以参考下面样例代码：
 
+```java
 import java.util.concurrent.ArrayBlockingQueue;
-
 import java.util.concurrent.BlockingQueue;
 
 public class ConsumerProducer {
-
-```
-public static final String EXIT\_MSG  = "Good bye!";
-
-public static void main\(String\[\] args\) {
-```
-
+    public static final String EXIT_MSG  = "Good bye!";
+    public static void main(String[] args) {
 // 使用较小的队列，以更好地在输出中展示其影响
-
-```
-    BlockingQueue&lt;String&gt; queue = new ArrayBlockingQueue&lt;&gt;\(3\);
-
-    Producer producer = new Producer\(queue\);
-
-    Consumer consumer = new Consumer\(queue\);
-
-    new Thread\(producer\).start\(\);
-
-    new Thread\(consumer\).start\(\);
-
-}
-
-
-
-
-
-static class Producer implements Runnable {
-
-    private BlockingQueue&lt;String&gt; queue;
-
-    public Producer\(BlockingQueue&lt;String&gt; q\) {
-
-        this.queue = q;
-
+        BlockingQueue<String> queue = new ArrayBlockingQueue<>(3);
+        Producer producer = new Producer(queue);
+        Consumer consumer = new Consumer(queue);
+        new Thread(producer).start();
+        new Thread(consumer).start();
     }
 
 
+    static class Producer implements Runnable {
+        private BlockingQueue<String> queue;
+        public Producer(BlockingQueue<String> q) {
+            this.queue = q;
+        }
 
-    @Override
+        @Override
+        public void run() {
+            for (int i = 0; i < 20; i++) {
+                try{
+                    Thread.sleep(5L);
+                    String msg = "Message" + i;
+                    System.out.println("Produced new item: " + msg);
+                    queue.put(msg);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
 
-    public void run\(\) {
+            try {
+                System.out.println("Time to say good bye!");
+                queue.put(EXIT_MSG);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
-        for \(int i = 0; i &lt; 20; i++\) {
+    static class Consumer implements Runnable{
+        private BlockingQueue<String> queue;
+        public Consumer(BlockingQueue<String> q){
+            this.queue=q;
+        }
 
+        @Override
+        public void run() {
             try{
-
-                Thread.sleep\(5L\);
-
-                String msg = "Message" + i;
-
-                System.out.println\("Produced new item: " + msg\);
-
-                queue.put\(msg\);
-
-            } catch \(InterruptedException e\) {
-
-                e.printStackTrace\(\);
-
+                String msg;
+                while(!EXIT_MSG.equalsIgnoreCase( (msg = queue.take()))){
+                    System.out.println("Consumed item: " + msg);
+                    Thread.sleep(10L);
+                }
+                System.out.println("Got exit message, bye!");
+            }catch(InterruptedException e) {
+                e.printStackTrace();
             }
-
         }
-
-
-
-        try {
-
-            System.out.println\("Time to say good bye!"\);
-
-            queue.put\(EXIT\_MSG\);
-
-        } catch \(InterruptedException e\) {
-
-            e.printStackTrace\(\);
-
-        }
-
     }
-
-}
-
-
-
-static class Consumer implements Runnable{
-
-    private BlockingQueue&lt;String&gt; queue;
-
-    public Consumer\(BlockingQueue&lt;String&gt; q\){
-
-        this.queue=q;
-
-    }
-
-
-
-    @Override
-
-    public void run\(\) {
-
-        try{
-
-            String msg;
-
-            while\(!EXIT\_MSG.equalsIgnoreCase\( \(msg = queue.take\(\)\)\)\){
-
-                System.out.println\("Consumed item: " + msg\);
-
-                Thread.sleep\(10L\);
-
-            }
-
-            System.out.println\("Got exit message, bye!"\);
-
-        }catch\(InterruptedException e\) {
-
-            e.printStackTrace\(\);
-
-        }
-
-    }
-
 }
 ```
-
-}
 
 上面是一个典型的生产者 - 消费者样例，如果使用非 Blocking 的队列，那么我们就要自己去实现轮询、条件判断（如检查 poll 返回值是否 null）等逻辑，如果没有特别的场景要求，Blocking 实现起来代码更加简单、直观。
 
