@@ -85,21 +85,16 @@ public ArrayBlockingQueue(int capacity, boolean fair)
 
 如果我们分析不同队列的底层实现，BlockingQueue 基本都是基于锁实现，一起来看看典型的 LinkedBlockingQueue。
 
-/\*\* Lock held by take, poll, etc \*/
-
-private final ReentrantLock takeLock = new ReentrantLock\(\);
-
-/\*\* Wait queue for waiting takes \*/
-
-private final Condition notEmpty = takeLock.newCondition\(\);
-
-/\*\* Lock held by put, offer, etc \*/
-
-private final ReentrantLock putLock = new ReentrantLock\(\);
-
-/\*\* Wait queue for waiting puts \*/
-
-private final Condition notFull = putLock.newCondition\(\);
+```java
+/** Lock held by take, poll, etc */
+private final ReentrantLock takeLock = new ReentrantLock();
+/** Wait queue for waiting takes */
+private final Condition notEmpty = takeLock.newCondition();
+/** Lock held by put, offer, etc */
+private final ReentrantLock putLock = new ReentrantLock();
+/** Wait queue for waiting puts */
+private final Condition notFull = putLock.newCondition();
+```
 
 我在介绍 ReentrantLock 的条件变量用法的时候分析过 ArrayBlockingQueue，不知道你有没有注意到，其条件变量与 LinkedBlockingQueue 版本的实现是有区别的。notEmpty、notFull 都是同一个再入锁的条件变量，而 LinkedBlockingQueue 则改进了锁操作的粒度，头、尾操作使用不同的锁，所以在通用场景下，它的吞吐量相对要更好一些。
 
