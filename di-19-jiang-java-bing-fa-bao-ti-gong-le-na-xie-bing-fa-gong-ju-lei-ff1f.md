@@ -50,85 +50,46 @@ Java 提供了经典信号量（Semaphore\)）的实现，它通过控制一定�
 
 你可以试试使用 Semaphore 来模拟实现这个调度过程：
 
+```java
 import java.util.concurrent.Semaphore;
-
 public class UsualSemaphoreSample {
-
-```
-public static void main\(String\[\] args\) throws InterruptedException {
-
-    System.out.println\("Action...GO!"\);
-
-    Semaphore semaphore = new Semaphore\(5\);
-
-    for \(int i = 0; i &lt; 10; i++\) {
-
-        Thread t = new Thread\(new SemaphoreWorker\(semaphore\)\);
-
-        t.start\(\);
-
+    public static void main(String[] args) throws InterruptedException {
+        System.out.println("Action...GO!");
+        Semaphore semaphore = new Semaphore(5);
+        for (int i = 0; i < 10; i++) {
+            Thread t = new Thread(new SemaphoreWorker(semaphore));
+            t.start();
+        }
     }
-
 }
-```
-
-}
-
 class SemaphoreWorker implements Runnable {
-
-```
-private String name;
-
-private Semaphore semaphore;
-
-public SemaphoreWorker\(Semaphore semaphore\) {
-
-    this.semaphore = semaphore;
-
-}
-
-@Override
-
-public void run\(\) {
-
-    try {
-
-        log\("is waiting for a permit!"\);
-
-       semaphore.acquire\(\);
-
-        log\("acquired a permit!"\);
-
-        log\("executed!"\);
-
-    } catch \(InterruptedException e\) {
-
-        e.printStackTrace\(\);
-
-    } finally {
-
-        log\("released a permit!"\);
-
-        semaphore.release\(\);
-
+    private String name;
+    private Semaphore semaphore;
+    public SemaphoreWorker(Semaphore semaphore) {
+        this.semaphore = semaphore;
     }
-
-}
-
-private void log\(String msg\){
-
-    if \(name == null\) {
-
-        name = Thread.currentThread\(\).getName\(\);
-
+    @Override
+    public void run() {
+        try {
+            log("is waiting for a permit!");
+           semaphore.acquire();
+            log("acquired a permit!");
+            log("executed!");
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } finally {
+            log("released a permit!");
+            semaphore.release();
+        }
     }
-
-    System.out.println\(name + " " + msg\);
-
+    private void log(String msg){
+        if (name == null) {
+            name = Thread.currentThread().getName();
+        }
+        System.out.println(name + " " + msg);
+    }
 }
 ```
-
-}
 
 这段代码是比较典型的 Semaphore 示例，其逻辑是，线程试图获得工作允许，得到许可则进行任务，然后释放许可，这时等待许可的其他线程，就可获得许可进入工作状态，直到全部处理结束。编译运行，我们就能看到 Semaphore 的允许机制对工作线程的限制。
 
