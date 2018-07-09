@@ -128,7 +128,7 @@ public E take() throws InterruptedException {
 
 相对比较另类的 SynchronousQueue，在 Java 6 中，其实现发生了非常大的变化，利用 CAS 替换掉了原本基于锁的逻辑，同步开销比较小。它是 Executors.newCachedThreadPool\(\) 的默认队列。
 
-队列使用场景与典型用例
+## 队列使用场景与典型用例
 
 在实际开发中，我提到过 Queue 被广泛使用在生产者 - 消费者场景，比如利用 BlockingQueue 来实现，由于其提供的等待机制，我们可以少操心很多协调工作，你可以参考下面样例代码：
 
