@@ -58,7 +58,7 @@ Executor 的设计是源于 Java 早期线程 API 使用的教训，开发者在
 <T> Future<T> submit(Callable<T> task);
 ```
 
-注意，这个例子输入的可是Callable，它解决了 Runnable 无法返回结果的困扰。
+**注意，这个例子输入的可是Callable，它解决了 Runnable 无法返回结果的困扰。**
 
 * Java 标准类库提供了几种基础实现，比如ThreadPoolExecutor、ScheduledThreadPoolExecutor、ForkJoinPool。这些线程池的设计特点在于其高度的可调节性和灵活性，以尽量满足复杂多变的实际应用场景，我会进一步分析其构建部分的源码，剖析这种灵活性的源头。
 
