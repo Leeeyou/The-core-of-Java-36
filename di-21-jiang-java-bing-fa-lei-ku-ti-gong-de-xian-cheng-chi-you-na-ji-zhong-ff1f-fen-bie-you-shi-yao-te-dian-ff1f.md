@@ -88,19 +88,18 @@ private final HashSet<Worker> workers = new HashSet<>();
 
 从上面的分析，就可以看出线程池的几个基本组成部分，一起都体现在线程池的构造函数中，从字面我们就可以大概猜测到其用意：
 
-corePoolSize，所谓的核心线程数，可以大致理解为长期驻留的线程数目（除非设置了 allowCoreThreadTimeOut）。对于不同的线程池，这个值可能会有很大区别，比如 newFixedThreadPool 会将其设置为 nThreads，而对于 newCachedThreadPool 则是为 0。
+* corePoolSize，所谓的核心线程数，可以大致理解为长期驻留的线程数目（除非设置了 allowCoreThreadTimeOut）。对于不同的线程池，这个值可能会有很大区别，比如 newFixedThreadPool 会将其设置为 nThreads，而对于 newCachedThreadPool 则是为 0。
 
-maximumPoolSize，顾名思义，就是线程不够时能够创建的最大线程数。同样进行对比，对于 newFixedThreadPool，当然就是 nThreads，因为其要求是固定大小，而 newCachedThreadPool 则是 Integer.MAX\_VALUE。
+* maximumPoolSize，顾名思义，就是线程不够时能够创建的最大线程数。同样进行对比，对于 newFixedThreadPool，当然就是 nThreads，因为其要求是固定大小，而 newCachedThreadPool 则是 Integer.MAX\_VALUE。
 
-keepAliveTime 和 TimeUnit，这两个参数指定了额外的线程能够闲置多久，显然有些线程池不需要它。
+* keepAliveTime 和 TimeUnit，这两个参数指定了额外的线程能够闲置多久，显然有些线程池不需要它。
 
-workQueue，工作队列，必须是 BlockingQueue。
+* workQueue，工作队列，必须是 BlockingQueue。
 
 通过配置不同的参数，我们就可以创建出行为大相径庭的线程池，这就是线程池高度灵活性的基础。
 
-public ThreadPoolExecutor\(int corePoolSize,
-
-```
+```java
+public ThreadPoolExecutor(int corePoolSize,
                       int maximumPoolSize,
 
                       long keepAliveTime,
@@ -111,7 +110,7 @@ public ThreadPoolExecutor\(int corePoolSize,
 
                       ThreadFactory threadFactory,
 
-                      RejectedExecutionHandler handler\)
+                      RejectedExecutionHandler handler)
 ```
 
 进一步分析，线程池既然有生命周期，它的状态是如何表征的呢？
