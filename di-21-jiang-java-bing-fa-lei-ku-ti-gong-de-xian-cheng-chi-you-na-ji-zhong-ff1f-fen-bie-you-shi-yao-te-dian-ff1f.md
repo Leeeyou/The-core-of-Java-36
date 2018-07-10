@@ -135,61 +135,7 @@ private static int ctlOf(int rs, int wc) { return rs | wc; }
 
 前面都是对线程池属性和构建等方面的分析，下面我选择典型的 execute 方法，来看看其是如何工作的，具体逻辑请参考我添加的注释，配合代码更加容易理解。
 
-public void execute\(Runnable command\) {
 
-…
-
-```
-int c = ctl.get\(\);
-```
-
-// 检查工作线程数目，低于 corePoolSize 则添加 Worker
-
-```
-if \(workerCountOf\(c\) &lt; corePoolSize\) {
-
-    if \(addWorker\(command, true\)\)
-
-        return;
-
-    c = ctl.get\(\);
-
-}
-```
-
-// isRunning 就是检查线程池是否被 shutdown
-
-// 工作队列可能是有界的，offer 是比较友好的入队方式
-
-```
-if \(isRunning\(c\) && workQueue.offer\(command\)\) {
-
-    int recheck = ctl.get\(\);
-```
-
-// 再次进行防御性检查
-
-```
-    if \(! isRunning\(recheck\) && remove\(command\)\)
-
-        reject\(command\);
-
-    else if \(workerCountOf\(recheck\) == 0\)
-
-        addWorker\(null, false\);
-
-}
-```
-
-// 尝试添加一个 worker，如果失败以为着已经饱和或者被 shutdown 了
-
-```
-else if \(!addWorker\(command, false\)\)
-
-    reject\(command\);
-```
-
-}
 
 线程池实践
 
