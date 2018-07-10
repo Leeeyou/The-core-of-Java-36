@@ -52,7 +52,9 @@ Executor 的设计是源于 Java 早期线程 API 使用的教训，开发者在
 
 * ExecutorService 则更加完善，不仅提供 service 的管理功能，比如 shutdown 等方法，也提供了更加全面的提交任务机制，如返回Future而不是 void 的 submit 方法。
 
-&lt;T&gt; Future&lt;T&gt; submit\(Callable&lt;T&gt; task\);
+```java
+<T> Future<T> submit(Callable<T> task);
+```
 
 注意，这个例子输入的可是Callable，它解决了 Runnable 无法返回结果的困扰。
 
