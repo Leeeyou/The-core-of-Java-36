@@ -117,27 +117,19 @@ public ThreadPoolExecutor(int corePoolSize,
 
 这里有一个非常有意思的设计，ctl 变量被赋予了双重角色，通过高低位的不同，既表示线程池状态，又表示工作线程数目，这是一个典型的高效优化。试想，实际系统中，虽然我们可以指定线程极限为 Integer.MAX\_VALUE，但是因为资源限制，这只是个理论值，所以完全可以将空闲位赋予其他意义。
 
-private final AtomicInteger ctl = new AtomicInteger\(ctlOf\(RUNNING, 0\)\);
-
+```java
+private final AtomicInteger ctl = new AtomicInteger(ctlOf(RUNNING, 0));
 // 真正决定了工作线程数的理论上限
-
-private static final int COUNT\_BITS = Integer.SIZE - 3;
-
-private static final int COUNT\_MASK = \(1 &lt;&lt; COUNT\_BITS\) - 1;
-
+private static final int COUNT_BITS = Integer.SIZE - 3;
+private static final int COUNT_MASK = (1 << COUNT_BITS) - 1;
 // 线程池状态，存储在数字的高位
-
-private static final int RUNNING = -1 &lt;&lt; COUNT\_BITS;
-
+private static final int RUNNING = -1 << COUNT_BITS;
 …
-
 // Packing and unpacking ctl
-
-private static int runStateOf\(int c\)  { return c & ~COUNT\_MASK; }
-
-private static int workerCountOf\(int c\)  { return c & COUNT\_MASK; }
-
-private static int ctlOf\(int rs, int wc\) { return rs \| wc; }
+private static int runStateOf(int c)  { return c & ~COUNT_MASK; }
+private static int workerCountOf(int c)  { return c & COUNT_MASK; }
+private static int ctlOf(int rs, int wc) { return rs | wc; }
+```
 
 为了让你能对线程生命周期有个更加清晰的印象，我这里画了一个简单的状态流转图，对线程池的可能状态和其内部方法之间进行了对应，如果有不理解的方法，请参考 Javadoc。注意，实际 Java 代码中并不存在所谓 Idle 状态，我添加它仅仅是便于理解。
 
