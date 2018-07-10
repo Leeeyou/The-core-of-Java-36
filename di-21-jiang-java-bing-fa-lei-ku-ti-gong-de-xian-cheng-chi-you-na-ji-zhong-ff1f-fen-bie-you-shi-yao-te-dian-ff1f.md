@@ -161,7 +161,7 @@ public void execute(Runnable command) {
         else if (workerCountOf(recheck) == 0)
             addWorker(null, false);
     }
-// 尝试添加一个 worker，如果失败以为着已经饱和或者被 shutdown 了
+// 尝试添加一个 worker，如果失败意味着已经饱和或者被 shutdown 了
     else if (!addWorker(command, false))
         reject(command);
 }
