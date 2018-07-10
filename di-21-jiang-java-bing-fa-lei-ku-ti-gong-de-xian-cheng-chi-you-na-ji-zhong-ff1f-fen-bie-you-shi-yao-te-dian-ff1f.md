@@ -38,7 +38,7 @@ Executor 框架可不仅仅是线程池，我觉得至少下面几点值得深�
 
 # 知识扩展
 
-首先，我们来看看 Executor 框架的基本组成，请参考下面的类图。
+首先，我们来看看[ Executor](https://developer.android.com/reference/java/util/concurrent/Executor) 框架的基本组成，请参考下面的类图。
 
 ![](/assets/微信图片_20180710102941.jpg)
 
