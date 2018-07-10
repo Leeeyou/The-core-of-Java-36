@@ -138,30 +138,30 @@ private static int ctlOf(int rs, int wc) { return rs | wc; }
 ```java
 public void execute(Runnable command) {
 …
-	int c = ctl.get();
+    int c = ctl.get();
 // 检查工作线程数目，低于 corePoolSize 则添加 Worker
-	if (workerCountOf(c) < corePoolSize) {
-    	if (addWorker(command, true))
-        	return;
-    	c = ctl.get();
-	}
+    if (workerCountOf(c) < corePoolSize) {
+        if (addWorker(command, true))
+            return;
+        c = ctl.get();
+    }
 // isRunning 就是检查线程池是否被 shutdown
 // 工作队列可能是有界的，offer 是比较友好的入队方式
-	if (isRunning(c) && workQueue.offer(command)) {
-    	int recheck = ctl.get();
+    if (isRunning(c) && workQueue.offer(command)) {
+        int recheck = ctl.get();
 // 再次进行防御性检查
-    	if (! isRunning(recheck) && remove(command))
-        	reject(command);
-    	else if (workerCountOf(recheck) == 0)
-        	addWorker(null, false);
-	}
+        if (! isRunning(recheck) && remove(command))
+            reject(command);
+        else if (workerCountOf(recheck) == 0)
+            addWorker(null, false);
+    }
 // 尝试添加一个 worker，如果失败以为着已经饱和或者被 shutdown 了
-	else if (!addWorker(command, false))
-    	reject(command);
+    else if (!addWorker(command, false))
+        reject(command);
 }
 ```
 
-线程池实践
+## 线程池实践
 
 线程池虽然为提供了非常强大、方便的功能，但是也不是银弹，使用不当同样会导致问题。我这里介绍些典型情况，经过前面的分析，很多方面可以自然的推导出来。
 
