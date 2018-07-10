@@ -72,7 +72,7 @@ Executor 的设计是源于 Java 早期线程 API 使用的教训，开发者在
 
 简单理解一下：
 
-* 工作队列负责存储用户提交的各个任务，这个工作队列，**可以是容量为 0 的 SynchronousQueue（使用 newCachedThreadPool），也可以是像固定大小线程池（newFixedThreadPool）那样使用 LinkedBlockingQueue**。
+* 工作队列负责存储用户提交的各个任务，**这个工作队列，可以是容量为 0 的 SynchronousQueue（使用 newCachedThreadPool），也可以是像固定大小线程池（newFixedThreadPool）那样使用 LinkedBlockingQueue**。
 
 ```java
 private final BlockingQueue<Runnable> workQueue;
