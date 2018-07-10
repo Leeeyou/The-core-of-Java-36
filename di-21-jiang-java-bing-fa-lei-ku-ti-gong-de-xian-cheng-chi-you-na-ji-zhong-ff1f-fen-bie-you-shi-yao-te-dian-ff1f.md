@@ -60,7 +60,7 @@ Executor 的设计是源于 Java 早期线程 API 使用的教训，开发者在
 
 * Java 标准类库提供了几种基础实现，比如ThreadPoolExecutor、ScheduledThreadPoolExecutor、ForkJoinPool。这些线程池的设计特点在于其高度的可调节性和灵活性，以尽量满足复杂多变的实际应用场景，我会进一步分析其构建部分的源码，剖析这种灵活性的源头。
 
-Executors 则从简化使用的角度，为我们提供了各种方便的静态工厂方法。
+* Executors 则从简化使用的角度，为我们提供了各种方便的静态工厂方法。
 
 下面我就从源码角度，分析线程池的设计与实现，我将主要围绕最基础的 ThreadPoolExecutor 源码。ScheduledThreadPoolExecutor 是 ThreadPoolExecutor 的扩展，主要是增加了调度逻辑，如想深入了解，你可以参考相关教程。而 ForkJoinPool 则是为 ForkJoinTask 定制的线程池，与通常意义的线程池有所不同。
 
