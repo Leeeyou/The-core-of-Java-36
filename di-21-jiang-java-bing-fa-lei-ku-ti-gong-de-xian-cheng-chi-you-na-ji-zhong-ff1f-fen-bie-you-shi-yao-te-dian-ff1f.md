@@ -16,7 +16,7 @@ Executors 目前提供了 5 种不同的线程池创建配置：
 
 * newSingleThreadScheduledExecutor\(\) 和 newScheduledThreadPool\(int corePoolSize\)，创建的是个 ScheduledExecutorService，可以进行定时或周期性的工作调度，区别在于单一工作线程还是多个工作线程。
 
-* newWorkStealingPool\(int parallelism\)，这是一个经常被人忽略的线程池，Java 8 才加入这个创建方法，其内部会构建ForkJoinPool，利用Work-Stealing算法，并行地处理任务，不保证处理顺序。
+* newWorkStealingPool\(int parallelism\)，这是一个经常被人忽略的线程池，Java 8 才加入这个创建方法，其内部会构建ForkJoinPool，利用Work-Stealing算法，并行地处理任务，**不保证处理顺序**。
 
 # 考点分析
 
