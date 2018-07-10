@@ -76,7 +76,9 @@ private final BlockingQueue<Runnable> workQueue;
 
 * 内部的“线程池”，这是指保持工作线程的集合，线程池需要在运行过程中管理线程创建、销毁。例如，对于带缓存的线程池，当任务压力较大时，线程池会创建新的工作线程；当业务压力退去，线程池会在闲置一段时间（默认 60 秒）后结束线程。
 
-private final HashSet&lt;Worker&gt; workers = new HashSet&lt;&gt;\(\);
+```java
+private final HashSet<Worker> workers = new HashSet<>();
+```
 
 线程池的工作线程被抽象为静态内部类 Worker，基于AQS实现。
 
