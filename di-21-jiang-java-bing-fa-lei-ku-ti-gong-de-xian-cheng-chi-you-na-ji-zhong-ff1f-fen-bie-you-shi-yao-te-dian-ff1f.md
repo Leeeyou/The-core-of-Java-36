@@ -82,7 +82,7 @@ private final HashSet<Worker> workers = new HashSet<>();
 
 线程池的工作线程被抽象为静态内部类 Worker，基于AQS实现。
 
-ThreadFactory 提供上面所需要的创建线程逻辑。
+* ThreadFactory 提供上面所需要的创建线程逻辑。
 
 如果任务提交时被拒绝，比如线程池已经处于 SHUTDOWN 状态，需要为其提供处理逻辑，Java 标准库提供了类似ThreadPoolExecutor.AbortPolicy等默认实现，也可以按照实际需求自定义。
 
