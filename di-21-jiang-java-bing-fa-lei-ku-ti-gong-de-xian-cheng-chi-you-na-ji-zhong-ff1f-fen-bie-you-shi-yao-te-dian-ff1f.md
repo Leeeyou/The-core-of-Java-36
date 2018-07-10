@@ -44,7 +44,9 @@ Executor 框架可不仅仅是线程池，我觉得至少下面几点值得深�
 
 * Executor 是一个基础的接口，其初衷是将任务提交和任务执行细节解耦，这一点可以体会其定义的唯一方法。
 
-void execute\(Runnable command\);
+```java
+void execute(Runnable command);
+```
 
 Executor 的设计是源于 Java 早期线程 API 使用的教训，开发者在实现应用逻辑时，被太多线程创建、调度等不相关细节所打扰。就像我们进行 HTTP 通信，如果还需要自己操作 TCP 握手，开发效率低下，质量也难以保证。
 
