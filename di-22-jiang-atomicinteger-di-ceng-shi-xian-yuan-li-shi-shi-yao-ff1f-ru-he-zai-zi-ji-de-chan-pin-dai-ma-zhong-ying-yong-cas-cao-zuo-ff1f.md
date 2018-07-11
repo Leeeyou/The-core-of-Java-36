@@ -130,7 +130,9 @@ AQS 内部数据和方法，可以简单拆分为：
 
 * 一个 volatile 的整数成员表征状态，同时提供了 setState 和 getState 方法
 
+```java
 private volatile int state;
+```
 
 一个先入先出（FIFO）的等待线程队列，以实现多线程间竞争和等待，这是 AQS 机制的核心之一。
 
