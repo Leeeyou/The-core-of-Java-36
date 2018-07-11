@@ -20,13 +20,11 @@ private volatile int value;
 
 Unsafe 会利用 value 字段的内存地址偏移，直接完成操作。
 
-public final int getAndIncrement\(\) {
-
-```
-return U.getAndAddInt\(this, VALUE, 1\);
-```
-
+```java
+public final int getAndIncrement() {
+    return U.getAndAddInt(this, VALUE, 1);
 }
+```
 
 因为 getAndIncrement 需要返归数值，所以需要添加失败重试逻辑。
 
