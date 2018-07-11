@@ -149,21 +149,14 @@ abstract static class Sync extends AbstractQueuedSynchronizer { …}
 
 下面是 ReentrantLock 对应 acquire 和 release 操作，如果是 CountDownLatch 则可以看作是 await\(\)/countDown\(\)，具体实现也有区别。
 
-public void lock\(\) {
-
-```
-sync.acquire\(1\);
-```
-
+```java
+public void lock() {
+    sync.acquire(1);
 }
-
-public void unlock\(\) {
-
-```
-sync.release\(1\);
-```
-
+public void unlock() {
+    sync.release(1);
 }
+```
 
 排除掉一些细节，整体地分析 acquire 方法逻辑，其直接实现是在 AQS 内部，调用了 tryAcquire 和 acquireQueued，这是两个需要搞清楚的基本部分。
 
