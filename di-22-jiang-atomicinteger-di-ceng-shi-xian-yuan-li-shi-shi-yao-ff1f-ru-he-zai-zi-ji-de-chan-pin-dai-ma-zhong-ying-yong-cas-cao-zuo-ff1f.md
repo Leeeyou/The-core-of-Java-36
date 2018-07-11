@@ -142,9 +142,10 @@ private volatile int state;
 
 以 ReentrantLock 为例，它内部通过扩展 AQS 实现了 Sync 类型，以 AQS 的 state 来反映锁的持有情况。
 
+```java
 private final Sync sync;
-
 abstract static class Sync extends AbstractQueuedSynchronizer { …}
+```
 
 下面是 ReentrantLock 对应 acquire 和 release 操作，如果是 CountDownLatch 则可以看作是 await\(\)/countDown\(\)，具体实现也有区别。
 
