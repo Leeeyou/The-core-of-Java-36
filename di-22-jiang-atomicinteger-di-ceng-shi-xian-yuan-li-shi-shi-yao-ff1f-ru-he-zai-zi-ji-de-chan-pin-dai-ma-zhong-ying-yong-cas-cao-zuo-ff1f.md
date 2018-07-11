@@ -56,9 +56,9 @@ public final boolean compareAndSet(int expectedValue, int newValue)
 
 如果我作为面试官，很有可能深入考察这些方向：
 
-在什么场景下，可以采用 CAS 技术，调用 Unsafe 毕竟不是大多数场景的最好选择，有没有更加推荐的方式呢？毕竟我们掌握一个技术，cool 不是目的，更不是为了应付面试，我们还是希望能在实际产品中有价值。
+* 在什么场景下，可以采用 CAS 技术，调用 Unsafe 毕竟不是大多数场景的最好选择，有没有更加推荐的方式呢？毕竟我们掌握一个技术，cool 不是目的，更不是为了应付面试，我们还是希望能在实际产品中有价值。
 
-对 ReentrantLock、CyclicBarrier 等并发结构底层的实现技术的理解。
+* 对 ReentrantLock、CyclicBarrier 等并发结构底层的实现技术的理解。
 
 # 知识扩展
 
