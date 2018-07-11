@@ -44,7 +44,7 @@ public final boolean compareAndSet\(int expectedValue, int newValue\)
 
 CAS 是 Java 并发中所谓 lock-free 机制的基础。
 
-考点分析
+# 考点分析
 
 今天的问题有点偏向于 Java 并发机制的底层了，虽然我们在开发中未必会涉及 CAS 的实现层面，但是理解其机制，掌握如何在 Java 中运用该技术，还是十分有必要的，尤其是这也是个并发编程的面试热点。
 
