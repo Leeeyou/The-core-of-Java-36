@@ -207,47 +207,28 @@ final boolean nonfairTryAcquire(int acquires) {
 
 当前线程会被包装成为一个排他模式的节点（EXCLUSIVE），通过 addWaiter 方法添加到队列中。acquireQueued 的逻辑，简要来说，就是如果当前节点的前面是头节点，则试图获取锁，一切顺利则成为新的头节点；否则，有必要则等待，具体处理逻辑请参考我添加的注释。
 
-final boolean acquireQueued\(final Node node, int arg\) {
-
-```
-  boolean interrupted = false;
-
-  try {
-
-    for \(;;\) {// 循环
-
-        final Node p = node.predecessor\(\);// 获取前一个节点
-
-        if \(p == head && tryAcquire\(arg\)\) { // 如果前一个节点是头结点，表示当前节点合适去 tryAcquire
-
-            setHead\(node\); // acquire 成功，则设置新的头节点
-
-            p.next = null; // 将前面节点对当前节点的引用清空
-
-            return interrupted;
-
+```java
+final boolean acquireQueued(final Node node, int arg) {
+      boolean interrupted = false;
+      try {
+        for (;;) {// 循环
+            final Node p = node.predecessor();// 获取前一个节点
+            if (p == head && tryAcquire(arg)) { // 如果前一个节点是头结点，表示当前节点合适去 tryAcquire
+                setHead(node); // acquire 成功，则设置新的头节点
+                p.next = null; // 将前面节点对当前节点的引用清空
+                return interrupted;
+            }
+            if (shouldParkAfterFailedAcquire(p, node)) // 检查是否失败后需要 park
+                interrupted |= parkAndCheckInterrupt();
         }
-
-        if \(shouldParkAfterFailedAcquire\(p, node\)\) // 检查是否失败后需要 park
-
-            interrupted \|= parkAndCheckInterrupt\(\);
-
-    }
-
-   } catch \(Throwable t\) {
-
-    cancelAcquire\(node\);// 出现异常，取消
-
-    if \(interrupted\)
-
-            selfInterrupt\(\);
-
-    throw t;
-
-  }
-```
-
+       } catch (Throwable t) {
+        cancelAcquire(node);// 出现异常，取消
+        if (interrupted)
+                selfInterrupt();
+        throw t;
+      }
 }
+```
 
 到这里线程试图获取锁的过程基本展现出来了，tryAcquire 是按照特定场景需要开发者去实现的部分，而线程间竞争则是 AQS 通过 Waiter 队列与 acquireQueued 提供的，在 release 方法中，同样会对队列进行对应操作。
 
