@@ -172,18 +172,13 @@ public final void acquire(int arg) {
 
 我们可以看到公平性在 ReentrantLock 构建时如何指定的，具体如下：
 
-public ReentrantLock\(\) {
-
-```
-    sync = new NonfairSync\(\); // 默认是非公平的
-
-}
-
-public ReentrantLock\(boolean fair\) {
-
-    sync = fair ? new FairSync\(\) : new NonfairSync\(\);
-
-}
+```java
+public ReentrantLock() {
+        sync = new NonfairSync(); // 默认是非公平的
+    }
+    public ReentrantLock(boolean fair) {
+        sync = fair ? new FairSync() : new NonfairSync();
+    }
 ```
 
 以非公平的 tryAcquire 为例，其内部实现了如何配合状态与 CAS 获取锁，注意，对比公平版本的 tryAcquire，它在锁无人占有时，并不检查是否有其他等待者，这里体现了非公平的语义。
