@@ -160,17 +160,13 @@ public void unlock() {
 
 排除掉一些细节，整体地分析 acquire 方法逻辑，其直接实现是在 AQS 内部，调用了 tryAcquire 和 acquireQueued，这是两个需要搞清楚的基本部分。
 
-public final void acquire\(int arg\) {
-
-```
-if \(!tryAcquire\(arg\) &&
-
-    acquireQueued\(addWaiter\(Node.EXCLUSIVE\), arg\)\)
-
-    selfInterrupt\(\);
-```
-
+```java
+public final void acquire(int arg) {
+    if (!tryAcquire(arg) &&
+        acquireQueued(addWaiter(Node.EXCLUSIVE), arg))
+        selfInterrupt();
 }
+```
 
 首先，我们来看看 tryAcquire。在 ReentrantLock 中，tryAcquire 逻辑实现在 NonfairSync 和 FairSync 中，分别提供了进一步的非公平或公平性方法，而 AQS 内部 tryAcquire 仅仅是个接近未实现的方法（直接抛异常），这是留个实现者自己定义的操作。
 
