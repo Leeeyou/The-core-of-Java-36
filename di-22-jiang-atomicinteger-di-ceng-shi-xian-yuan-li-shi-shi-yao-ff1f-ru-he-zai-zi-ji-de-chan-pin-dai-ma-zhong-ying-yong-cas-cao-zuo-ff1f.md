@@ -183,41 +183,25 @@ public ReentrantLock() {
 
 以非公平的 tryAcquire 为例，其内部实现了如何配合状态与 CAS 获取锁，注意，对比公平版本的 tryAcquire，它在锁无人占有时，并不检查是否有其他等待者，这里体现了非公平的语义。
 
-final boolean nonfairTryAcquire\(int acquires\) {
-
-```
-final Thread current = Thread.currentThread\(\);
-
-int c = getState\(\);// 获取当前 AQS 内部状态量
-
-if \(c == 0\) { // 0 表示无人占有，则直接用 CAS 修改状态位，
-
-    if \(compareAndSetState\(0, acquires\)\) {// 不检查排队情况，直接争抢
-
-        setExclusiveOwnerThread\(current\);  // 并设置当前线程独占锁
-
+```java
+final boolean nonfairTryAcquire(int acquires) {
+    final Thread current = Thread.currentThread();
+    int c = getState();// 获取当前 AQS 内部状态量
+    if (c == 0) { // 0 表示无人占有，则直接用 CAS 修改状态位，
+        if (compareAndSetState(0, acquires)) {// 不检查排队情况，直接争抢
+            setExclusiveOwnerThread(current);  // 并设置当前线程独占锁
+            return true;
+        }
+    } else if (current == getExclusiveOwnerThread()) { // 即使状态不是 0，也可能当前线程是锁持有者，因为这是再入锁
+        int nextc = c + acquires;
+        if (nextc < 0) // overflow
+            throw new Error("Maximum lock count exceeded");
+        setState(nextc);
         return true;
-
     }
-
-} else if \(current == getExclusiveOwnerThread\(\)\) { // 即使状态不是 0，也可能当前线程是锁持有者，因为这是再入锁
-
-    int nextc = c + acquires;
-
-    if \(nextc &lt; 0\) // overflow
-
-        throw new Error\("Maximum lock count exceeded"\);
-
-    setState\(nextc\);
-
-    return true;
-
+    return false;
 }
-
-return false;
 ```
-
-}
 
 接下来我再来分析 acquireQueued，如果前面的 tryAcquire 失败，代表着锁争抢失败，进入排队竞争阶段。这里就是我们所说的，利用 FIFO 队列，实现线程间对锁的竞争的部分，算是是 AQS 的核心逻辑。
 
