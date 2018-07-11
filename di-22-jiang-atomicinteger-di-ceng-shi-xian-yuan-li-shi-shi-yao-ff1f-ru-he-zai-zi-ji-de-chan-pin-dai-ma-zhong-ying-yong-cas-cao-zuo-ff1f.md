@@ -234,7 +234,7 @@ final boolean acquireQueued(final Node node, int arg) {
 
 今天我介绍了 Atomic 数据类型的底层技术 CAS，并通过实例演示了如何在产品代码中利用 CAS，最后介绍了并发包的基础技术 AQS，希望对你有所帮助。
 
-一课一练
+思考
 
 关于今天我们讨论的题目你做到心中有数了吗？今天布置一个源码阅读作业，AQS 中 Node 的 waitStatus 有什么作用？
 
