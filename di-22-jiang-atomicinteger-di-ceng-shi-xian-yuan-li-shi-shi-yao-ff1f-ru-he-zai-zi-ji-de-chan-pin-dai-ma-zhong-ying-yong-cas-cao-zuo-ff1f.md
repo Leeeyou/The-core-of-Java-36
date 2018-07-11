@@ -68,9 +68,9 @@ public final boolean compareAndSet(int expectedValue, int newValue)
 
 ```java
 public class AtomicBTreePartition {
-private volatile long lock;
-public void acquireLock(){}
-public void releaseeLock(){}
+    private volatile long lock;
+    public void acquireLock(){}
+    public void releaseeLock(){}
 }
 ```
 
