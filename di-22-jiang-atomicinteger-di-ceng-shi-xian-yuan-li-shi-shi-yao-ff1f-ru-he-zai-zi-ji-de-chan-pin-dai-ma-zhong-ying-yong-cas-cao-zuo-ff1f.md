@@ -95,27 +95,18 @@ Atomic 包提供了最常用的原子性数据类型，甚至是引用、数组�
 
 回归正题，如果是 Java 9 以后，我们完全可以采用另外一种方式实现，也就是 Variable Handle API，这是源自于JEP 193，提供了各种粒度的原子或者有序性的操作等。我将前面的代码修改为如下实现：
 
-private static final VarHandle HANDLE = MethodHandles.lookup\(\).findStaticVarHandle
+```java
+private static final VarHandle HANDLE = MethodHandles.lookup().findStaticVarHandle
+        (AtomicBTreePartition.class, "lock");
 
-```
-    \(AtomicBTreePartition.class, "lock"\);
-```
-
-private void acquireLock\(\){
-
-```
-long t = Thread.currentThread\(\).getId\(\);
-
-while \(!HANDLE.compareAndSet\(this, 0L, t\)\){
-
-    // 等待一会儿，数据库操作可能比较慢
-
-    …
-
+private void acquireLock(){
+    long t = Thread.currentThread().getId();
+    while (!HANDLE.compareAndSet(this, 0L, t)){
+        // 等待一会儿，数据库操作可能比较慢
+        …
+    }
 }
 ```
-
-}
 
 过程非常直观，首先，获取相应的变量句柄，然后直接调用其提供的 CAS 方法。
 
