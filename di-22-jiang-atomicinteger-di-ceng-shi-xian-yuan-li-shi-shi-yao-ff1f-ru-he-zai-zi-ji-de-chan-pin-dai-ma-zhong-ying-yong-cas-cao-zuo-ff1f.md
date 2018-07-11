@@ -66,15 +66,13 @@ public final boolean compareAndSet(int expectedValue, int newValue)
 
 可以考虑为索引分区对象添加一个逻辑上的锁，例如，以当前独占的线程 ID 作为锁的数值，然后通过原子操作设置 lock 数值，来实现加锁和释放锁，伪代码如下：
 
+```java
 public class AtomicBTreePartition {
-
 private volatile long lock;
-
-public void acquireLock\(\){}
-
-public void releaseeLock\(\){}
-
+public void acquireLock(){}
+public void releaseeLock(){}
 }
+```
 
 那么在 Java 代码中，我们怎么实现锁操作呢？Unsafe 似乎不是个好的选择，例如，我就注意到类似 Cassandra 等产品，因为 Java 9 中移除了 Unsafe.moniterEnter\(\)/moniterExit\(\)，导致无法平滑升级到新的 JDK 版本。目前 Java 提供了两种公共 API，可以实现这种 CAS 操作，比如使用 java.util.concurrent.atomic.AtomicLongFieldUpdater，它是基于反射机制创建，我们需要保证类型和字段名称正确。
 
