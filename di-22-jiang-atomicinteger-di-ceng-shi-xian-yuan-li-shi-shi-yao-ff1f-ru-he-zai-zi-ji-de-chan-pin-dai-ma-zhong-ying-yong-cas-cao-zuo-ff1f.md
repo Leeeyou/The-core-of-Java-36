@@ -76,27 +76,18 @@ public class AtomicBTreePartition {
 
 那么在 Java 代码中，我们怎么实现锁操作呢？Unsafe 似乎不是个好的选择，例如，我就注意到类似 Cassandra 等产品，因为 Java 9 中移除了 Unsafe.moniterEnter\(\)/moniterExit\(\)，导致无法平滑升级到新的 JDK 版本。目前 Java 提供了两种公共 API，可以实现这种 CAS 操作，比如使用 java.util.concurrent.atomic.AtomicLongFieldUpdater，它是基于反射机制创建，我们需要保证类型和字段名称正确。
 
-private static final AtomicLongFieldUpdater&lt;AtomicBTreePartition&gt; lockFieldUpdater =
+```java
+private static final AtomicLongFieldUpdater<AtomicBTreePartition> lockFieldUpdater =
+        AtomicLongFieldUpdater.newUpdater(AtomicBTreePartition.class, "lock");
 
-```
-    AtomicLongFieldUpdater.newUpdater\(AtomicBTreePartition.class, "lock"\);
-```
-
-private void acquireLock\(\){
-
-```
-long t = Thread.currentThread\(\).getId\(\);
-
-while \(!lockFieldUpdater.compareAndSet\(this, 0L, t\)\){
-
-    // 等待一会儿，数据库操作可能比较慢
-
-     …
-
+private void acquireLock(){
+    long t = Thread.currentThread().getId();
+    while (!lockFieldUpdater.compareAndSet(this, 0L, t)){
+        // 等待一会儿，数据库操作可能比较慢
+         …
+    }
 }
 ```
-
-}
 
 Atomic 包提供了最常用的原子性数据类型，甚至是引用、数组等相关原子类型和更新操作工具，是很多线程安全程序的首选。
 
