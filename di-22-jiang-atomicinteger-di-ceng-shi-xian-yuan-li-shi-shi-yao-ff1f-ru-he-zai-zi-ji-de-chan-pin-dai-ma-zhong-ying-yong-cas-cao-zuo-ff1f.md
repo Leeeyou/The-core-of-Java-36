@@ -128,7 +128,7 @@ Doug Lea曾经介绍过 AQS 的设计初衷。从原理上，一种同步结构�
 
 AQS 内部数据和方法，可以简单拆分为：
 
-一个 volatile 的整数成员表征状态，同时提供了 setState 和 getState 方法
+* 一个 volatile 的整数成员表征状态，同时提供了 setState 和 getState 方法
 
 private volatile int state;
 
