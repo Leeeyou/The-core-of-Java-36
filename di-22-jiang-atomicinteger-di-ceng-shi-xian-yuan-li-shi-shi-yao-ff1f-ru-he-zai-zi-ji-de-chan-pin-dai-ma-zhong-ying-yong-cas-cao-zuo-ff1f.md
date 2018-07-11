@@ -10,11 +10,11 @@ AtomicIntger 是对 int 类型的一个封装，提供原子性的访问和更�
 
 从 AtomicInteger 的内部属性可以看出，它依赖于 Unsafe 提供的一些底层能力，进行底层操作；以 volatile 的 value 字段，记录数值，以保证可见性。
 
-private static final jdk.internal.misc.Unsafe U = jdk.internal.misc.Unsafe.getUnsafe\(\);
-
-private static final long VALUE = U.objectFieldOffset\(AtomicInteger.class, "value"\);
-
+```java
+private static final jdk.internal.misc.Unsafe U = jdk.internal.misc.Unsafe.getUnsafe();
+private static final long VALUE = U.objectFieldOffset(AtomicInteger.class, "value");
 private volatile int value;
+```
 
 具体的原子操作细节，可以参考任意一个原子更新方法，比如下面的 getAndIncrement。
 
