@@ -42,7 +42,7 @@ public final int getAndAddInt(Object o, long offset, int delta) {
 
 public final boolean compareAndSet\(int expectedValue, int newValue\)
 
-CAS 是 Java 并发中所谓 lock-free 机制的基础。
+**CAS 是 Java 并发中所谓 lock-free 机制的基础。**
 
 # 考点分析
 
