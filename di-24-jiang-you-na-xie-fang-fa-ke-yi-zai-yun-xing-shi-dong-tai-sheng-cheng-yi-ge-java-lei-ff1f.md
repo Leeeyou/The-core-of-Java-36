@@ -60,13 +60,13 @@ static native Class<?> defineClass2(ClassLoader loader, String name, java.nio.By
 
 ```java
 byte[] proxyClassFile = ProxyGenerator.generateProxyClass(
-    	proxyName, interfaces.toArray(EMPTY_CLASS_ARRAY), accessFlags);
+        proxyName, interfaces.toArray(EMPTY_CLASS_ARRAY), accessFlags);
 try {
-	Class<?> pc = UNSAFE.defineClass(proxyName, proxyClassFile,
-                                 	0, proxyClassFile.length,
-      	                           loader, null);
-	reverseProxyCache.sub(pc).putIfAbsent(loader, Boolean.TRUE);
-	return pc;
+    Class<?> pc = UNSAFE.defineClass(proxyName, proxyClassFile,
+                                     0, proxyClassFile.length,
+                                     loader, null);
+    reverseProxyCache.sub(pc).putIfAbsent(loader, Boolean.TRUE);
+    return pc;
 } catch (ClassFormatError e) {
 // 如果出现 ClassFormatError，很可能是输入参数有问题，比如，ProxyGenerator 有 bug
 }
@@ -74,7 +74,7 @@ try {
 
 前面理顺了二进制的字节码信息到 Class 对象的转换过程，似乎我们还没有分析如何生成自己需要的字节码，接下来一起来看看相关的字节码操纵逻辑。
 
-JDK 内部动态代理的逻辑，可以参考java.lang.reflect.ProxyGenerator的内部实现。我觉得可以认为这是种另类的字节码操纵技术，其利用了DataOutputStrem提供的能力，配合 hard-coded 的各种 JVM 指令实现方法，生成所需的字节码数组。你可以参考下面的示例代码。
+**JDK 内部动态代理的逻辑，可以参考java.lang.reflect.ProxyGenerator的内部实现。**我觉得可以认为这是种另类的字节码操纵技术，其利用了DataOutputStrem提供的能力，配合 hard-coded 的各种 JVM 指令实现方法，生成所需的字节码数组。你可以参考下面的示例代码。
 
 private void codeLocalLoadStore\(int lvar, int opcode, int opcode\_0,
 
