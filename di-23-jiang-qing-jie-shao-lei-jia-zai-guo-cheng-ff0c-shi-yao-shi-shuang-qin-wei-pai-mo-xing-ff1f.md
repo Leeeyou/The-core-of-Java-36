@@ -77,17 +77,16 @@ Javap –v CLPreparation.class
 
 对于做底层开发的工程师，有的时候可能不得不去试图修改 JDK 的基础代码，也就是通常意义上的核心类库，我们可以使用下面的命令行参数。
 
-\# 指定新的 bootclasspath，替换 java.\* 包的内部实现
+```java
+# 指定新的 bootclasspath，替换 java.* 包的内部实现
+java -Xbootclasspath:<your_boot_classpath> your_App
 
-java -Xbootclasspath:&lt;your\_boot\_classpath&gt; your\_App
+# a 意味着 append，将指定目录添加到 bootclasspath 后面
+java -Xbootclasspath/a:<your_dir> your_App
 
-\# a 意味着 append，将指定目录添加到 bootclasspath 后面
-
-java -Xbootclasspath/a:&lt;your\_dir&gt; your\_App
-
-\# p 意味着 prepend，将指定目录添加到 bootclasspath 前面
-
-java -Xbootclasspath/p:&lt;your\_dir&gt; your\_App
+# p 意味着 prepend，将指定目录添加到 bootclasspath 前面
+java -Xbootclasspath/p:<your_dir> your_App
+```
 
 用法其实很易懂，例如，使用最常见的 “/p”，既然是前置，就有机会替换个别基础类的实现。
 
