@@ -179,7 +179,9 @@ Java -Xshare:dump -XX:+UseAppCDS -XX:SharedArchiveFile=<jsa>
 
 第二，在应用程序启动时，指定归档文件，并开启 AppCDS。
 
-Java -Xshare:on -XX:+UseAppCDS -XX:SharedArchiveFile=&lt;jsa&gt; yourApp
+```java
+Java -Xshare:on -XX:+UseAppCDS -XX:SharedArchiveFile=<jsa> yourApp
+```
 
 通过上面的命令，JVM 会通过内存映射技术，直接映射到相应的地址空间，免除了类加载、解析等各种开销。
 
