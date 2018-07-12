@@ -78,26 +78,26 @@ try {
 
 ```java
 private void codeLocalLoadStore(int lvar, int opcode, int opcode_0,
-                            	DataOutputStream out)
-	throws IOException
+                                DataOutputStream out)
+    throws IOException
 {
-	assert lvar >= 0 && lvar <= 0xFFFF;
-	// 根据变量数值，以不同格式，dump 操作码
+    assert lvar >= 0 && lvar <= 0xFFFF;
+    // 根据变量数值，以不同格式，dump 操作码
     if (lvar <= 3) {
-    	out.writeByte(opcode_0 + lvar);
-	} else if (lvar <= 0xFF) {
-    	out.writeByte(opcode);
-    	out.writeByte(lvar & 0xFF);
-	} else {
-    	// 使用宽指令修饰符，如果变量索引不能用无符号 byte
-    	out.writeByte(opc_wide);
-    	out.writeByte(opcode);
-    	out.writeShort(lvar & 0xFFFF);
-	}
+        out.writeByte(opcode_0 + lvar);
+    } else if (lvar <= 0xFF) {
+        out.writeByte(opcode);
+        out.writeByte(lvar & 0xFF);
+    } else {
+        // 使用宽指令修饰符，如果变量索引不能用无符号 byte
+        out.writeByte(opc_wide);
+        out.writeByte(opcode);
+        out.writeShort(lvar & 0xFFFF);
+    }
 }
 ```
 
-这种实现方式的好处是没有太多依赖关系，简单实用，但是前提是你需要懂各种JVM 指令，知道怎么处理那些偏移地址等，实际门槛非常高，所以并不适合大多数的普通开发场景。
+**这种实现方式的好处是没有太多依赖关系，简单实用，但是前提是你需要懂各种JVM 指令，知道怎么处理那些偏移地址等，实际门槛非常高，所以并不适合大多数的普通开发场景。**
 
 幸好，Java 社区专家提供了各种从底层到更高抽象水平的字节码操作类库，我们不需要什么都自己从头做。JDK 内部就集成了 ASM 类库，虽然并未作为公共 API 暴露出来，但是它广泛应用在，如java.lang.instrumentation API 底层实现，或者Lambda Call Site生成的内部逻辑中，这些代码的实现我就不在这里展开了，如果你确实有兴趣或有需要，可以参考类似 LamdaForm 的字节码生成逻辑：java.lang.invoke.InvokerBytecodeGenerator。
 
