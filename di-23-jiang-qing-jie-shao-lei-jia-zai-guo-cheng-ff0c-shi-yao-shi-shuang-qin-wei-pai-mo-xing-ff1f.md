@@ -130,7 +130,9 @@ java -Djava.system.class.loader=com.yourcorp.YourClassLoader HelloWorld
 
 首先，确认要修改的类文件已经编译好，并按照对应模块（假设是 java.base）结构存放， 然后，给模块打补丁：
 
-java --patch-module java.base=your\_patch yourApp
+```java
+java --patch-module java.base=your_patch yourApp
+```
 
 扩展类加载器被重命名为平台类加载器（Platform Class-Loader），而且 extension 机制则被移除。也就意味着，如果我们指定 java.ext.dirs 环境变量，或者 lib/ext 目录存在，JVM 将直接返回错误！建议解决办法就是将其放入 classpath 里。
 
