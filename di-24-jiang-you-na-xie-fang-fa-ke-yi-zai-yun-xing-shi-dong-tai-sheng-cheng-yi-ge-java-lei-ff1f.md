@@ -112,10 +112,9 @@ private void codeLocalLoadStore(int lvar, int opcode, int opcode_0,
 * 通过 Proxy 类，调用其 newProxyInstance 方法，生成一个实现了相应基础接口的代理类实例，可以看下面的方法签名。
 
 ```java
-
 public static Object newProxyInstance(ClassLoader loader,
-                                  	Class<?>[] interfaces,
-                                  	InvocationHandler h)
+                                      Class<?>[] interfaces,
+                                      InvocationHandler h)
 ```
 
 我们分析一下，动态代码生成是具体发生在什么阶段呢？
@@ -124,20 +123,15 @@ public static Object newProxyInstance(ClassLoader loader,
 
 第一步，生成对应的类，其实和我们去写 Java 代码很类似，只不过改为用 ASM 方法和指定参数，代替了我们书写的源码。
 
-ClassWriter cw = new ClassWriter\(ClassWriter.COMPUTE\_FRAMES\);
+```java
+ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_FRAMES);
 
-cw.visit\(V1\_8,                      // 指定 Java 版本
-
-```
-    ACC\_PUBLIC,                 // 说明是 public 类型
-
-    "com/mycorp/HelloProxy",    // 指定包和类的名称
-
-    null,                       // 签名，null 表示不是泛型
-
-    "java/lang/Object",                 // 指定父类
-
-    new String\[\]{ "com/mycorp/Hello" }\); // 指定需要实现的接口
+cw.visit(V1_8,                      // 指定 Java 版本
+    	ACC_PUBLIC,             	// 说明是 public 类型
+        "com/mycorp/HelloProxy",	// 指定包和类的名称
+    	null,                   	// 签名，null 表示不是泛型
+    	"java/lang/Object",             	// 指定父类
+    	new String[]{ "com/mycorp/Hello" }); // 指定需要实现的接口
 ```
 
 更进一步，我们可以按照需要为代理对象实例，生成需要的方法和逻辑。
