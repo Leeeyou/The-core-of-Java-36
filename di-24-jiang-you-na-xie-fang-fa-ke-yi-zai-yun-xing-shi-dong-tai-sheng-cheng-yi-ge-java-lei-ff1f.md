@@ -76,45 +76,26 @@ try {
 
 **JDK 内部动态代理的逻辑，可以参考java.lang.reflect.ProxyGenerator的内部实现。**我觉得可以认为这是种另类的字节码操纵技术，其利用了DataOutputStrem提供的能力，配合 hard-coded 的各种 JVM 指令实现方法，生成所需的字节码数组。你可以参考下面的示例代码。
 
-private void codeLocalLoadStore\(int lvar, int opcode, int opcode\_0,
-
-```
-                            DataOutputStream out\)
-
-throws IOException
-```
-
+```java
+private void codeLocalLoadStore(int lvar, int opcode, int opcode_0,
+                            	DataOutputStream out)
+	throws IOException
 {
-
-```
-assert lvar &gt;= 0 && lvar &lt;= 0xFFFF;
-
-// 根据变量数值，以不同格式，dump 操作码
-
-if \(lvar &lt;= 3\) {
-
-    out.writeByte\(opcode\_0 + lvar\);
-
-} else if \(lvar &lt;= 0xFF\) {
-
-    out.writeByte\(opcode\);
-
-    out.writeByte\(lvar & 0xFF\);
-
-} else {
-
-    // 使用宽指令修饰符，如果变量索引不能用无符号 byte
-
-    out.writeByte\(opc\_wide\);
-
-    out.writeByte\(opcode\);
-
-    out.writeShort\(lvar & 0xFFFF\);
-
+	assert lvar >= 0 && lvar <= 0xFFFF;
+	// 根据变量数值，以不同格式，dump 操作码
+    if (lvar <= 3) {
+    	out.writeByte(opcode_0 + lvar);
+	} else if (lvar <= 0xFF) {
+    	out.writeByte(opcode);
+    	out.writeByte(lvar & 0xFF);
+	} else {
+    	// 使用宽指令修饰符，如果变量索引不能用无符号 byte
+    	out.writeByte(opc_wide);
+    	out.writeByte(opcode);
+    	out.writeShort(lvar & 0xFFFF);
+	}
 }
 ```
-
-}
 
 这种实现方式的好处是没有太多依赖关系，简单实用，但是前提是你需要懂各种JVM 指令，知道怎么处理那些偏移地址等，实际门槛非常高，所以并不适合大多数的普通开发场景。
 
