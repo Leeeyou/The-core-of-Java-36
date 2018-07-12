@@ -34,16 +34,11 @@
 
 首先，我们来理解一下，类从字节码到 Class 对象的转换，在类加载过程中，这一步是通过下面的方法提供的功能，或者 defineClass 的其他本地对等实现。
 
-protected final Class&lt;?&gt; defineClass\(String name, byte\[\] b, int off, int len,
-
-```
-                                 ProtectionDomain protectionDomain\)
-```
-
-protected final Class&lt;?&gt; defineClass\(String name, java.nio.ByteBuffer b,
-
-```
-                                 ProtectionDomain protectionDomain\)
+```java
+protected final Class<?> defineClass(String name, byte[] b, int off, int len,
+                                 	ProtectionDomain protectionDomain)
+protected final Class<?> defineClass(String name, java.nio.ByteBuffer b,
+                                 	ProtectionDomain protectionDomain)
 ```
 
 我这里只选取了最基础的两个典型的 defineClass 实现，Java 重载了几个不同的方法。
