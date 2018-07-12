@@ -96,7 +96,7 @@ java -Xbootclasspath/p:<your_dir> your_App
 public final ClassLoader getParent()
 ```
 
-扩展类加载器（Extension or Ext Class-Loader），负责加载我们放到 jre/lib/ext/ 目录下面的 jar 包，这就是所谓的 extension 机制。该目录也可以通过设置 “java.ext.dirs”来覆盖。
+* 扩展类加载器（Extension or Ext Class-Loader），负责加载我们放到 jre/lib/ext/ 目录下面的 jar 包，这就是所谓的 extension 机制。该目录也可以通过设置 “java.ext.dirs”来覆盖。
 
 java -Djava.ext.dirs=your\_ext\_dir HelloWorld
 
