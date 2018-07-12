@@ -98,7 +98,9 @@ public final ClassLoader getParent()
 
 * 扩展类加载器（Extension or Ext Class-Loader），负责加载我们放到 jre/lib/ext/ 目录下面的 jar 包，这就是所谓的 extension 机制。该目录也可以通过设置 “java.ext.dirs”来覆盖。
 
-java -Djava.ext.dirs=your\_ext\_dir HelloWorld
+```java
+java -Djava.ext.dirs=your_ext_dir HelloWorld
+```
 
 应用类加载器（Application or App Class-Loader），就是加载我们最熟悉的 classpath 的内容。这里有一个容易混淆的概念，系统（System）类加载器，通常来说，其默认就是 JDK 内建的应用类加载器，但是它同样是可能修改的，比如：
 
