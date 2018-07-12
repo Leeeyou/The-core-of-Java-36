@@ -92,7 +92,9 @@ java -Xbootclasspath/p:<your_dir> your_App
 
 我们一般可以使用下面方法获取父加载器，但是在通常的 JDK/JRE 实现中，扩展类加载器 getParent\(\) 都只能返回 null。
 
-public final ClassLoader getParent\(\)
+```java
+public final ClassLoader getParent()
+```
 
 扩展类加载器（Extension or Ext Class-Loader），负责加载我们放到 jre/lib/ext/ 目录下面的 jar 包，这就是所谓的 extension 机制。该目录也可以通过设置 “java.ext.dirs”来覆盖。
 
