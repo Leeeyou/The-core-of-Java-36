@@ -58,7 +58,19 @@ static native Class<?> defineClass2(ClassLoader loader, String name, java.nio.By
 
 更进一步，我们来看看 JDK dynamic proxy 的实现代码。你会发现，对应逻辑是实现在 ProxyBuilder 这个静态内部类中，ProxyGenerator 生成字节码，并以 byte 数组的形式保存，然后通过调用 Unsafe 提供的 defineClass 入口。
 
-
+```java
+byte[] proxyClassFile = ProxyGenerator.generateProxyClass(
+    	proxyName, interfaces.toArray(EMPTY_CLASS_ARRAY), accessFlags);
+try {
+	Class<?> pc = UNSAFE.defineClass(proxyName, proxyClassFile,
+                                 	0, proxyClassFile.length,
+      	                           loader, null);
+	reverseProxyCache.sub(pc).putIfAbsent(loader, Boolean.TRUE);
+	return pc;
+} catch (ClassFormatError e) {
+// 如果出现 ClassFormatError，很可能是输入参数有问题，比如，ProxyGenerator 有 bug
+}
+```
 
 前面理顺了二进制的字节码信息到 Class 对象的转换过程，似乎我们还没有分析如何生成自己需要的字节码，接下来一起来看看相关的字节码操纵逻辑。
 
