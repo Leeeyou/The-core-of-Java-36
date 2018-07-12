@@ -111,12 +111,11 @@ private void codeLocalLoadStore(int lvar, int opcode, int opcode_0,
 
 * 通过 Proxy 类，调用其 newProxyInstance 方法，生成一个实现了相应基础接口的代理类实例，可以看下面的方法签名。
 
-public static Object newProxyInstance\(ClassLoader loader,
+```java
 
-```
-                                  Class&lt;?&gt;\[\] interfaces,
-
-                                  InvocationHandler h\)
+public static Object newProxyInstance(ClassLoader loader,
+                                  	Class<?>[] interfaces,
+                                  	InvocationHandler h)
 ```
 
 我们分析一下，动态代码生成是具体发生在什么阶段呢？
