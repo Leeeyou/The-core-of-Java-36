@@ -102,7 +102,7 @@ public final ClassLoader getParent()
 java -Djava.ext.dirs=your_ext_dir HelloWorld
 ```
 
-应用类加载器（Application or App Class-Loader），就是加载我们最熟悉的 classpath 的内容。这里有一个容易混淆的概念，系统（System）类加载器，通常来说，其默认就是 JDK 内建的应用类加载器，但是它同样是可能修改的，比如：
+* 应用类加载器（Application or App Class-Loader），就是加载我们最熟悉的 classpath 的内容。这里有一个容易混淆的概念，系统（System）类加载器，通常来说，其默认就是 JDK 内建的应用类加载器，但是它同样是可能修改的，比如：
 
 java -Djava.system.class.loader=com.yourcorp.YourClassLoader HelloWorld
 
