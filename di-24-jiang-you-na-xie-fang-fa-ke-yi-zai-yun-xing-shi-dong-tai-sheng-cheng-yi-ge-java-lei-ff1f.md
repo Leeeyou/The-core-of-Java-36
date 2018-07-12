@@ -127,34 +127,27 @@ public static Object newProxyInstance(ClassLoader loader,
 ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_FRAMES);
 
 cw.visit(V1_8,                      // 指定 Java 版本
-    	ACC_PUBLIC,             	// 说明是 public 类型
-        "com/mycorp/HelloProxy",	// 指定包和类的名称
-    	null,                   	// 签名，null 表示不是泛型
-    	"java/lang/Object",             	// 指定父类
-    	new String[]{ "com/mycorp/Hello" }); // 指定需要实现的接口
+        ACC_PUBLIC,                 // 说明是 public 类型
+        "com/mycorp/HelloProxy",    // 指定包和类的名称
+        null,                       // 签名，null 表示不是泛型
+        "java/lang/Object",                 // 指定父类
+        new String[]{ "com/mycorp/Hello" }); // 指定需要实现的接口
 ```
 
 更进一步，我们可以按照需要为代理对象实例，生成需要的方法和逻辑。
 
-MethodVisitor mv = cw.visitMethod\(
+```java
+MethodVisitor mv = cw.visitMethod(
+    	ACC_PUBLIC,         	    // 声明公共方法
+    	"sayHello",             	// 方法名称
+    	"()Ljava/lang/Object;", 	// 描述符
+    	null,                   	// 签名，null 表示不是泛型
+    	null);                      // 可能抛出的异常，如果有，则指定字符串数组
 
-```
-    ACC\_PUBLIC,                 // 声明公共方法
-
-    "sayHello",                 // 方法名称
-
-    "\(\)Ljava/lang/Object;",     // 描述符
-
-    null,                       // 签名，null 表示不是泛型
-
-    null\);                      // 可能抛出的异常，如果有，则指定字符串数组
-```
-
-mv.visitCode\(\);
-
+mv.visitCode();
 // 省略代码逻辑实现细节
-
-cw.visitEnd\(\);                      // 结束类字节码生成
+cw.visitEnd();                      // 结束类字节码生成
+```
 
 上面的代码虽然有些晦涩，但总体还是能多少理解其用意，不同的 visitX 方法提供了创建类型，创建各种方法等逻辑。ASM API，广泛的使用了Visitor模式，如果你熟悉这个模式，就会知道它所针对的场景是将算法和对象结构解耦，非常适合字节码操纵的场合，因为我们大部分情况都是依赖于特定结构修改或者添加新的方法、变量或者类型等。
 
