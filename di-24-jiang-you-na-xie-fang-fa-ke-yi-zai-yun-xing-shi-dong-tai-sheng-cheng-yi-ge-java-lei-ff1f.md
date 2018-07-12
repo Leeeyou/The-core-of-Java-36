@@ -109,7 +109,7 @@ private void codeLocalLoadStore(int lvar, int opcode, int opcode_0,
 
 * 实现InvocationHandler，对代理对象方法的调用，会被分派到其 invoke 方法来真正实现动作。
 
-通过 Proxy 类，调用其 newProxyInstance 方法，生成一个实现了相应基础接口的代理类实例，可以看下面的方法签名。
+* 通过 Proxy 类，调用其 newProxyInstance 方法，生成一个实现了相应基础接口的代理类实例，可以看下面的方法签名。
 
 public static Object newProxyInstance\(ClassLoader loader,
 
