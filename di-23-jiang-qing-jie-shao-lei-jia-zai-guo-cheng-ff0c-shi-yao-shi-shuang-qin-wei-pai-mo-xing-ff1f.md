@@ -104,7 +104,9 @@ java -Djava.ext.dirs=your_ext_dir HelloWorld
 
 * 应用类加载器（Application or App Class-Loader），就是加载我们最熟悉的 classpath 的内容。这里有一个容易混淆的概念，系统（System）类加载器，通常来说，其默认就是 JDK 内建的应用类加载器，但是它同样是可能修改的，比如：
 
+```java
 java -Djava.system.class.loader=com.yourcorp.YourClassLoader HelloWorld
+```
 
 如果我们指定了这个参数，JDK 内建的应用类加载器就会成为定制加载器的父亲，这种方式通常用在类似需要改变双亲委派模式的场景。
 
