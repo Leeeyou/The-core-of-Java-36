@@ -105,7 +105,7 @@ private void codeLocalLoadStore(int lvar, int opcode, int opcode_0,
 
 对于一个普通的 Java 动态代理，其实现过程可以简化成为：
 
-提供一个基础的接口，作为被调用类型（com.mycorp.HelloImpl）和代理类之间的统一入口，如 com.mycorp.Hello。
+* 提供一个基础的接口，作为被调用类型（com.mycorp.HelloImpl）和代理类之间的统一入口，如 com.mycorp.Hello。
 
 实现InvocationHandler，对代理对象方法的调用，会被分派到其 invoke 方法来真正实现动作。
 
