@@ -112,6 +112,8 @@ java -Djava.system.class.loader=com.yourcorp.YourClassLoader HelloWorld
 
 具体请参考下图：
 
+![](/assets/微信图片_20180712150050.jpg)
+
 至于前面被问到的双亲委派模型，参考这个结构图更容易理解。试想，如果不同类加载器都自己加载需要的某个类型，那么就会出现多次重复加载，完全是种浪费。
 
 通常类加载机制有三个基本特征：
@@ -123,6 +125,8 @@ java -Djava.system.class.loader=com.yourcorp.YourClassLoader HelloWorld
 * 单一性，由于父加载器的类型对于子加载器是可见的，所以父加载器中加载过的类型，就不会在子加载器中重复加载。但是注意，类加载器“邻居”间，同一类型仍然可以被加载多次，因为互相并不可见。
 
 在 JDK 9 中，由于 Jigsaw 项目引入了 Java 平台模块化系统（JPMS），Java SE 的源代码被划分为一系列模块。
+
+![](/assets/微信图片_20180712150054.jpg)
 
 类加载器，类文件容器等都发生了非常大的变化，我这里总结一下：
 
@@ -143,6 +147,8 @@ java --patch-module java.base=your_patch yourApp
 * 增加了 Layer 的抽象， JVM 启动默认创建 BootLayer，开发者也可以自己去定义和实例化 Layer，可以更加方便的实现类似容器一般的逻辑抽象。
 
 结合了 Layer，目前的 JVM 内部结构就变成了下面的层次，内建类加载器都在 BootLayer 中，其他 Layer 内部有自定义的类加载器，不同版本模块可以同时工作在不同的 Layer。
+
+![](/assets/微信图片_20180712150057.jpg)
 
 谈到类加载器，绕不过的一个话题是自定义类加载器，常见的场景有：
 
