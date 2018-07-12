@@ -172,10 +172,9 @@ java --patch-module java.base=your_patch yourApp
 
 首先，JVM 将类信息加载， 解析成为元数据，并根据是否需要修改，将其分类为 Read-Only 部分和 Read-Write 部分。然后，将这些元数据直接存储在文件系统中，作为所谓的 Shared Archive。命令很简单：
 
-Java -Xshare:dump -XX:+UseAppCDS -XX:SharedArchiveFile=&lt;jsa&gt;  \
-
-```
-     -XX:SharedClassListFile=&lt;classlist&gt; -XX:SharedArchiveConfigFile=&lt;config\_file&gt;
+```java
+Java -Xshare:dump -XX:+UseAppCDS -XX:SharedArchiveFile=<jsa>  
+-XX:SharedClassListFile=<classlist> -XX:SharedArchiveConfigFile=<config_file>
 ```
 
 第二，在应用程序启动时，指定归档文件，并开启 AppCDS。
