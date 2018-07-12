@@ -43,24 +43,21 @@ public class CLPreparation {
 编译并反编译一下：
 
 ```java
-
 Javac CLPreparation.java
 Javap –v CLPreparation.class
 ```
 
 可以在字节码中看到这样的额外初始化逻辑：
 
+```java
+         0: bipush        100
+         2: putstatic     #2                  // Field a:I
+         5: sipush        10000
+         8: invokestatic  #3                  // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+        11: putstatic     #4                  // Field INTEGER_CONSTANT:Ljava/lang/Integer;
 ```
-     0: bipush        100
 
-     2: putstatic     \#2                  // Field a:I
 
-     5: sipush        10000
-
-     8: invokestatic  \#3                  // Method java/lang/Integer.valueOf:\(I\)Ljava/lang/Integer;
-
-    11: putstatic     \#4                  // Field INTEGER\_CONSTANT:Ljava/lang/Integer;
-```
 
 这能让我们更清楚，普通原始类型静态变量和引用类型（即使是常量），是需要额外调用 putstatic 等 JVM 指令的，这些是在显式初始化阶段执行，而不是准备阶段调用；而原始类型常量，则不需要这样的步骤。
 
