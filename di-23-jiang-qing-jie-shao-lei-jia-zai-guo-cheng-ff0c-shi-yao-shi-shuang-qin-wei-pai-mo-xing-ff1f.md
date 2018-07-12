@@ -42,9 +42,11 @@ public class CLPreparation {
 
 编译并反编译一下：
 
-Javac CLPreparation.java
+```java
 
+Javac CLPreparation.java
 Javap –v CLPreparation.class
+```
 
 可以在字节码中看到这样的额外初始化逻辑：
 
