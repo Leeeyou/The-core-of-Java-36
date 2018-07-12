@@ -138,11 +138,11 @@ cw.visit(V1_8,                      // 指定 Java 版本
 
 ```java
 MethodVisitor mv = cw.visitMethod(
-    	ACC_PUBLIC,         	    // 声明公共方法
-    	"sayHello",             	// 方法名称
-    	"()Ljava/lang/Object;", 	// 描述符
-    	null,                   	// 签名，null 表示不是泛型
-    	null);                      // 可能抛出的异常，如果有，则指定字符串数组
+        ACC_PUBLIC,                 // 声明公共方法
+        "sayHello",                 // 方法名称
+        "()Ljava/lang/Object;",     // 描述符
+        null,                       // 签名，null 表示不是泛型
+        null);                      // 可能抛出的异常，如果有，则指定字符串数组
 
 mv.visitCode();
 // 省略代码逻辑实现细节
@@ -153,7 +153,9 @@ cw.visitEnd();                      // 结束类字节码生成
 
 按照前面的分析，字节码操作最后大都应该是生成 byte 数组，ClassWriter 提供了一个简便的方法。
 
-cw.toByteArray\(\);
+```java
+cw.toByteArray();
+```
 
 然后，就可以进入我们熟知的类加载过程了，我就不再赘述了，如果你对 ASM 的具体用法感兴趣，可以参考这个教程。
 
