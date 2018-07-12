@@ -32,17 +32,13 @@ Java 通过引入字节码和 JVM 机制，提供了强大的跨平台能力，�
 
 我们定义下面这样的类型，分别提供了普通静态变量、静态常量，常量又考虑到原始类型和引用类型可能有区别。
 
+```java
 public class CLPreparation {
-
-```
-public static int a = 100;
-
-public static final int INT\_CONSTANT = 1000;
-
-public static final Integer INTEGER\_CONSTANT = Integer.valueOf\(10000\);
-```
-
+    public static int a = 100;
+    public static final int INT_CONSTANT = 1000;
+    public static final Integer INTEGER_CONSTANT = Integer.valueOf(10000);
 }
+```
 
 编译并反编译一下：
 
