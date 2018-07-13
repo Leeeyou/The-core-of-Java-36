@@ -156,7 +156,7 @@ JIT 编译默认是开启了 TieredCompilation 的，将其关闭，那么 JIT �
 
 得到的统计信息如下，线程数目从 25 降到了 17，消耗的内存也下降了大概 1/3。
 
-接下来是 Code 统计信息，显然这是 CodeCache 相关内存，也就是 JIT compiler 存储编译热点方法等信息的地方，JVM 提供了一系列参数可以限制其初始值和最大值等，例如：
+* 接下来是 Code 统计信息，显然这是 CodeCache 相关内存，也就是 JIT compiler 存储编译热点方法等信息的地方，JVM 提供了一系列参数可以限制其初始值和最大值等，例如：
 
 -XX:InitialCodeCacheSize=value
 
