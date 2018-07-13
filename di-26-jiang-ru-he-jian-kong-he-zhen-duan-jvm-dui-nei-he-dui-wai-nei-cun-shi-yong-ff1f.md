@@ -158,9 +158,10 @@ JIT 编译默认是开启了 TieredCompilation 的，将其关闭，那么 JIT �
 
 * 接下来是 Code 统计信息，显然这是 CodeCache 相关内存，也就是 JIT compiler 存储编译热点方法等信息的地方，JVM 提供了一系列参数可以限制其初始值和最大值等，例如：
 
+```java
 -XX:InitialCodeCacheSize=value
-
 -XX:ReservedCodeCacheSize=value
+```
 
 你可以设置下列 JVM 参数，也可以只设置其中一个，进一步判断不同参数对 CodeCache 大小的影响。
 
