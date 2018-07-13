@@ -171,7 +171,9 @@ JIT 编译默认是开启了 TieredCompilation 的，将其关闭，那么 JIT �
 
 使用命令：
 
+```java
 -XX:+UseSerialGC
+```
 
 可见，不仅总线程数大大降低（25 → 13），而且 GC 设施本身的内存开销就少了非常多。据我所知，AWS Lambda 中 Java 运行时就是使用的 Serial GC，可以大大降低单个 function 的启动和运行开销。
 
