@@ -112,7 +112,9 @@
 
 首先来做些准备工作，开启 NMT 并选择 summary 模式，
 
+```java
 -XX:NativeMemoryTracking=summary
+```
 
 为了方便获取和对比 NMT 输出，选择在应用退出时打印 NMT 统计信息
 
