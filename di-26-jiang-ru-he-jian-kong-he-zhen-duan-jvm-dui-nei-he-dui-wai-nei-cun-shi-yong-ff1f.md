@@ -92,7 +92,9 @@
 
 * Eden 和 Survivor 的大小是按照比例设置的，如果 SurvivorRatio 是 8，那么 Survivor 区域就是 Eden 的 1/8 大小，也就是新生代的 1/10，因为 YoungGen=Eden + 2\*Survivor，JVM 参数格式是
 
+```java
 -XX:SurvivorRatio=value
+```
 
 TLAB 当然也可以调整，JVM 实现了复杂的适应策略，如果你有兴趣可以参考这篇说明。
 
