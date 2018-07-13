@@ -8,4 +8,5 @@
 * [第22讲 \| AtomicInteger底层实现原理是什么？如何在自己的产品代码中应用CAS操作？](di-22-jiang-atomicinteger-di-ceng-shi-xian-yuan-li-shi-shi-yao-ff1f-ru-he-zai-zi-ji-de-chan-pin-dai-ma-zhong-ying-yong-cas-cao-zuo-ff1f.md)
 * [第23讲 \| 请介绍类加载过程，什么是双亲委派模型？](di-23-jiang-qing-jie-shao-lei-jia-zai-guo-cheng-ff0c-shi-yao-shi-shuang-qin-wei-pai-mo-xing-ff1f.md)
 * [第24讲 \| 有哪些方法可以在运行时动态生成一个Java类？](di-24-jiang-you-na-xie-fang-fa-ke-yi-zai-yun-xing-shi-dong-tai-sheng-cheng-yi-ge-java-lei-ff1f.md)
+* [第25讲 \| 谈谈JVM内存区域的划分，哪些区域可能发生OutOfMemoryError?](di-25-jiang-tan-tan-jvm-nei-cun-qu-yu-de-hua-fen-ff0c-na-xie-qu-yu-ke-neng-fa-sheng-outofmemoryerror.md)
 
