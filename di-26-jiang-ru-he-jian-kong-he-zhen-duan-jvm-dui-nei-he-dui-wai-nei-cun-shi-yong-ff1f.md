@@ -177,7 +177,7 @@ JIT 编译默认是开启了 TieredCompilation 的，将其关闭，那么 JIT �
 
 可见，不仅总线程数大大降低（25 → 13），而且 GC 设施本身的内存开销就少了非常多。据我所知，AWS Lambda 中 Java 运行时就是使用的 Serial GC，可以大大降低单个 function 的启动和运行开销。
 
-Compiler 部分，就是 JIT 的开销，显然关闭 TieredCompilation 会降低内存使用。
+* Compiler 部分，就是 JIT 的开销，显然关闭 TieredCompilation 会降低内存使用。
 
 其他一些部分占比都非常低，通常也不会出现内存使用问题，请参考官方文档。唯一的例外就是 Internal（JDK 11 以后在 Other 部分）部分，其统计信息包含着 Direct Buffer 的直接内存，这其实是堆外内存中比较敏感的部分，很多堆外内存 OOM 就发生在这里，请参考专栏第 12 讲的处理步骤。原则上 Direct Buffer 是不推荐频繁创建或销毁的，如果你怀疑直接内存区域有问题，通常可以通过类似 instrument 构造函数等手段，排查可能的问题。
 
