@@ -171,6 +171,10 @@ JIT 编译默认是开启了 TieredCompilation 的，将其关闭，那么 JIT �
 
 你可以设置下列 JVM 参数，也可以只设置其中一个，进一步判断不同参数对 CodeCache 大小的影响。
 
+![](/assets/微信图片_20180713104932.jpg)
+
+![](/assets/微信图片_20180713104930.jpg)
+
 很明显，CodeCache 空间下降非常大，这是因为我们关闭了复杂的 TieredCompilation，而且还限制了其初始大小。
 
 * 下面就是 GC 部分了，就像我前面介绍的，G1 等垃圾收集器其本身的设施和数据结构就非常复杂和庞大，例如 Remembered Set 通常都会占用 20%~30% 的堆空间。如果我把 GC 明确修改为相对简单的 Serial GC，会有什么效果呢？
@@ -180,6 +184,8 @@ JIT 编译默认是开启了 TieredCompilation 的，将其关闭，那么 JIT �
 ```java
 -XX:+UseSerialGC
 ```
+
+![](/assets/微信图片_20180713104927.jpg)
 
 可见，不仅总线程数大大降低（25 → 13），而且 GC 设施本身的内存开销就少了非常多。据我所知，AWS Lambda 中 Java 运行时就是使用的 Serial GC，可以大大降低单个 function 的启动和运行开销。
 
