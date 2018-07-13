@@ -86,7 +86,9 @@
 
 * 当然，也可以不用比例的方式调整新生代的大小，直接指定下面的参数，设定具体的内存大小数值。
 
+```java
 -XX:NewSize=value
+```
 
 Eden 和 Survivor 的大小是按照比例设置的，如果 SurvivorRatio 是 8，那么 Survivor 区域就是 Eden 的 1/8 大小，也就是新生代的 1/10，因为 YoungGen=Eden + 2\*Survivor，JVM 参数格式是
 
