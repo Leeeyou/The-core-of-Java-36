@@ -118,7 +118,9 @@
 
 为了方便获取和对比 NMT 输出，选择在应用退出时打印 NMT 统计信息
 
+```java
 -XX:+UnlockDiagnosticVMOptions -XX:+PrintNMTStatistics
+```
 
 然后，执行一个简单的在标准输出打印 HelloWorld 的程序，就可以得到下面的输出
 
