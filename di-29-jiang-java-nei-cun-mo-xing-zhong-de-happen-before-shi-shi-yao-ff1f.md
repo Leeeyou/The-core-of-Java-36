@@ -98,6 +98,7 @@ JMM 内部的实现通常是依赖于所谓的内存屏障，通过禁止某些�
 // Thread A
 while (condition) {
 }
+
 // Thread B
 condition = false;
 ```
