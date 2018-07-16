@@ -136,7 +136,9 @@ G1 的类型卸载有什么改进吗？很多资料中都谈到，G1 只有在�
 
 还有一些非常有用的日志选项，很多特定问题的诊断都是要依赖这些选项：
 
+```java
 -XX:+PrintAdaptiveSizePolicy // 打印 G1 Ergonomics 相关信息
+```
 
 我们知道 GC 内部一些行为是适应性的触发的，利用 PrintAdaptiveSizePolicy，我们就可以知道为什么 JVM 做出了一些可能我们不希望发生的动作。例如，G1 调优的一个基本建议就是避免进行大量的 Humongous 对象分配，如果 Ergonomics 信息说明发生了这一点，那么就可以考虑要么增大堆的大小，要么直接将 region 大小提高。
 
