@@ -111,11 +111,13 @@ condition = false;
 Map configOptions;
 char[] configText;
 volatile boolean initialized = false;
+
 // Thread A
 configOptions = new HashMap();
 configText = readConfigFile(fileName);
 processConfigOptions(configText, configOptions);
 initialized = true;
+
 // Thread B
 while (!initialized)
 sleep();
