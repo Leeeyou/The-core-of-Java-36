@@ -107,29 +107,20 @@ condition = false;
 
 第二，我想举 Brian Goetz 提供的一个经典用例，使用 volatile 作为守卫对象，实现某种程度上轻量级的同步，请看代码片段：
 
+```java
 Map configOptions;
-
-char\[\] configText;
-
+char[] configText;
 volatile boolean initialized = false;
-
 // Thread A
-
-configOptions = new HashMap\(\);
-
-configText = readConfigFile\(fileName\);
-
-processConfigOptions\(configText, configOptions\);
-
+configOptions = new HashMap();
+configText = readConfigFile(fileName);
+processConfigOptions(configText, configOptions);
 initialized = true;
-
 // Thread B
-
-while \(!initialized\)
-
-sleep\(\);
-
+while (!initialized)
+sleep();
 // use configOptions
+```
 
 JSR-133 重新定义的 JMM 模型，能够保证线程 B 获取的 configOptions 是更新后的数值。
 
