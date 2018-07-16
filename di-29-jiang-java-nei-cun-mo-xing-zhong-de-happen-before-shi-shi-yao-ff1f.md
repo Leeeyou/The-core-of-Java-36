@@ -14,9 +14,9 @@ Happen-before 关系，是 Java 内存模型中保证多线程操作可见性的
 
 * 对于一个锁的解锁操作，保证 happen-before 加锁操作。
 
-对象构建完成，保证 happen-before 于 finalizer 的开始动作。
+* 对象构建完成，保证 happen-before 于 finalizer 的开始动作。
 
-甚至是类似线程内部操作的完成，保证 happen-before 其他 Thread.join\(\) 的线程等。
+* 甚至是类似线程内部操作的完成，保证 happen-before 其他 Thread.join\(\) 的线程等。
 
 这些 happen-before 关系是存在着传递性的，如果满足 a happen-before b 和 b happen-before c，那么 a happen-before c 也成立。
 
