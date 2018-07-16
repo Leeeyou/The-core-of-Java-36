@@ -10,7 +10,7 @@ Happen-before 关系，是 Java 内存模型中保证多线程操作可见性的
 
 * 线程内执行的每个操作，都保证 happen-before 后面的操作，这就保证了基本的程序顺序规则，这是开发者在书写程序时的基本约定。
 
-对于 volatile 变量，对它的写操作，保证 happen-before 在随后对该变量的读取操作。
+* 对于 volatile 变量，对它的写操作，保证 happen-before 在随后对该变量的读取操作。
 
 对于一个锁的解锁操作，保证 happen-before 加锁操作。
 
