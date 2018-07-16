@@ -28,9 +28,10 @@
 
 另外，Parallel GC 引入了开发者友好的配置项，我们可以直接设置暂停时间或吞吐量等目标，JVM 会自动进行适应性调整，例如下面参数：
 
+```java
 -XX:MaxGCPauseMillis=value
-
--XX:GCTimeRatio=N // GC 时间和用户时间比例 = 1 / \(N+1\)
+-XX:GCTimeRatio=N // GC 时间和用户时间比例 = 1 / (N+1)
+```
 
 G1 GC 这是一种兼顾吞吐量和停顿时间的 GC 实现，是 Oracle JDK 9 以后的默认 GC 选项。G1 可以直观的设定停顿时间的目标，相比于 CMS GC，G1 未必能做到 CMS 在最好情况下的延时停顿，但是最差情况要好很多。
 
