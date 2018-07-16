@@ -170,7 +170,9 @@ java -Xlog:help
 
 降低其最大值同样对降低 Young GC 延迟有帮助。
 
+```java
 -XX:G1MaxNewSizePercent
+```
 
 如果我们直接为 G1 设置较小的延迟目标值，也会起到减小新生代的效果，虽然会影响吞吐量。
 
