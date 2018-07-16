@@ -64,9 +64,10 @@ region 的大小是一致的，数值是在 1M 到 32M 字节之间的一个 2 �
 
 * 老年代回收，则是依靠 Mixed GC。并发标记结束后，JVM 就有足够的信息进行垃圾收集，Mixed GC 不仅同时会清理 Eden、Survivor 区域，而且还会清理部分 Old 区域。可以通过设置下面的参数，指定触发阈值，并且设定最多被包含在一次 Mixed GC 中的 region 比例。
 
+```java
 –XX:G1MixedGCLiveThresholdPercent
-
 –XX:G1OldCSetRegionThresholdPercent
+```
 
 从 G1 内部运行的角度，下面的示意图描述了 G1 正常运行时的状态流转变化，当然，在发生逃逸失败等情况下，就会触发 Full GC。
 
