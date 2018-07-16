@@ -150,7 +150,9 @@ G1 的类型卸载有什么改进吗？很多资料中都谈到，G1 只有在�
 
 另外，建议开启选项下面的选项进行并行引用处理。
 
+```java
 -XX:+ParallelRefProcEnabled
+```
 
 需要注意的一点是，JDK 9 中 JVM 和 GC 日志机构进行了重构，其实我前面提到的PrintGCDetails 已经被标记为废弃，而PrintGCDateStamps 已经被移除，指定它会导致 JVM 无法启动。可以使用下面的命令查询新的配置参数。
 
