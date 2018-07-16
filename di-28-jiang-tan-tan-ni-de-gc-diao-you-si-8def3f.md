@@ -164,7 +164,9 @@ java -Xlog:help
 
 * 如果发现 Young GC 非常耗时，这很可能就是因为新生代太大了，我们可以考虑减小新生代的最小比例。
 
+```java
 -XX:G1NewSizePercent
+```
 
 降低其最大值同样对降低 Young GC 延迟有帮助。
 
