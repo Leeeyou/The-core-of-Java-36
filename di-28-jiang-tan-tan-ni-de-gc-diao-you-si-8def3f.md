@@ -182,7 +182,9 @@ java -Xlog:help
 
 我在上面已经介绍了 G1OldCSetRegionThresholdPercent 控制其最大值，还可以利用下面参数提高 Mixed GC 的个数，当前默认值是 8，Mixed GC 数量增多，意味着每次被包含的 region 减少。
 
+```java
 -XX:G1MixedGCCountTarget
+```
 
 今天的内容算是抛砖引玉，更多内容你可以参考G1 调优指南等，远不是几句话可以囊括的。需要注意的是，也要避免过度调优，G1 对大堆非常友好，其运行机制也需要浪费一定的空间，有时候稍微多给堆一些空间，比进行苛刻的调优更加实用。
 
