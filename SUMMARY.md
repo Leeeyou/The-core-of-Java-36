@@ -12,4 +12,5 @@
 * [第26讲 \| 如何监控和诊断JVM堆内和堆外内存使用？](di-26-jiang-ru-he-jian-kong-he-zhen-duan-jvm-dui-nei-he-dui-wai-nei-cun-shi-yong-ff1f.md)
 * [第27讲 \| Java常见的垃圾收集器有哪些？](di-27-jiang-java-chang-jian-de-la-ji-shou-ji-qi-you-na-xie-ff1f.md)
 * [第28讲 \| 谈谈你的GC调优思路? ](di-28-jiang-tan-tan-ni-de-gc-diao-you-si-8def3f.md)
+* [第29讲 \| Java内存模型中的happen-before是什么？](di-29-jiang-java-nei-cun-mo-xing-zhong-de-happen-before-shi-shi-yao-ff1f.md)
 
