@@ -62,7 +62,7 @@ region 的大小是一致的，数值是在 1M 到 32M 字节之间的一个 2 �
 
 * Minor GC 仍然存在，虽然具体过程会有区别，会涉及 Remembered Set 等相关处理。
 
-老年代回收，则是依靠 Mixed GC。并发标记结束后，JVM 就有足够的信息进行垃圾收集，Mixed GC 不仅同时会清理 Eden、Survivor 区域，而且还会清理部分 Old 区域。可以通过设置下面的参数，指定触发阈值，并且设定最多被包含在一次 Mixed GC 中的 region 比例。
+* 老年代回收，则是依靠 Mixed GC。并发标记结束后，JVM 就有足够的信息进行垃圾收集，Mixed GC 不仅同时会清理 Eden、Survivor 区域，而且还会清理部分 Old 区域。可以通过设置下面的参数，指定触发阈值，并且设定最多被包含在一次 Mixed GC 中的 region 比例。
 
 –XX:G1MixedGCLiveThresholdPercent
 
