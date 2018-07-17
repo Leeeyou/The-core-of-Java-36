@@ -99,7 +99,9 @@ $ docker run -it --rm --name yourcontainer -p 8080:8080 -m 800M repo/your-java-c
 
 那么，就可以额外配置下面的环境变量，直接指定 JVM 堆大小。
 
--e JAVA\_OPTIONS='-Xmx300m'
+```java
+-e JAVA_OPTIONS='-Xmx300m'
+```
 
 明确配置 GC 和 JIT 并行线程数目，以避免二者占用过多计算资源。
 
