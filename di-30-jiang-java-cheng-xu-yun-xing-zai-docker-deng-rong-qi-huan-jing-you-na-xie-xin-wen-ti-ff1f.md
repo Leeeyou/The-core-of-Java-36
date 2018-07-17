@@ -64,11 +64,12 @@ Docker 仅在类似 Linux 内核之上实现了有限的隔离和虚拟化，并
 
 首先，如果你能够升级到最新的 JDK 版本，这个问题就迎刃而解了。
 
-针对这种情况，JDK 9 中引入了一些实验性的参数，以方便 Docker 和 Java“沟通”，例如针对内存限制，可以使用下面的参数设置：
+* 针对这种情况，JDK 9 中引入了一些实验性的参数，以方便 Docker 和 Java“沟通”，例如针对内存限制，可以使用下面的参数设置：
 
+```java
 -XX:+UnlockExperimentalVMOptions
-
 -XX:+UseCGroupMemoryLimitForHeap
+```
 
 注意，这两个参数是顺序敏感的，并且只支持 Linux 环境。而对于 CPU 核心数限定，Java 已经被修正为可以正确理解“–cpuset-cpus”等设置，无需单独设置参数。
 
