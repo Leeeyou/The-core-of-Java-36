@@ -32,7 +32,9 @@ Select * from use_info where username = “input_usr_name” and password = “�
 
 第二，操作系统命令注入。Java 语言提供了类似 Runtime.exec\(…\) 的 API，可以用来执行特定命令，假设我们构建了一个应用，以输入文本作为参数，执行下面的命令：
 
-ls –la input\_file\_name
+```java
+ls –la input_file_name
+```
 
 但是如果用户输入是 “input\_file\_name;rm –rf /\*”，这就有可能出现问题了。当然，这只是个举例，Java 标准类库本身进行了非常多的改进，所以类似这种编程错误，未必可以真的完成攻击，但其反映的一类场景是真实存在的。
 
