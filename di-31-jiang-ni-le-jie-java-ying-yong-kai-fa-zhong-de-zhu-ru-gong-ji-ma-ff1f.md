@@ -18,7 +18,9 @@ Select * from use_info where username = “input_usr_name” and password = “i
 
 但是，如果我输入的 input\_pwd 是类似下面的文本，
 
+```java
 “ or “”=”
+```
 
 那么，拼接出的 SQL 字符串就变成了下面的条件，OR 的存在导致输入什么名字都是复合条件的。
 
