@@ -80,13 +80,15 @@ Java 工程师未必都要成为安全专家，但了解基础的安全领域常
 
 第三， 就是 JDK 集成的各种安全工具，例如：
 
-keytool，这是个强大的工具，可以管理安全场景中不可或缺的秘钥、证书等，并且可以管理 Java 程序使用的 keystore 文件。
+* keytool，这是个强大的工具，可以管理安全场景中不可或缺的秘钥、证书等，并且可以管理 Java 程序使用的 keystore 文件。
 
-jarsigner，用于对 jar 文件进行签名或者验证。
+* jarsigner，用于对 jar 文件进行签名或者验证。
 
 在应用实践中，如果对安全要求非常高，建议打开 SecurityManager，
 
+```java
 -Djava.security.manager
+```
 
 请注意其开销，通常只要开启 SecurityManager，就会导致 10% ~ 15% 的性能下降，在 JDK 9 以后，这个开销有所改善。
 
