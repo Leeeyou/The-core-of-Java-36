@@ -93,7 +93,9 @@ Docker 仅在类似 Linux 内核之上实现了有限的隔离和虚拟化，并
 
 例如，我们可能在环境中，这样限制容器内存：
 
+```java
 $ docker run -it --rm --name yourcontainer -p 8080:8080 -m 800M repo/your-java-container:openjdk
+```
 
 那么，就可以额外配置下面的环境变量，直接指定 JVM 堆大小。
 
