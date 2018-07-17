@@ -118,7 +118,9 @@ $ docker run -it --rm --name yourcontainer -p 8080:8080 -m 800M repo/your-java-c
 
 也可以指定 Docker 运行参数，例如：
 
+```java
 --memory-swappiness=0
+```
 
 这是受操作系统Swappiness机制影响，当内存消耗达到一定门限，操作系统会试图将不活跃的进程换出（Swap out），上面的参数有显式关闭 Swap 的作用。所以可以看到，Java 在 Docker 中的使用，从操作系统、内核到 JVM 自身机制，需要综合运用我们所掌握的知识。
 
