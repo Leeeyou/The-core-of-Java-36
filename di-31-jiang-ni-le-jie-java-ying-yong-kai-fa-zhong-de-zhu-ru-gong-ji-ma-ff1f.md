@@ -12,7 +12,9 @@
 
 假设应用逻辑是，后端程序利用界面输入动态生成类似下面的 SQL，然后让 JDBC 执行。
 
-Select \* from use\_info where username = “input\_usr\_name” and password = “input\_pwd”
+```java
+Select * from use_info where username = “input_usr_name” and password = “input_pwd”
+```
 
 但是，如果我输入的 input\_pwd 是类似下面的文本，
 
