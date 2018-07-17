@@ -112,7 +112,9 @@ $ docker run -it --rm --name yourcontainer -p 8080:8080 -m 800M repo/your-java-c
 
 除了我前面介绍的 OOM 等问题，在很多场景中还发现 Java 在 Docker 环境中，似乎会意外使用 Swap。具体原因待查，但很有可能也是因为 Ergonomics 机制失效导致的，我建议配置下面参数，明确告知 JVM 系统内存限额。
 
--XX:MaxRAM=\`cat /sys/fs/cgroup/memory/memory.limit\_in\_bytes\`
+```java
+-XX:MaxRAM=`cat /sys/fs/cgroup/memory/memory.limit_in_bytes`
+```
 
 也可以指定 Docker 运行参数，例如：
 
