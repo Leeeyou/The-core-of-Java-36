@@ -103,11 +103,12 @@ $ docker run -it --rm --name yourcontainer -p 8080:8080 -m 800M repo/your-java-c
 -e JAVA_OPTIONS='-Xmx300m'
 ```
 
-明确配置 GC 和 JIT 并行线程数目，以避免二者占用过多计算资源。
+* 明确配置 GC 和 JIT 并行线程数目，以避免二者占用过多计算资源。
 
+```java
 -XX:ParallelGCThreads
-
 -XX:CICompilerCount
+```
 
 除了我前面介绍的 OOM 等问题，在很多场景中还发现 Java 在 Docker 环境中，似乎会意外使用 Swap。具体原因待查，但很有可能也是因为 Ergonomics 机制失效导致的，我建议配置下面参数，明确告知 JVM 系统内存限额。
 
