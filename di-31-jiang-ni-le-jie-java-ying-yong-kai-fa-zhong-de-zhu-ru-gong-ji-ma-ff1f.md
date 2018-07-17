@@ -24,7 +24,9 @@ Select * from use_info where username = “input_usr_name” and password = “i
 
 那么，拼接出的 SQL 字符串就变成了下面的条件，OR 的存在导致输入什么名字都是复合条件的。
 
-Select \* from use\_info where username = “input\_usr\_name” and password = “” or “” = “”
+```java
+Select * from use_info where username = “input_usr_name” and password = “” or “” = “”
+```
 
 这里只是举个简单的例子，它是利用了期望输入和可能输入之间的偏差。上面例子中，期望用户输入一个数值，但实际输入的则是 SQL 语句片段。类似场景可以利用注入的不同 SQL 语句，进行各种不同目的的攻击，甚至还可以加上“;delete xxx”之类语句，如果数据库权限控制不合理，攻击效果就可能是灾难性的。
 
