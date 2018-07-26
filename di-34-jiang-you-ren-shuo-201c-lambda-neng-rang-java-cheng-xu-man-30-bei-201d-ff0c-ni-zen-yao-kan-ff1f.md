@@ -159,27 +159,19 @@ blackhole.consume(mul);
 
 * 防止发生常量折叠（Constant Folding）。JVM 如果发现计算过程是依赖于常量或者事实上的常量，就可能会直接计算其结果，所以基准测试并不能真实反映代码执行的性能。JMH 提供了 State 机制来解决这个问题，将本地变量修改为 State 对象信息，请参考下面示例。
 
-@State\(Scope.Thread\)
-
+```java
+@State(Scope.Thread)
 public static class MyState {
-
 public int left = 10;
-
 public int right = 100;
-
 }
-
-public void testMethod\(MyState state, Blackhole blackhole\) {
-
+public void testMethod(MyState state, Blackhole blackhole) {
 int left = state.left;
-
 int right = state.right;
-
-int mul = left \* right;
-
-blackhole.consume\(mul\);
-
+int mul = left * right;
+blackhole.consume(mul);
 }
+```
 
 另外 JMH 还会对 State 对象进行额外的处理，以尽量消除伪共享（False Sharing）的影响，标记 @State，JMH 会自动进行补齐。
 
