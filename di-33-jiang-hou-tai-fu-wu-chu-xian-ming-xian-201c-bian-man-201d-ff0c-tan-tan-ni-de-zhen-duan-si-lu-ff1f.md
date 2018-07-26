@@ -38,7 +38,7 @@
 
 如果你有兴趣进行系统性的学习，我建议参考 Charlie Hunt 编撰的《Java Performance》或者 Scott Oaks 的《Java Performance：The Definitive Guide》。另外，如果不希望出现理解偏差，最好是阅读英文版。
 
-知识扩展
+# 知识扩展
 
 首先，我们来了解一下业界最广泛的性能分析方法论。
 
