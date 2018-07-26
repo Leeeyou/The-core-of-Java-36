@@ -72,7 +72,9 @@ JVM 会根据统计信息，动态决定什么方法被编译，什么方法解�
 
 JVM 会生成一个 xml 形式的文件，另外， LogFile 选项是可选的，不指定则会输出到
 
-hotspot\_pid&lt;pid&gt;.log
+```java
+hotspot_pid<pid>.log
+```
 
 具体格式可以参考 Ben Evans 提供的JitWatch工具和分析指南。
 
