@@ -75,9 +75,8 @@ JMH 是由 Hotspot JVM 团队专家开发的，除了支持完整的基准测试
 
 也可以，利用类似下面的命令，直接生成一个 Maven 项目。
 
+```java
 $ mvn archetype:generate \
-
-```
       -DinteractiveMode=false \
 
       -DarchetypeGroupId=org.openjdk.jmh \
