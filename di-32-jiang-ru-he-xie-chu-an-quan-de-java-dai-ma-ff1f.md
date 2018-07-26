@@ -77,7 +77,7 @@ throw new RuntimeException(hostname + port + “ doesn’t response”);
 
 * 敏感信息不要被序列化！在编码中，建议使用 transient 关键字将其保护起来。
 
-反序列化中，建议在 readObject 中实现与对象构件过程相同的安全检查和数据检查。
+* 反序列化中，建议在 readObject 中实现与对象构件过程相同的安全检查和数据检查。
 
 另外，在 JDK 9 中，Java 引入了过滤器机制，以保证反序列化过程中数据都要经过基本验证才可以使用。其原理是通过黑名单和白名单，限定安全或者不安全的类型，并且你可以进行定制，然后通过环境变量灵活进行配置， 更加具体的使用你可以参考 ObjectInputFilter。
 
