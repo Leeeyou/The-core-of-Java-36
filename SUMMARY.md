@@ -17,4 +17,5 @@
 * [第31讲 \| 你了解Java应用开发中的注入攻击吗？](di-31-jiang-ni-le-jie-java-ying-yong-kai-fa-zhong-de-zhu-ru-gong-ji-ma-ff1f.md)
 * [第32讲 \| 如何写出安全的Java代码？](di-32-jiang-ru-he-xie-chu-an-quan-de-java-dai-ma-ff1f.md)
 * [第33讲 \| 后台服务出现明显“变慢”，谈谈你的诊断思路？](di-33-jiang-hou-tai-fu-wu-chu-xian-ming-xian-201c-bian-man-201d-ff0c-tan-tan-ni-de-zhen-duan-si-lu-ff1f.md)
+* [第34讲 \| 有人说“Lambda能让Java程序慢30倍”，你怎么看？](di-34-jiang-you-ren-shuo-201c-lambda-neng-rang-java-cheng-xu-man-30-bei-201d-ff0c-ni-zen-yao-kan-ff1f.md)
 
