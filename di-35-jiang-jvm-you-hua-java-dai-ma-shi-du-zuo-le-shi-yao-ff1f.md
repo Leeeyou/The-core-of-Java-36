@@ -144,7 +144,9 @@ JVM 的编译器线程数目与我们选择的模式有关，选择 client 模�
 
 比如，减少进入安全点。严格说，它远远不只是发生在动态编译的时候，GC 阶段发生的更加频繁，你可以利用下面选项诊断安全点的影响。
 
+```java
 -XX:+PrintSafepointStatistics ‑XX:+PrintGCApplicationStoppedTime
+```
 
 注意，在 JDK 9 之后，PrintGCApplicationStoppedTime 已经被移除了，你需要使用“-Xlog:safepoint”之类方式来指定。
 
