@@ -102,7 +102,9 @@ public void testMethod() {
 
 当我们实现了具体的测试后，就可以利用下面的 Maven 命令构建。
 
+```java
 mvn clean install
+```
 
 运行基准测试则与运行不同的 Java 应用没有明显区别。
 
