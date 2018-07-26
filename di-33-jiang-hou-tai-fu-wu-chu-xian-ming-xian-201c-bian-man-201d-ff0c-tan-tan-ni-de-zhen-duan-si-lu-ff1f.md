@@ -70,7 +70,9 @@ top –H
 
 * 然后转换成为 16 进制。
 
-printf "%x" your\_pid
+```java
+printf "%x" your_pid
+```
 
 最后利用 jstack 获取的线程栈，对比相应的 ID 即可。
 
