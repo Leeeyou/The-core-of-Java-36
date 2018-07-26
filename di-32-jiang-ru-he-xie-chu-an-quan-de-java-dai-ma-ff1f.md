@@ -93,7 +93,7 @@ throw new RuntimeException(hostname + port + “ doesn’t response”);
 
 落实到实际开发流程中，以 OpenJDK 团队为例，我们应用了几个不同角度的实践：
 
-在早期设计阶段，就由安全专家组对新特性进行风险评估。
+* 在早期设计阶段，就由安全专家组对新特性进行风险评估。
 
 开发过程中，尤其是 code review 阶段，应用 OpenJDK 自身定制的代码规范。
 
