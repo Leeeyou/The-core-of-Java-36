@@ -150,13 +150,12 @@ int mul = left * right;
 
 解决办法也很直接，尽量保证方法有返回值，而不是 void 方法，或者使用 JMH 提供的BlackHole设施，在方法中添加下面语句。
 
-public void testMethod\(Blackhole blackhole\) {
-
+```java
+public void testMethod(Blackhole blackhole) {
 // …
-
-blackhole.consume\(mul\);
-
+blackhole.consume(mul);
 }
+```
 
 防止发生常量折叠（Constant Folding）。JVM 如果发现计算过程是依赖于常量或者事实上的常量，就可能会直接计算其结果，所以基准测试并不能真实反映代码执行的性能。JMH 提供了 State 机制来解决这个问题，将本地变量修改为 State 对象信息，请参考下面示例。
 
