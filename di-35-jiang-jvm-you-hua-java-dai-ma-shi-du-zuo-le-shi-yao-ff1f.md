@@ -58,15 +58,17 @@ JVM 会根据统计信息，动态决定什么方法被编译，什么方法解�
 
 专栏中已经陆陆续续介绍了一些，我来简单总结一下并补充部分细节。
 
-打印编译发生的细节。
+* 打印编译发生的细节。
 
 ```java
 -XX:+PrintCompilation
 ```
 
-输出更多编译的细节。
+* 输出更多编译的细节。
 
--XX:UnlockDiagnosticVMOptions -XX:+LogCompilation -XX:LogFile=&lt;your\_file\_path&gt;
+```java
+-XX:UnlockDiagnosticVMOptions -XX:+LogCompilation -XX:LogFile=<your_file_path>
+```
 
 JVM 会生成一个 xml 形式的文件，另外， LogFile 选项是可选的，不指定则会输出到
 
