@@ -95,7 +95,7 @@ throw new RuntimeException(hostname + port + “ doesn’t response”);
 
 * 在早期设计阶段，就由安全专家组对新特性进行风险评估。
 
-开发过程中，尤其是 code review 阶段，应用 OpenJDK 自身定制的代码规范。
+* 开发过程中，尤其是 code review 阶段，应用 OpenJDK 自身定制的代码规范。
 
 利用多种静态分析工具如FindBugs、Parfait等，帮助早期发现潜在安全风险，并对相应问题采取零容忍态度，强制要求解决。
 
