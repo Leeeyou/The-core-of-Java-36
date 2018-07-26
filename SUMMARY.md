@@ -16,4 +16,5 @@
 * [第30讲 \| Java程序运行在Docker等容器环境有哪些新问题？](di-30-jiang-java-cheng-xu-yun-xing-zai-docker-deng-rong-qi-huan-jing-you-na-xie-xin-wen-ti-ff1f.md)
 * [第31讲 \| 你了解Java应用开发中的注入攻击吗？](di-31-jiang-ni-le-jie-java-ying-yong-kai-fa-zhong-de-zhu-ru-gong-ji-ma-ff1f.md)
 * [第32讲 \| 如何写出安全的Java代码？](di-32-jiang-ru-he-xie-chu-an-quan-de-java-dai-ma-ff1f.md)
+* [第33讲 \| 后台服务出现明显“变慢”，谈谈你的诊断思路？](di-33-jiang-hou-tai-fu-wu-chu-xian-ming-xian-201c-bian-man-201d-ff0c-tan-tan-ni-de-zhen-duan-si-lu-ff1f.md)
 
