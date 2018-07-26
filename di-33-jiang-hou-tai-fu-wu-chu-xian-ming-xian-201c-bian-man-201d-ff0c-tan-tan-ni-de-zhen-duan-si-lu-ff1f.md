@@ -124,5 +124,5 @@ Jcmd <pid> JFR.start duration=120s filename=myrecording.jfr
 
 # 思考
 
-关于今天我们讨论的题目你做到心中有数了吗？ 今天的思考题是，Profiling 工具获取数据的主要方式有哪些？各有什么优缺点。\*
+关于今天我们讨论的题目你做到心中有数了吗？ 今天的思考题是，Profiling 工具获取数据的主要方式有哪些？各有什么优缺点。
 
