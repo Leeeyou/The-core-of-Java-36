@@ -78,11 +78,15 @@ hotspot_pid<pid>.log
 
 具体格式可以参考 Ben Evans 提供的JitWatch工具和分析指南。
 
-打印内联的发生，可利用下面的诊断选项，也需要明确解锁。
+![](/assets/1532594931437.jpg)
 
+* 打印内联的发生，可利用下面的诊断选项，也需要明确解锁。
+
+```java
 -XX:+PrintInlining
+```
 
-如何知晓 Code Cache 的使用状态呢？
+* 如何知晓 Code Cache 的使用状态呢？
 
 很多工具都已经提供了具体的统计信息，比如，JMC、JConsole 之类，我也介绍过使用 NMT 监控其使用。
 
