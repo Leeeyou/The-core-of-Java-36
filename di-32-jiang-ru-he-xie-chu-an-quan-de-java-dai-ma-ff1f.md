@@ -57,15 +57,13 @@ if (a < c – b)
 
 再来看一个例子，请看下面的一段异常处理代码：
 
+```java
 try {
-
 // 业务代码
-
-} catch \(Exception e\) {
-
-throw new RuntimeException\(hostname + port + “ doesn’t response”\);
-
+} catch (Exception e) {
+throw new RuntimeException(hostname + port + “ doesn’t response”);
 }
+```
 
 这段代码将敏感信息包含在异常消息中，试想，如果是一个 Web 应用，异常也没有良好的包装起来，很有可能就把内部信息暴露给终端客户。古人曾经告诫我们“言多必失”是很有道理的，虽然其本意不是指软件安全，但尽量少暴露信息，也是保证安全的基本原则之一。即使我们并不认为某个信息有安全风险，我的建议也是如果没有必要，不要暴露出来。
 
