@@ -15,4 +15,5 @@
 * [第29讲 \| Java内存模型中的happen-before是什么？](di-29-jiang-java-nei-cun-mo-xing-zhong-de-happen-before-shi-shi-yao-ff1f.md)
 * [第30讲 \| Java程序运行在Docker等容器环境有哪些新问题？](di-30-jiang-java-cheng-xu-yun-xing-zai-docker-deng-rong-qi-huan-jing-you-na-xie-xin-wen-ti-ff1f.md)
 * [第31讲 \| 你了解Java应用开发中的注入攻击吗？](di-31-jiang-ni-le-jie-java-ying-yong-kai-fa-zhong-de-zhu-ru-gong-ji-ma-ff1f.md)
+* [第32讲 \| 如何写出安全的Java代码？](di-32-jiang-ru-he-xie-chu-an-quan-de-java-dai-ma-ff1f.md)
 
