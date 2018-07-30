@@ -77,3 +77,5 @@ java -XX:AOTLibrary=./libHelloWorld.so,./libjava.base.so HelloWorld
 
 这也就解释了类似JVM虚拟机存在的原因，隔离CPU架构，在运行过程中，根据不同CPU架构将中间代码转换成目标代码。
 
+[参考知乎](https://www.zhihu.com/question/21486706/answer/18642540)
+
