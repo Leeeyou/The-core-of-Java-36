@@ -67,5 +67,5 @@ java -XX:AOTLibrary=./libHelloWorld.so,./libjava.base.so HelloWorld
 
 ## 解释执行和编译执行的区别？
 
-
+编译型语言在编译过程中生成目标平台的指令，解释型语言在运行过程中才生成目标平台的指令。
 
