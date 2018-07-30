@@ -65,5 +65,7 @@ java -XX:AOTLibrary=./libHelloWorld.so,./libjava.base.so HelloWorld
 
 对于一个知识点的掌握，最好能全面理解，做到知其然并知其所以然。明白知识点的基本组成和机制，是解决问题和调优问题的基础。
 
-解释执行和编译执行
+## 解释执行和编译执行的区别？
+
+
 
