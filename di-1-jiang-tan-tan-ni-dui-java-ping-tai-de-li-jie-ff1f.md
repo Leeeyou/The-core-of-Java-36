@@ -85,10 +85,10 @@ JIT，即Just-in-time，动态\(即时\)编译，边运行边编译；AOT，Ahea
 
 JIT、AOT、Dalvik与ART的关系可以用下面表格表示：
 
-|  |  |
+| 编译方式 | 虚拟机 |
 | :--- | :--- |
 | AOT | ART |
-|  | Dalvik |
+| JIT | Dalvik |
 
 
 
