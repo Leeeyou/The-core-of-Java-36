@@ -128,5 +128,7 @@ JIT是运行时编译，这样可以对执行次数频繁的dex代码进行编�
 
 * AOT可以理解为一种编译策略，即运行前编译，ART虚拟机的主要特征就是AOT
 
-[参考GITHUB](https://github.com/ZhaoKaiQiang/AndroidDifficultAnalysis/blob/master/10.ART%E3%80%81JIT%E3%80%81AOT%E3%80%81Dalvik%E4%B9%8B%E9%97%B4%E6%9C%89%E4%BB%80%E4%B9%88%E5%85%B3%E7%B3%BB%EF%BC%9F.md)
+[参考GITHUB](https://github.com/ZhaoKaiQiang/AndroidDifficultAnalysis/blob/master/10.ART、JIT、AOT、Dalvik之间有什么关系？.md)
+
+Java从源码到执行流绊何处？
 
