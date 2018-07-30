@@ -79,3 +79,7 @@ java -XX:AOTLibrary=./libHelloWorld.so,./libjava.base.so HelloWorld
 
 [参考知乎](https://www.zhihu.com/question/21486706/answer/18642540)
 
+## JIT与AOT的区别？
+
+
+
