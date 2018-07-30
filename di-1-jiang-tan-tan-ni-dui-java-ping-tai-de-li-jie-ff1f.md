@@ -69,3 +69,5 @@ java -XX:AOTLibrary=./libHelloWorld.so,./libjava.base.so HelloWorld
 
 从实用价值的角度出发，主要区别在于代码是什么时候被翻译成目标CPU指令的。编译型语言在编译过程中生成目标平台的指令，解释型语言在运行过程中才生成目标平台的指令。
 
+上面提到了目标平台的指令。
+
