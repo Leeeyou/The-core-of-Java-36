@@ -63,3 +63,5 @@ java -XX:AOTLibrary=./libHelloWorld.so,./libjava.base.so HelloWorld
 
 正如文中提供的参考蓝图，至少可以从5个方面入手回答这个问题。基本语言特性、Java类库、JVM、各种工具以及Java生态。对于Android开发来说，重点掌握好前面3个方面已经相当好了。对于编译调试工具以及Java生态，后台开发的童鞋可能使用的更多些。
 
+对于一个知识点的掌握，最好能全面理解，做到知其然并知其所以然。
+
