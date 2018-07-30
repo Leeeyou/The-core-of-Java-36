@@ -1,6 +1,7 @@
 # Summary
 
 * [介绍](README.md)
+* [第1讲 \| 谈谈你对Java平台的理解？](di-1-jiang-tan-tan-ni-dui-java-ping-tai-de-li-jie-ff1f.md)
 * [第18讲 \| 什么情况下Java程序会产生死锁？如何定位、修复？](di-18-jiang-shi-yao-qing-kuang-xia-java-cheng-xu-hui-chan-sheng-si-suo-ff1f-ru-he-ding-wei-3001-xiu-fu-ff1f.md)
 * [第19讲 \| Java并发包提供了哪些并发工具类？](di-19-jiang-java-bing-fa-bao-ti-gong-le-na-xie-bing-fa-gong-ju-lei-ff1f.md)
 * [第20讲 \| 并发包中的ConcurrentLinkedQueue和LinkedBlockingQueue有什么区别？](di-20-jiang-bing-fa-bao-zhong-de-concurrentlinkedqueue-he-linkedblockingqueue-you-shi-yao-qu-bie-ff1f.md)
@@ -14,9 +15,8 @@
 * [第28讲 \| 谈谈你的GC调优思路? ](di-28-jiang-tan-tan-ni-de-gc-diao-you-si-8def3f.md)
 * [第29讲 \| Java内存模型中的happen-before是什么？](di-29-jiang-java-nei-cun-mo-xing-zhong-de-happen-before-shi-shi-yao-ff1f.md)
 * [第30讲 \| Java程序运行在Docker等容器环境有哪些新问题？](di-30-jiang-java-cheng-xu-yun-xing-zai-docker-deng-rong-qi-huan-jing-you-na-xie-xin-wen-ti-ff1f.md)
-* [第31讲 \| 你了解Java应用开发中的注入攻击吗？](di-31-jiang-ni-le-jie-java-ying-yong-kai-fa-zhong-de-zhu-ru-gong-ji-ma-ff1f.md)
+* 第1讲 \| 谈谈你对Java平台的理解？
 * [第32讲 \| 如何写出安全的Java代码？](di-32-jiang-ru-he-xie-chu-an-quan-de-java-dai-ma-ff1f.md)
 * [第33讲 \| 后台服务出现明显“变慢”，谈谈你的诊断思路？](di-33-jiang-hou-tai-fu-wu-chu-xian-ming-xian-201c-bian-man-201d-ff0c-tan-tan-ni-de-zhen-duan-si-lu-ff1f.md)
 * [第34讲 \| 有人说“Lambda能让Java程序慢30倍”，你怎么看？](di-34-jiang-you-ren-shuo-201c-lambda-neng-rang-java-cheng-xu-man-30-bei-201d-ff0c-ni-zen-yao-kan-ff1f.md)
-* [第35讲 \| JVM优化Java代码时都做了什么？](di-35-jiang-jvm-you-hua-java-dai-ma-shi-du-zuo-le-shi-yao-ff1f.md)
 
