@@ -61,5 +61,5 @@ java -XX:AOTLibrary=./libHelloWorld.so,./libjava.base.so HelloWorld
 
 关于今天我们讨论的题目你做到心中有数了吗？知道不如做到，请你也在留言区写写自己对 Java 平台的理解。
 
-正如文中提供的参考蓝图，至少可以从5个方面入手回答这个问题。基本语言特性、Java类库、JVM、各种工具
+正如文中提供的参考蓝图，至少可以从5个方面入手回答这个问题。基本语言特性、Java类库、JVM、各种工具以及Java生态。
 
