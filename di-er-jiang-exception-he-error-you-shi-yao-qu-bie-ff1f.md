@@ -24,7 +24,7 @@ Exception 又分为可检查（checked）异常和不检查（unchecked）异常
 
 我们在日常编程中，如何处理好异常是比较考验功底的，我觉得需要掌握两个方面。
 
-第一，理解 Throwable、Exception、Error 的设计和分类。比如，掌握那些应用最为广泛的子类，以及如何自定义异常等。
+第一，理解** Throwable、Exception、Error** 的设计和分类。比如，掌握那些应用最为广泛的子类，以及如何自定义异常等。
 
 很多面试官会进一步追问一些细节，比如，你了解哪些 Error、Exception 或者 RuntimeException？我画了一个简单的类图，并列出来典型例子，可以给你作为参考，至少做到基本心里有数。
 
