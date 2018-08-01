@@ -18,7 +18,7 @@ Exception 又分为可检查（checked）异常和不检查（unchecked）异常
 
 不检查异常就是所谓的运行时异常，类似 NullPointerException、ArrayIndexOutOfBoundsException 之类，通常是可以编码避免的逻辑错误，具体根据需要来判断是否需要捕获，并不会在编译期强制要求。
 
-考点分析
+## 考点分析
 
 分析 Exception 和 Error 的区别，是从概念角度考察了 Java 处理机制。总的来说，还处于理解的层面，面试者只要阐述清楚就好了。
 
