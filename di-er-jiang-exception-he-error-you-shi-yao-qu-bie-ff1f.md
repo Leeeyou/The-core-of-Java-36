@@ -8,7 +8,7 @@ Java 语言在设计之初就提供了相对完善的异常处理机制，这也
 
 ## 典型回答
 
-Exception 和 Error 都是继承了 Throwable 类，在 Java 中只有 Throwable 类型的实例才可以被抛出（throw）或者捕获（catch），它是异常处理机制的基本组成类型。
+Exception 和 Error 都是继承了 Throwable 类，**在 Java 中只有 Throwable 类型的实例才可以被抛出（throw）或者捕获（catch），它是异常处理机制的基本组成类型。**
 
 Exception 和 Error 体现了 Java 平台设计者对不同异常情况的分类。Exception 是程序正常运行中，可以预料的意外情况，可能并且应该被捕获，进行相应处理。
 
