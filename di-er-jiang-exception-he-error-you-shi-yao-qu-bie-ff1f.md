@@ -48,7 +48,7 @@ catch \( IOException \| XEception e\) {// Multiple catch
 
 }
 
-知识扩展
+## 知识扩展
 
 前面谈的大多是概念性的东西，下面我来谈些实践中的选择，我会结合一些代码用例进行分析。
 
