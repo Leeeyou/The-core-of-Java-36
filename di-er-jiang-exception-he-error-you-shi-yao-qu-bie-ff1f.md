@@ -92,17 +92,13 @@ try {
 
 我们接下来看下面的代码段，体会一下Throw early, catch late 原则。
 
-public void readPreferences\(String fileName\){
-
-```
+```java
+public void readPreferences(String fileName){
  //...perform operations... 
-
-InputStream in = new FileInputStream\(fileName\);
-
+ InputStream in = new FileInputStream\(fileName\);
  //...read the preferences file...
-```
-
 }
+```
 
 如果 fileName 是 null，那么程序就会抛出 NullPointerException，但是由于没有第一时间暴露出问题，堆栈信息可能非常令人费解，往往需要相对复杂的定位。这个 NPE 只是作为例子，实际产品代码中，可能是各种情况，比如获取配置失败之类的。在发现问题的时候，第一时间抛出，能够更加清晰地反映问题。
 
