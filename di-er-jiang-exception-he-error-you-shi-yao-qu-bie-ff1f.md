@@ -49,19 +49,15 @@ try (BufferedReader br = new BufferedReader(…);
 
 先开看第一个吧，下面的代码反映了异常处理中哪些不当之处？
 
+```java
 try {
-
-// 业务代码
-
-// …
-
-Thread.sleep\(1000L\);
-
-} catch \(Exception e\) {
-
-// Ignore it
-
+  // 业务代码
+  // …
+  Thread.sleep(1000L);
+} catch (Exception e) {
+  // Ignore it
 }
+```
 
 这段代码虽然很短，但是已经违反了异常处理的两个基本原则。
 
