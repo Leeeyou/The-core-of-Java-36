@@ -90,7 +90,7 @@ try {
 
 尤其是对于分布式系统，如果发生异常，但是无法找到堆栈轨迹（stacktrace），这纯属是为诊断设置障碍。所以，最好使用产品日志，详细地输出到日志系统里。
 
-我们接下来看下面的代码段，体会一下Throw early, catch late 原则。
+我们接下来看下面的代码段，体会一下**Throw early, catch late 原则**。
 
 ```java
 public void readPreferences(String fileName){
