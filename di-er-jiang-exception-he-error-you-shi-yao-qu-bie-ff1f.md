@@ -104,19 +104,14 @@ public void readPreferences(String fileName){
 
 我们可以修改一下，让问题“throw early”，对应的异常信息就非常直观了。
 
-public void readPreferences\(String filename\) {
-
-```
-Objects. requireNonNull\(filename\);
-
-//...perform other operations... 
-
-InputStream in = new FileInputStream\(filename\);
-
- //...read the preferences file...
-```
-
+```java
+public void readPreferences(String filename) {
+    Objects. requireNonNull(filename);
+    //...perform other operations... 
+    InputStream in = new FileInputStream(filename);
+     //...read the preferences file...
 }
+```
 
 至于“catch late”，其实是我们经常苦恼的问题，捕获异常后，需要怎么处理呢？最差的处理方式，就是我前面提到的“生吞异常”，本质上其实是掩盖问题。如果实在不知道如何处理，可以选择保留原有异常的 cause 信息，直接再抛出或者构建新的异常抛出去。在更高层面，因为有了清晰的（业务）逻辑，往往会更清楚合适的处理方式是什么。
 
