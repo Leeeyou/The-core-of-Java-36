@@ -42,19 +42,21 @@ Exception 又分为可检查（checked）异常和不检查（unchecked）异常
 >
 > * ClassNotFoundException是异常，发生在运行阶段，调用Class.forName\(\)、ClassLoader.findSystemClass\(\)和ClassLoader.loadClass\(\)等方法时可能会引起java.lang.ClassNotFoundException
 >
->       如果你在J2EE开发中一般可以使用下面两种方法解决：
+>   ```
+>   如果你在J2EE开发中一般可以使用下面两种方法解决：
 >
->           使用Maven Helper这个插件，可以排除掉大部分jar包冲突
+>       使用Maven Helper这个插件，可以排除掉大部分jar包冲突
 >
->           根据命令mvn dependency:tree -Dverbose -Dincludes=:logback-classic
+>       根据命令mvn dependency:tree -Dverbose -Dincludes=:logback-classic
+>   ```
 >
->     
+>   ```
+>   如果你在AndroidStudio开发中一般可以使用下面两种方法解决
 >
->       如果你在AndroidStudio开发中一般可以使用下面两种方法解决
+>       使用Gradle View插件
 >
->           使用Gradle View插件
->
->           根据命令gradlew -q app:dependencies，打印出所有的依赖
+>       根据命令gradlew -q app:dependencies，打印出所有的依赖
+>   ```
 
 第二，理解 Java 语言中操作 Throwable 的元素和实践。**掌握最基本的语法是必须的，如 try-catch-finally 块，throw、throws 关键字等。与此同时，也要懂得如何处理典型场景。**
 
