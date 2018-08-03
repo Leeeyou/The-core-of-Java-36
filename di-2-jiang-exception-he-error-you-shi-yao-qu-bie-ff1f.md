@@ -32,6 +32,42 @@ Exception 又分为可检查（checked）异常和不检查（unchecked）异常
 
 其中有些子类型，最好重点理解一下，**比如 NoClassDefFoundError 和 ClassNotFoundException 有什么区别，这也是个经典的入门题目。**
 
+> NoClassDefFoundError和ClassNotFoundException都是由于在CLASSPATH下找不到对应的类而引起的，通常是缺少对应的jar包。区别在于：
+>
+>
+>
+> 当使用类名字符串去调用Class.forName等方法来加载一个类时，如果找不到这个类，则抛出ClassNotFoundException。如果JVM尝试去加载一个类（普通方法调用或者使用new关键字创建对象），而这个类又不存在时，则抛出NoClassDefFoundError。
+>
+>
+>
+> NoClassDefFoundError是Error，是unchecked，因此也不需要使用try-catch或者finally语句块包围；而ClassNotFoundException是受检异常（checked Exception），因此需要使用try-catch语句块或者try-finally语句块包围，否则会导致编译错误。
+>
+>
+>
+> NoClassDefFoundError是链接错误，发生在链接阶段，当解析引用的时候找不到对应的类，就会抛出java.lang.NoClassDefFoundError。可能的原因就是存在多个类加载器 or 多个目标类 or jar包名称被修改 or 对应类在编译过后被删除。
+>
+>
+>
+> ClassNotFoundException是异常，发生在运行阶段，调用Class.forName\(\)、ClassLoader.findSystemClass\(\)和ClassLoader.loadClass\(\)等方法时可能会引起java.lang.ClassNotFoundException
+>
+>
+>
+> 如果你在J2EE开发中一般可以使用下面两种方法解决：
+>
+>
+>
+> 使用Maven Helper这个插件，可以排除掉大部分jar包冲突 
+>
+> 根据命令mvn dependency:tree -Dverbose -Dincludes=:logback-classic
+>
+>
+>
+> 如果你在AndroidStudio开发中一般可以使用下面两种方法解决
+>
+> 使用Gradle View插件
+>
+> 根据命令gradlew -q app:dependencies，打印出所有的依赖
+
 第二，理解 Java 语言中操作 Throwable 的元素和实践。**掌握最基本的语法是必须的，如 try-catch-finally 块，throw、throws 关键字等。与此同时，也要懂得如何处理典型场景。**
 
 异常处理代码比较繁琐，比如我们需要写很多千篇一律的捕获代码，或者在 finally 里面做一些资源回收工作。随着 Java 语言的发展，引入了一些更加便利的特性，比如 **try-with-resources 和 multiple catch ?? 这里具体指什么内容**，具体可以参考下面的代码段。在编译时期，会自动生成相应的处理逻辑，比如，自动按照约定俗成 close 那些扩展了 AutoCloseable 或者 Closeable 的对象。
