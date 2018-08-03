@@ -71,6 +71,8 @@ try (BufferedReader br = new BufferedReader(…);
 }
 ```
 
+multi-catch语法时的异常不能有相交。如IOException是Exception的子类, 所以以后用 \| 分隔开的异常不能有父子关系。
+
 ## 知识扩展
 
 前面谈的大多是概念性的东西，下面我来谈些实践中的选择，我会结合一些代码用例进行分析。
