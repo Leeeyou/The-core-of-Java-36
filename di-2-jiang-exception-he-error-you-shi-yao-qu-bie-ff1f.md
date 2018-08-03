@@ -46,11 +46,12 @@ Exception 又分为可检查（checked）异常和不检查（unchecked）异常
 >
 >   ```
 >   使用Maven Helper这个插件，可以排除掉大部分jar包冲突
+>   根据命令mvn dependency:tree -Dverbose -Dincludes=:logback-classic
 >   ```
 >
-> 根据命令mvn dependency:tree -Dverbose -Dincludes=:logback-classic
 >
-> 如果你在AndroidStudio开发中一般可以使用下面两种方法解决
+>
+>        如果你在AndroidStudio开发中一般可以使用下面两种方法解决
 >
 > 使用Gradle View插件
 >
