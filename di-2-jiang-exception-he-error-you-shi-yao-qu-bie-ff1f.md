@@ -71,7 +71,7 @@ try (BufferedReader br = new BufferedReader(…);
 }
 ```
 
-**在编译时期，会自动生成相应的处理逻辑，由java从语言层面保证扩展了 AutoCloseable 或者 Closeable 的对象一定关闭，代码也非常简洁清晰。**
+**try-with-resources的方式，在编译时期，会自动生成相应的处理逻辑，由java从语言层面保证扩展了 AutoCloseable 或者 Closeable 的对象一定关闭，代码也非常简洁清晰。**
 
 multi-catch语法时的异常不能有相交。如IOException是Exception的子类, 所以以后用 \| 分隔开的异常不能有父子关系。
 
