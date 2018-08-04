@@ -93,35 +93,21 @@ Immutable 在很多场景是非常棒的选择，某种意义上说，Java 语�
 
 finalize 还会掩盖资源回收时的出错信息，我们看下面一段 JDK 的源代码，截取自 java.lang.ref.Finalizer
 
-private void runFinalizer\(JavaLangAccess jla\) {
-
-//  ... 省略部分代码
-
-try {
-
+```java
+ private void runFinalizer(JavaLangAccess jla) {
+ //  ... 省略部分代码
+ try {
+    Object finalizee = this.get(); 
+    if (finalizee != null && !(finalizee instanceof java.lang.Enum)) {
+       jla.invokeFinalize(finalizee);
+       // Clear stack slot containing this variable, to decrease
+       // the chances of false retention with a conservative GC
+       finalizee = null;
+    }
+  } catch (Throwable x) { }
+    super.clear(); 
+ }
 ```
-Object finalizee = this.get\(\); 
-
-if \(finalizee != null && !\(finalizee instanceof java.lang.Enum\)\) {
-
-   jla.invokeFinalize\(finalizee\);
-
-   // Clear stack slot containing this variable, to decrease
-
-   // the chances of false retention with a conservative GC
-
-   finalizee = null;
-
-}
-```
-
-} catch \(Throwable x\) { }
-
-```
-super.clear\(\);
-```
-
-}
 
 结合我上期专栏介绍的异常处理实践，你认为这段代码会导致什么问题？
 
