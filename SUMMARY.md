@@ -3,6 +3,8 @@
 * [介绍](README.md)
 * [第1讲 \| 谈谈你对Java平台的理解？](di-1-jiang-tan-tan-ni-dui-java-ping-tai-de-li-jie-ff1f.md)
 * [第2讲 \| Exception和Error有什么区别？](di-2-jiang-exception-he-error-you-shi-yao-qu-bie-ff1f.md)
+* [第3讲 \| 谈谈final、finally、 finalize有什么不同？](#)
+
 * [第18讲 \| 什么情况下Java程序会产生死锁？如何定位、修复？](di-18-jiang-shi-yao-qing-kuang-xia-java-cheng-xu-hui-chan-sheng-si-suo-ff1f-ru-he-ding-wei-3001-xiu-fu-ff1f.md)
 * [第19讲 \| Java并发包提供了哪些并发工具类？](di-19-jiang-java-bing-fa-bao-ti-gong-le-na-xie-bing-fa-gong-ju-lei-ff1f.md)
 * [第20讲 \| 并发包中的ConcurrentLinkedQueue和LinkedBlockingQueue有什么区别？](di-20-jiang-bing-fa-bao-zhong-de-concurrentlinkedqueue-he-linkedblockingqueue-you-shi-yao-qu-bie-ff1f.md)
@@ -21,5 +23,6 @@
 * [第33讲 \| 后台服务出现明显“变慢”，谈谈你的诊断思路？](di-33-jiang-hou-tai-fu-wu-chu-xian-ming-xian-201c-bian-man-201d-ff0c-tan-tan-ni-de-zhen-duan-si-lu-ff1f.md)
 * [第34讲 \| 有人说“Lambda能让Java程序慢30倍”，你怎么看？](di-34-jiang-you-ren-shuo-201c-lambda-neng-rang-java-cheng-xu-man-30-bei-201d-ff0c-ni-zen-yao-kan-ff1f.md)
 * [第35讲 \| JVM优化Java代码时都做了很么？](/di-35-jiang-jvm-you-hua-java-dai-ma-shi-du-zuo-le-shi-yao-ff1f.md)
-* [第3讲 \| 谈谈final、finally、 finalize有什么不同？](di-3-jiang-tan-tan-final-finally-finalize-you-shi-yao-bu-tong-ff1f.md)
+* 
+
 
