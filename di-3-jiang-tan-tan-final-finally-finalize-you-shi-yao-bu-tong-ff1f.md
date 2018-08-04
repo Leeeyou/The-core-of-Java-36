@@ -32,17 +32,14 @@ final 也许会有性能的好处，很多文章或者书籍中都介绍了可�
 
 另外，我注意到有一些常被考到的 finally 问题（也比较偏门），至少需要了解一下。比如，下面代码会输出什么？
 
+```java
 try {
-
 // do something
-
-System.exit\(1\);
-
+System.exit(1);
 } finally{
-
-System.out.println\(“Print from finally”\);
-
+System.out.println(“Print from finally”);
 }
+```
 
 上面 finally 里面的代码可不会被执行的哦，这是一个特例。
 
