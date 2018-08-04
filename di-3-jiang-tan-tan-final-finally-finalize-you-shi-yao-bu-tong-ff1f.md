@@ -157,3 +157,5 @@ public class CleaningExample implements AutoCloseable {
 
 也许你已经注意到了，JDK 自身使用的 Cleaner 机制仍然是有缺陷的，你有什么更好的建议吗？
 
+[参考](https://blog.csdn.net/tigershin/article/details/78947972)
+
