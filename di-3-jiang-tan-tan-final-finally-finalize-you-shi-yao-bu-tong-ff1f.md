@@ -63,7 +63,7 @@ List<String> unmodifiableStrList = List.of("hello", "world");
 unmodifiableStrList.add("again");
 ```
 
-**final 只能约束 strList 这个引用不可以被赋值，但是 strList 对象行为不被 final 影响**，添加元素等操作是完全正常的。如果我们真的希望对象本身是不可变的，那么需要相应的类支持不可变的行为。在上面这个例子中，**List.of 方法创建的本身就是不可变 List，最后那句 add 是会在运行时抛出异常的。**
+**final 只能约束 strList 这个引用不可以被赋值，但是 strList 对象行为不被 final 影响**，添加元素等操作是完全正常的。如果我们真的希望对象本身是不可变的，那么需要相应的类支持不可变的行为。在上面这个例子中，**List.of 方法\(Java9新增\)创建的本身就是不可变 List，最后那句 add 是会在运行时抛出异常的。**
 
 Immutable 在很多场景是非常棒的选择，某种意义上说，Java 语言目前并没有原生的不可变支持，如果要实现 immutable 的类，我们需要做到：
 
@@ -158,13 +158,13 @@ public class CleaningExample implements AutoCloseable {
 也许你已经注意到了，JDK 自身使用的 Cleaner 机制仍然是有缺陷的，你有什么更好的建议吗？
 
 > 1、临时对象，使用完毕后，赋值为null,可以加快对象的回收
-
+>
 > 2、共用资源对象，比如数据库连接，使用连接池
-
+>
 > 3、native调用资源的释放，比如一个进程初始化调用一次，退出调用一次，这类场景可以考虑使用cleaner
-
+>
 > 4、对尽量try-finally中完成资源的释放，即使用完毕就释放，最小化的使用，下次使用在申请。
-
+>
 > 5、可以使用钩子进行程序的正常退出清理操作。
 
 
