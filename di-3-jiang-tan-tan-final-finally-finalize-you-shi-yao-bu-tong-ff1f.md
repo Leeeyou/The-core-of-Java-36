@@ -111,7 +111,7 @@ finalize 还会掩盖资源回收时的出错信息，我们看下面一段 JDK 
 
 结合我上期专栏介绍的异常处理实践，你认为这段代码会导致什么问题？
 
-是的，你没有看错，这里的Throwable 是被生吞了的！也就意味着一旦出现异常或者出错，你得不到任何有效信息。况且，Java 在 finalize 阶段也没有好的方式处理任何信息，不然更加不可预测。
+是的，你没有看错，**这里的Throwable 是被生吞了的！**也就意味着一旦出现异常或者出错，你得不到任何有效信息。况且，Java 在 finalize 阶段也没有好的方式处理任何信息，不然更加不可预测。
 
 ### 3.有什么机制可以替换 finalize 吗？
 
@@ -121,47 +121,27 @@ Java 平台目前在逐步使用 java.lang.ref.Cleaner 来替换掉原有的 fin
 
 实践中，我们可以为自己的模块构建一个 Cleaner，然后实现相应的清理逻辑。下面是 JDK 自身提供的样例程序：
 
+```java
 public class CleaningExample implements AutoCloseable {
-
-```
     // A cleaner, preferably one shared within a library
-
-    private static final Cleaner cleaner = &lt;cleaner&gt;;
-
+    private static final Cleaner cleaner = <cleaner>;
     static class State implements Runnable { 
-
-        State\(...\) {
-
+        State(...) {
             // initialize State needed for cleaning action
-
         }
-
-        public void run\(\) {
-
+        public void run() {
             // cleanup action accessing State, executed at most once
-
         }
-
     }
-
     private final State;
-
     private final Cleaner.Cleanable cleanable
-
-    public CleaningExample\(\) {
-
-        this.state = new State\(...\);
-
-        this.cleanable = cleaner.register\(this, state\);
-
+    public CleaningExample() {
+        this.state = new State(...);
+        this.cleanable = cleaner.register(this, state);
     }
-
-    public void close\(\) {
-
-        cleanable.clean\(\);
-
+    public void close() {
+        cleanable.clean();
     }
-
 }
 ```
 
