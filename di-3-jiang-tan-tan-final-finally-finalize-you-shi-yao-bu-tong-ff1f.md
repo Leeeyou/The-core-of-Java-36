@@ -51,7 +51,7 @@ System.out.println(“Print from finally”);
 
 ## 知识扩展
 
-1. #### 注意，final 不是 immutable！
+#### 1.注意，final 不是 immutable！
 
 我在前面介绍了 final 在实践中的益处，需要注意的是，**final 并不等同于 immutable**，比如下面这段代码：
 
