@@ -58,37 +58,24 @@
 
 谈到各种引用的编程，就必然要提到引用队列。我们在创建各种引用并关联到响应对象时，可以选择是否需要关联引用队列，JVM 会在特定时机将引用 enqueue 到队列里，我们可以从队列里获取引用（remove 方法在这里实际是有获取的意思）进行相关后续逻辑。尤其是幻象引用，get 方法只返回 null，如果再不指定引用队列，基本就没有意义了。看看下面的示例代码。利用引用队列，我们可以在对象处于相应状态时（对于幻象引用，就是前面说的被 finalize 了，处于幻象可达状态），执行后期处理逻辑。
 
-Object counter = new Object\(\);
-
-ReferenceQueue refQueue = new ReferenceQueue&lt;&gt;\(\);
-
-PhantomReference&lt;Object&gt; p = new PhantomReference&lt;&gt;\(counter, refQueue\);
-
+```java
+Object counter = new Object();
+ReferenceQueue refQueue = new ReferenceQueue<>();
+PhantomReference<Object> p = new PhantomReference<>(counter, refQueue);
 counter = null;
-
-System.gc\(\);
-
+System.gc();
 try {
-
-```
-// Remove 是一个阻塞方法，可以指定 timeout，或者选择一直阻塞
-
-Reference&lt;Object&gt; ref = refQueue.remove\(1000L\);
-
-if \(ref != null\) {
-
-    // do something
-
+    // Remove 是一个阻塞方法，可以指定 timeout，或者选择一直阻塞
+    Reference<Object> ref = refQueue.remove(1000L);
+    if (ref != null) {
+        // do something
+    }
+} catch (InterruptedException e) {
+    // Handle it
 }
 ```
 
-} catch \(InterruptedException e\) {
 
-```
-// Handle it
-```
-
-}
 
 1. 显式地影响软引用垃圾收集
 
