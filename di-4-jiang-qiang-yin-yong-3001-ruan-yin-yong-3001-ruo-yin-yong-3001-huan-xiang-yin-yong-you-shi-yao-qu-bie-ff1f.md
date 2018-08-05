@@ -99,7 +99,9 @@ try {
 
 这是 JDK 8 使用 ParrallelGC 收集的垃圾收集日志，各种引用数量非常清晰。
 
-0.403: \[GC \(Allocation Failure\) 0.871: \[SoftReference, 0 refs, 0.0000393 secs\]0.871: \[WeakReference, 8 refs, 0.0000138 secs\]0.871: \[FinalReference, 4 refs, 0.0000094 secs\]0.871: \[PhantomReference, 0 refs, 0 refs, 0.0000085 secs\]0.871: \[JNI Weak Reference, 0.0000071 secs\]\[PSYoungGen: 76272K-&gt;10720K\(141824K\)\] 128286K-&gt;128422K\(316928K\), 0.4683919 secs\] \[Times: user=1.17 sys=0.03, real=0.47 secs\]
+```java
+0.403: [GC (Allocation Failure) 0.871: [SoftReference, 0 refs, 0.0000393 secs]0.871: [WeakReference, 8 refs, 0.0000138 secs]0.871: [FinalReference, 4 refs, 0.0000094 secs]0.871: [PhantomReference, 0 refs, 0 refs, 0.0000085 secs]0.871: [JNI Weak Reference, 0.0000071 secs][PSYoungGen: 76272K->10720K(141824K)] 128286K->128422K(316928K), 0.4683919 secs] [Times: user=1.17 sys=0.03, real=0.47 secs]
+```
 
 注意：JDK 9 对 JVM 和垃圾收集日志进行了广泛的重构，类似 PrintGCTimeStamps 和 PrintReferenceGC 已经不再存在，我在专栏后面的垃圾收集主题里会更加系统的阐述。
 
