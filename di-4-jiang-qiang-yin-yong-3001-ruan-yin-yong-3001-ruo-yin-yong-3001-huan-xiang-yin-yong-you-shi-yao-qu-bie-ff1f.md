@@ -111,65 +111,33 @@ try {
 
 为什么需要这种机制呢？考虑一下这样的场景，按照 Java 语言规范，如果一个对象没有指向强引用，就符合垃圾收集的标准，有些时候，对象本身并没有强引用，但是也许它的部分属性还在被使用，这样就导致诡异的问题，所以我们需要一个方法，在没有强引用情况下，通知 JVM 对象是在被使用的。说起来有点绕，我们来看看 Java 9 中提供的案例。
 
+```java
 class Resource {
-
-private static ExternalResource\[\] externalResourceArray = ...
-
-int myIndex; Resource\(...\) {
-
-```
- myIndex = ...
-
- externalResourceArray\[myIndex\] = ...;
-
- ...
-```
-
+ private static ExternalResource[] externalResourceArray = ...
+ int myIndex; Resource(...) {
+     myIndex = ...
+     externalResourceArray[myIndex] = ...;
+     ...
+ }
+ protected void finalize() {
+     externalResourceArray[myIndex] = null;
+     ...
+ }
+ public void action() {
+ try {
+     // 需要被保护的代码
+     int i = myIndex;
+     Resource.update(externalResourceArray[i]);
+ } finally {
+     // 调用 reachbilityFence，明确保障对象 strongly reachable
+     Reference.reachabilityFence(this);
+ }
+ }
+ private static void update(ExternalResource ext) {
+    ext.status = ...;
+ }
 }
-
-protected void finalize\(\) {
-
 ```
- externalResourceArray\[myIndex\] = null;
-
- ...
-```
-
-}
-
-public void action\(\) {
-
-try {
-
-```
- // 需要被保护的代码
-
- int i = myIndex;
-
- Resource.update\(externalResourceArray\[i\]\);
-```
-
-} finally {
-
-```
- // 调用 reachbilityFence，明确保障对象 strongly reachable
-
- Reference.reachabilityFence\(this\);
-```
-
-}
-
-}
-
-private static void update\(ExternalResource ext\) {
-
-```
-ext.status = ...;
-```
-
-}
-
-}
 
 方法 action 的执行，依赖于对象的部分属性，所以被特定保护了起来。否则，如果我们在代码中像下面这样调用，那么就可能会出现困扰，因为没有强引用指向我们创建出来的 Resource 对象，JVM 对它进行 finalize 操作是完全合法的。
 
