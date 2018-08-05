@@ -89,11 +89,13 @@ try {
 
 本质上，这个行为还是个黑盒，取决于 JVM 实现，即使是上面提到的参数，在新版的 JDK 上也未必有效，另外 Client 模式的 JDK 已经逐步退出历史舞台。所以在我们应用时，可以参考类似设置，但不要过于依赖它。
 
-1. 诊断 JVM 引用情况
+### 4.诊断 JVM 引用情况
 
 如果你怀疑应用存在引用（或 finalize）导致的回收问题，可以有很多工具或者选项可供选择，比如 HotSpot JVM 自身便提供了明确的选项（PrintReferenceGC）去获取相关信息，我指定了下面选项去使用 JDK 8 运行一个样例应用：
 
+```java
 -XX:+PrintGCDetails -XX:+PrintGCTimeStamps -XX:+PrintReferenceGC
+```
 
 这是 JDK 8 使用 ParrallelGC 收集的垃圾收集日志，各种引用数量非常清晰。
 
