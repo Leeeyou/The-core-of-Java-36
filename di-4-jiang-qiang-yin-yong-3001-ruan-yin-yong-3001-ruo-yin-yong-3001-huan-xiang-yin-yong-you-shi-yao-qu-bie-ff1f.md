@@ -141,11 +141,13 @@ class Resource {
 
 方法 action 的执行，依赖于对象的部分属性，所以被特定保护了起来。否则，如果我们在代码中像下面这样调用，那么就可能会出现困扰，因为没有强引用指向我们创建出来的 Resource 对象，JVM 对它进行 finalize 操作是完全合法的。
 
-new Resource\(\).action\(\)
+```java
+new Resource().action()
+```
 
 类似的书写结构，在异步编程中似乎是很普遍的，因为异步编程中往往不会用传统的“执行 -&gt; 返回 -&gt; 使用”的结构。
 
-在 Java 9 之前，实现类似类似功能相对比较繁琐，有的时候需要采取一些比较隐晦的小技巧。幸好，java.lang.ref.Reference 给我们提供了新方法，它是 JEP 193: Variable Handles 的一部分，将 Java 平台底层的一些能力暴露出来：
+在 Java 9 之前，实现类似功能相对比较繁琐，有的时候需要采取一些比较隐晦的小技巧。幸好，java.lang.ref.Reference 给我们提供了新方法，它是 JEP 193: Variable Handles 的一部分，将 Java 平台底层的一些能力暴露出来：
 
 static void reachabilityFence\(Object ref\)
 
