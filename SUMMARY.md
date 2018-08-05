@@ -22,5 +22,5 @@
 * [第33讲 \| 后台服务出现明显“变慢”，谈谈你的诊断思路？](di-33-jiang-hou-tai-fu-wu-chu-xian-ming-xian-201c-bian-man-201d-ff0c-tan-tan-ni-de-zhen-duan-si-lu-ff1f.md)
 * [第34讲 \| 有人说“Lambda能让Java程序慢30倍”，你怎么看？](di-34-jiang-you-ren-shuo-201c-lambda-neng-rang-java-cheng-xu-man-30-bei-201d-ff0c-ni-zen-yao-kan-ff1f.md)
 * [第35讲 \| JVM优化Java代码时都做了很么？](/di-35-jiang-jvm-you-hua-java-dai-ma-shi-du-zuo-le-shi-yao-ff1f.md)
-* 第4讲 \| 强引用、软引用、弱引用、幻象引用有什么区别？
+* [第4讲 \| 强引用、软引用、弱引用、幻象引用有什么区别？](di-4-jiang-qiang-yin-yong-3001-ruan-yin-yong-3001-ruo-yin-yong-3001-huan-xiang-yin-yong-you-shi-yao-qu-bie-ff1f.md)
 
