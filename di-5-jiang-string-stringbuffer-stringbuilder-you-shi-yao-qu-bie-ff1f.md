@@ -128,18 +128,13 @@ Intern 是一种显式地排重机制，但是它也有一定的副作用，因�
 
 前面说到的几个方面，只是 Java 底层对字符串各种优化的一角，在运行时，字符串的一些基础操作会直接利用 JVM 内部的 Intrinsic 机制，往往运行的就是特殊优化的本地代码，而根本就不是 Java 代码生成的字节码。Intrinsic 可以简单理解为，是一种利用 native 方式 hard-coded 的逻辑，算是一种特别的内联，很多优化还是需要直接使用特定的 CPU 指令，具体可以看相关源码，搜索“string”以查找相关 Intrinsic 定义。当然，你也可以在启动实验应用时，使用下面参数，了解 intrinsic 发生的状态。
 
+```java
 -XX:+PrintCompilation -XX:+UnlockDiagnosticVMOptions -XX:+PrintInlining
-
-```
-// 样例输出片段    
-
-    180    3       3       java.lang.String::charAt \(25 bytes\)  
-
-                              @ 1   java.lang.String::isLatin1 \(19 bytes\)   
-
-                              ...  
-
-                              @ 7 java.lang.StringUTF16::getChar \(60 bytes\) intrinsic
+    // 样例输出片段    
+        180    3       3       java.lang.String::charAt (25 bytes)  
+                                  @ 1   java.lang.String::isLatin1 (19 bytes)   
+                                  ...  
+                                  @ 7 java.lang.StringUTF16::getChar (60 bytes) intrinsic
 ```
 
 可以看出，仅仅是字符串一个实现，就需要 Java 平台工程师和科学家付出如此大且默默无闻的努力，我们得到的很多便利都是来源于此。
