@@ -50,7 +50,7 @@ StringBuilder 是 Java 1.5 中新增的，**在能力上和 StringBuffer 没有�
 String strByBuilder  = new
 StringBuilder().append("aa").append("bb").append("cc").append
             ("dd").toString();
-             
+
 String strByConcat = "aa" + "bb" + "cc" + "dd";
 ```
 
@@ -58,18 +58,13 @@ String strByConcat = "aa" + "bb" + "cc" + "dd";
 
 我们来做个实验，把下面一段代码，利用不同版本的 JDK 编译，然后再反编译，例如：
 
-public class StringConcat {
-
-```
-    public static void main\(String\[\] args\) {
-
-        String myStr = "aa" + "bb" + "cc" + "dd";   
-
-         System.out.println\("My String:" + myStr\);   
-
-    } 
-
-}
+```java
+  public class StringConcat {
+        public static void main(String[] args) {
+            String myStr = "aa" + "bb" + "cc" + "dd";   
+             System.out.println("My String:" + myStr);   
+        } 
+    }
 ```
 
 先编译再反编译，比如使用 JDK 9：
