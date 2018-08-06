@@ -59,12 +59,12 @@ String strByConcat = "aa" + "bb" + "cc" + "dd";
 我们来做个实验，把下面一段代码，利用不同版本的 JDK 编译，然后再反编译，例如：
 
 ```java
-  public class StringConcat {
-        public static void main(String[] args) {
-            String myStr = "aa" + "bb" + "cc" + "dd";   
-             System.out.println("My String:" + myStr);   
-        } 
-    }
+public class StringConcat {
+    public static void main(String[] args) {
+        String myStr = "aa" + "bb" + "cc" + "dd";   
+         System.out.println("My String:" + myStr);   
+    } 
+}
 ```
 
 先编译再反编译，比如使用 JDK 9：
