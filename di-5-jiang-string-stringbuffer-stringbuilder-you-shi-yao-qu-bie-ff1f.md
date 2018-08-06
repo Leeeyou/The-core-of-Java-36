@@ -69,9 +69,11 @@ public class StringConcat {
 
 先编译再反编译，比如使用 JDK 9：
 
-${JAVA9\_HOME}/bin/javac StringConcat.java
-
-${JAVA9\_HOME}/bin/javap -v StringConcat.class
+```java
+${JAVA9_HOME}/bin/javac StringConcat.java  
+        
+${JAVA9_HOME}/bin/javap -v StringConcat.class
+```
 
 JDK 8 的输出片段是：
 
