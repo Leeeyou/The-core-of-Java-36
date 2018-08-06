@@ -90,7 +90,9 @@ JDK 8 的输出片段是：
 
 而在 JDK 9 中，反编译的结果就非常简单了，片段是：
 
-7: invokedynamic \#4,  0              // InvokeDynamic \#0:makeConcatWithConstants:\(Ljava/lang/String;\)Ljava/lang/String;
+```java
+7: invokedynamic #4,  0              // InvokeDynamic #0:makeConcatWithConstants:(Ljava/lang/String;)Ljava/lang/String;
+```
 
 你可以看到，在 JDK 8 中，字符串拼接操作会自动被 javac 转换为 StringBuilder 操作，而在 JDK 9 里面则是因为 Java 9 为了更加统一字符串操作优化，提供了 StringConcatFactory，作为一个统一的入口。javac 自动生成的代码，虽然未必是最优化的，但普通场景也足够了，你可以酌情选择。
 
