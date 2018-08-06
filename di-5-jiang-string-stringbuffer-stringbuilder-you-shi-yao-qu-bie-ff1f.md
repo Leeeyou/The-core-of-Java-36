@@ -78,20 +78,20 @@ ${JAVA9_HOME}/bin/javap -v StringConcat.class
 JDK 8 的输出片段是：
 
 ```java
-6: new           #4                  // class java/lang/StringBuilder
+6: new           #4 // class java/lang/StringBuilder
 9: dup
-10: invokespecial #5                  // Method java/lang/StringBuilder."<init>":()V
-13: ldc           #6                  // String My String:
-15: invokevirtual #7                  // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+10: invokespecial #5 // Method java/lang/StringBuilder."<init>":()V
+13: ldc           #6 // String My String:
+15: invokevirtual #7 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
 18: aload_1
-19: invokevirtual #7                  // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
-22: invokevirtual #8                  // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+19: invokevirtual #7 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+22: invokevirtual #8 // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
 ```
 
 而在 JDK 9 中，反编译的结果就非常简单了，片段是：
 
 ```java
-7: invokedynamic #4,  0              // InvokeDynamic #0:makeConcatWithConstants:(Ljava/lang/String;)Ljava/lang/String;
+7: invokedynamic #4,  0 // InvokeDynamic #0:makeConcatWithConstants:(Ljava/lang/String;)Ljava/lang/String;
 ```
 
 你可以看到，在 JDK 8 中，字符串拼接操作会自动被 javac 转换为 StringBuilder 操作，而在 JDK 9 里面则是因为 Java 9 为了更加统一字符串操作优化，提供了 StringConcatFactory，作为一个统一的入口。javac 自动生成的代码，虽然未必是最优化的，但普通场景也足够了，你可以酌情选择。
