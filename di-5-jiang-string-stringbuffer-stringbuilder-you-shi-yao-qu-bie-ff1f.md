@@ -46,15 +46,13 @@ StringBuilder 是 Java 1.5 中新增的，**在能力上和 StringBuffer 没有�
 
 在没有线程安全问题的情况下，全部拼接操作是应该都用 StringBuider 实现吗？毕竟这样书写的代码，还是要多敲很多字的，可读性也不理想，下面的对比非常明显。
 
+```java
 String strByBuilder  = new
-
-StringBuilder\(\).append\("aa"\).append\("bb"\).append\("cc"\).append
-
-```
-        \("dd"\).toString\(\);
-```
-
+StringBuilder().append("aa").append("bb").append("cc").append
+            ("dd").toString();
+             
 String strByConcat = "aa" + "bb" + "cc" + "dd";
+```
 
 其实，在通常情况下，没有必要过于担心，要相信 Java 还是非常智能的。
 
