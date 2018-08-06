@@ -71,28 +71,21 @@ public class StringConcat {
 
 ```java
 ${JAVA9_HOME}/bin/javac StringConcat.java  
-        
+
 ${JAVA9_HOME}/bin/javap -v StringConcat.class
 ```
 
 JDK 8 的输出片段是：
 
-```
- 6: new           \#4                  // class java/lang/StringBuilder
-
- 9: dup
-
-10: invokespecial \#5                  // Method java/lang/StringBuilder."&lt;init&gt;":\(\)V
-
-13: ldc           \#6                  // String My String:
-
-15: invokevirtual \#7                  // Method java/lang/StringBuilder.append:\(Ljava/lang/String;\)Ljava/lang/StringBuilder;
-
-18: aload\_1
-
-19: invokevirtual \#7                  // Method java/lang/StringBuilder.append:\(Ljava/lang/String;\)Ljava/lang/StringBuilder;
-
-22: invokevirtual \#8                  // Method java/lang/StringBuilder.toString:\(\)Ljava/lang/String;
+```java
+6: new           #4                  // class java/lang/StringBuilder
+9: dup
+10: invokespecial #5                  // Method java/lang/StringBuilder."<init>":()V
+13: ldc           #6                  // String My String:
+15: invokevirtual #7                  // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+18: aload_1
+19: invokevirtual #7                  // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+22: invokevirtual #8                  // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
 ```
 
 而在 JDK 9 中，反编译的结果就非常简单了，片段是：
