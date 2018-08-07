@@ -80,16 +80,19 @@ public class MyDynamicProxy {
         proxyHello.sayHello();
     }
 }
+
 interface Hello {
     void sayHello();
 }
+
 class HelloImpl implements  Hello {
     @Override
     public void sayHello() {
         System.out.println("Hello World");
     }
 }
- class MyInvocationHandler implements InvocationHandler {
+
+class MyInvocationHandler implements InvocationHandler {
     private Object target;
     public MyInvocationHandler(Object target) {
         this.target = target;
