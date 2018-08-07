@@ -44,15 +44,14 @@ setAccessible 的应用场景非常普遍，遍布我们的日常开发、测试
 
 但是，在 Java 9 以后，这个方法的使用可能会存在一些争议，因为 Jigsaw 项目新增的模块化系统，出于强封装性的考虑，对反射访问进行了限制。Jigsaw 引入了所谓 Open 的概念，只有当被反射操作的模块和指定的包对反射调用者模块 Open，才能使用 setAccessible；否则，被认为是不合法（illegal）操作。如果我们的实体类是定义在模块里面，我们需要在模块描述符中明确声明：
 
+```java
 module MyEntities {
-
-```
-// Open for reflection
-
-opens com.mycorp to java.persistence;
-```
-
+    // Open for reflection
+    opens com.mycorp to java.persistence;
 }
+```
+
+
 
 因为反射机制使用广泛，根据社区讨论，目前，Java 9 仍然保留了兼容 Java 8 的行为，但是很有可能在未来版本，完全启用前面提到的针对 setAccessible 的限制，即只有当被反射操作的模块和指定的包对反射调用者模块 Open，才能使用 setAccessible，我们可以使用下面参数显式设置。
 
