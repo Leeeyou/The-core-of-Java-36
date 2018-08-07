@@ -69,77 +69,40 @@ module MyEntities {
 
 这么说可能不够直观，我们可以看 JDK 动态代理的一个简单例子。下面只是加了一句 print，在生产系统中，我们可以轻松扩展类似逻辑进行诊断、限流等。
 
+```java
 public class MyDynamicProxy {
-
-```
-public static  void main \(String\[\] args\) {
-
-    HelloImpl hello = new HelloImpl\(\);
-
-    MyInvocationHandler handler = new MyInvocationHandler\(hello\);
-
-    // 构造代码实例
-
-    Hello proxyHello = \(Hello\) Proxy.newProxyInstance\(HelloImpl.class.getClassLoader\(\), HelloImpl.class.getInterfaces\(\), handler\);
-
-    // 调用代理方法
-
-    proxyHello.sayHello\(\);
-
+    public static  void main (String[] args) {
+        HelloImpl hello = new HelloImpl();
+        MyInvocationHandler handler = new MyInvocationHandler(hello);
+        // 构造代码实例
+        Hello proxyHello = (Hello) Proxy.newProxyInstance(HelloImpl.class.getClassLoader(), HelloImpl.class.getInterfaces(), handler);
+        // 调用代理方法
+        proxyHello.sayHello();
+    }
 }
-```
-
-}
-
 interface Hello {
-
-```
-void sayHello\(\);
-```
-
+    void sayHello();
 }
-
 class HelloImpl implements  Hello {
-
-```
-@Override
-
-public void sayHello\(\) {
-
-    System.out.println\("Hello World"\);
-
+    @Override
+    public void sayHello() {
+        System.out.println("Hello World");
+    }
+}
+ class MyInvocationHandler implements InvocationHandler {
+    private Object target;
+    public MyInvocationHandler(Object target) {
+        this.target = target;
+    }
+    @Override
+    public Object invoke(Object proxy, Method method, Object[] args)
+            throws Throwable {
+        System.out.println("Invoking sayHello");
+        Object result = method.invoke(target, args);
+        return result;
+    }
 }
 ```
-
-}
-
-class MyInvocationHandler implements InvocationHandler {
-
-```
-private Object target;
-
-public MyInvocationHandler\(Object target\) {
-
-    this.target = target;
-
-}
-
-@Override
-
-public Object invoke\(Object proxy, Method method, Object\[\] args\)
-
-        throws Throwable {
-
-    System.out.println\("Invoking sayHello"\);
-
-    Object result = method.invoke\(target, args\);
-
-    return result;
-
-}
-```
-
-}
 
 上面的 JDK Proxy 例子，非常简单地实现了动态代理的构建和代理操作。首先，实现对应的 InvocationHandler；然后，以接口 Hello 为纽带，为被调用目标构建代理对象，进而应用程序就可以使用代理对象间接运行调用目标的逻辑，代理为应用插入额外逻辑（这里是 println）提供了便利的入口。
 
