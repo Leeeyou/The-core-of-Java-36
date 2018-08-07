@@ -51,11 +51,11 @@ module MyEntities {
 }
 ```
 
-
-
 因为反射机制使用广泛，根据社区讨论，目前，Java 9 仍然保留了兼容 Java 8 的行为，但是很有可能在未来版本，完全启用前面提到的针对 setAccessible 的限制，即只有当被反射操作的模块和指定的包对反射调用者模块 Open，才能使用 setAccessible，我们可以使用下面参数显式设置。
 
---illegal-access={ permit \| warn \| deny }
+```java
+--illegal-access={ permit | warn | deny }
+```
 
 ### 2.动态代理
 
