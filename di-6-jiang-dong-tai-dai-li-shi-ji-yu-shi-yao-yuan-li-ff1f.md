@@ -152,6 +152,8 @@ AOP 通过（动态）代理机制可以让开发者从这些繁琐事项中抽�
 > 参考：[【深度】安卓AOP三剑客:APT,AspectJ,Javassist](https://mp.weixin.qq.com/s?__biz=MzI3MDE0NzYwNA==∣=2651435662&idx=1&sn=8bfca6b022b5a4456a9cd53aa50d666c&chksm=f1289bf5c65f12e338560850662588e3b2e040da8a2981f9ce2e97822c53035050e3abbe0f19&mpshare=1&scene=1&srcid=0607EkR)
 >
 > 参考：[Android 如何编写基于编译时注解的项目](https://mp.weixin.qq.com/s?__biz=MzAxMTI4MTkwNQ==&mid=2650820701&idx=1&sn=ccaf53ba09eec6aae0738d0187e20b77&scene=1&srcid=0720QQv7cYkTtl2QjLXsgkfr#rd)
+>
+> 参考：T D W
 
 
 
