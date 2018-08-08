@@ -62,7 +62,7 @@ java/lang/Integer.intValue:()I
 
 * Byte，数值有限，所以全部都被缓存。
 
-Character，缓存范围 '\u0000' 到 '\u007F'。
+* Character，缓存范围 '\u0000' 到 '\u007F'。
 
 自动装箱 / 自动拆箱似乎很酷，在编程实践中，有什么需要注意的吗？
 
