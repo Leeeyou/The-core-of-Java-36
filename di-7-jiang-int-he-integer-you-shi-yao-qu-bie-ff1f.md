@@ -115,7 +115,7 @@ private static class IntegerCache {
         static {
             // high value may be configured by property
             int h = 127;
-            String integerCacheHighPropValue =                VM.getSavedProperty("java.lang.Integer.IntegerCache.high");
+            String integerCacheHighPropValue = VM.getSavedProperty("java.lang.Integer.IntegerCache.high");
             ...
             // range [-128, 127] must be interned (JLS7 5.1.7)
             assert IntegerCache.high >= 127;
