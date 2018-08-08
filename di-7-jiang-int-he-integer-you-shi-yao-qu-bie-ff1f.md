@@ -47,13 +47,12 @@ int unboxing = integer ++;
 
 反编译输出：
 
-1: invokestatic  \#2                  // Method
-
-java/lang/Integer.valueOf:\(I\)Ljava/lang/Integer;
-
-8: invokevirtual \#3                  // Method
-
-java/lang/Integer.intValue:\(\)I
+```java
+1: invokestatic  #2                  // Method
+java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+8: invokevirtual #3                  // Method
+java/lang/Integer.intValue:()I
+```
 
 这种缓存机制并不是只有 Integer 才有，同样存在于其他的一些包装类，比如：
 
