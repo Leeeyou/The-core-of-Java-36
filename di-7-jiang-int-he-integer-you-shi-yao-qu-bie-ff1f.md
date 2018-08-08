@@ -81,21 +81,15 @@ class Counter {
 
 如果利用原始数据类型，可以将其修改为
 
+```java
 class CompactCounter {
-
-```
-private volatile long counter;
-
-private static final AtomicLongFieldUpdater&lt;CompactCounter&gt; updater = AtomicLongFieldUpdater.newUpdater\(CompactCounter.class, "counter"\);
-
-public void increase\(\) {
-
-    updater.incrementAndGet\(this\);
-
+    private volatile long counter;
+    private static final AtomicLongFieldUpdater<CompactCounter> updater = AtomicLongFieldUpdater.newUpdater(CompactCounter.class, "counter");
+    public void increase() {
+        updater.incrementAndGet(this);
+    }
 }
 ```
-
-}
 
 1. 源码分析
 
