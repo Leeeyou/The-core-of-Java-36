@@ -70,19 +70,14 @@ java/lang/Integer.intValue:()I
 
 **我们其实可以把这个观点扩展开，使用原始数据类型、数组甚至本地代码实现等，在性能极度敏感的场景往往具有比较大的优势，用其替换掉包装类、动态数组（如 ArrayList）等可以作为性能优化的备选项。一些追求极致性能的产品或者类库，会极力避免创建过多对象。当然，在大多数产品代码里，并没有必要这么做，还是以开发效率优先。**以我们经常会使用到的计数器实现为例，下面是一个常见的线程安全计数器实现。
 
+```java
 class Counter {
-
-```
-private final AtomicLong counter = new AtomicLong\(\);  
-
-public void increase\(\) {
-
-    counter.incrementAndGet\(\);
-
+    private final AtomicLong counter = new AtomicLong();  
+    public void increase() {
+        counter.incrementAndGet();
+    }
 }
 ```
-
-}
 
 如果利用原始数据类型，可以将其修改为
 
