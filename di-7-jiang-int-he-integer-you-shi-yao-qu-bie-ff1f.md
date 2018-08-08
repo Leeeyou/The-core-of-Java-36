@@ -60,7 +60,7 @@ java/lang/Integer.intValue:()I
 
 * Short，同样是缓存了 -128 到 127 之间的数值。
 
-Byte，数值有限，所以全部都被缓存。
+* Byte，数值有限，所以全部都被缓存。
 
 Character，缓存范围 '\u0000' 到 '\u007F'。
 
