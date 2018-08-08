@@ -107,35 +107,22 @@ class CompactCounter {
 
 这些实现，都体现在java.lang.Integer源码之中，并实现在 IntegerCache 的静态初始化块里。
 
+```java
 private static class IntegerCache {
-
-```
-    static final int low = -128;
-
-    static final int high;
-
-    static final Integer cache\[\];
-
-    static {
-
-        // high value may be configured by property
-
-        int h = 127;
-
-        String integerCacheHighPropValue =                VM.getSavedProperty\("java.lang.Integer.IntegerCache.high"\);
-
+        static final int low = -128;
+        static final int high;
+        static final Integer cache[];
+        static {
+            // high value may be configured by property
+            int h = 127;
+            String integerCacheHighPropValue =                VM.getSavedProperty("java.lang.Integer.IntegerCache.high");
+            ...
+            // range [-128, 127] must be interned (JLS7 5.1.7)
+            assert IntegerCache.high >= 127;
+        }
         ...
-
-        // range \[-128, 127\] must be interned \(JLS7 5.1.7\)
-
-        assert IntegerCache.high &gt;= 127;
-
-    }
-
-    ...
-```
-
 }
+```
 
 第二，我们在分析字符串的设计实现时，提到过字符串是不可变的，保证了基本的信息安全和并发编程中的线程安全。如果你去看包装类里存储数值的成员变量“value”，你会发现，不管是 Integer 还 Boolean 等，都被声明为“private final”，所以，它们同样是不可变类型！
 
