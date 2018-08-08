@@ -101,7 +101,9 @@ class CompactCounter {
 
 缓存上限值实际是可以根据需要调整的，JVM 提供了参数设置：
 
+```java
 -XX:AutoBoxCacheMax=N
+```
 
 这些实现，都体现在java.lang.Integer源码之中，并实现在 IntegerCache 的静态初始化块里。
 
