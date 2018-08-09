@@ -178,7 +178,7 @@ final V putVal(int hash, K key, V value, boolean onlyIfAbent,
 
 从 putVal 方法最初的几行，我们就可以发现几个有意思的地方：
 
-如果表格是 null，resize 方法会负责初始化它，这从 tab = resize\(\) 可以看出。
+* 如果表格是 null，resize 方法会负责初始化它，这从 tab = resize\(\) 可以看出。
 
 resize 方法兼顾两个职责，创建初始存储表格，或者在容量不满足需求的时候，进行扩容（resize）。
 
