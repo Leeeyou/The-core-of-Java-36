@@ -222,7 +222,7 @@ final Node<K,V>[] resize() {
     else {  
         // zero initial threshold signifies using defaultsfults
         newCap = DEFAULT_INITIAL_CAPAITY;
-        newThr = (int)(DEFAULT_LOAD_ATOR* DEFAULT_INITIAL_CAPACITY；
+        newThr = (int)(DEFAULT_LOAD_ATOR* DEFAULT_INITIAL_CAPACITY);
     }
     if (newThr ==0) {
         float ft = (float)newCap * loadFator;
