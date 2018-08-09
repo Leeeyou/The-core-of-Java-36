@@ -147,18 +147,15 @@ public HashMap(int initialCapacity, float loadFactor){
     this.loadFactor = loadFactor;
     this.threshold = tableSizeFor(initialCapacity);
 }
-
 ```
 
 所以，我们深刻怀疑，HashMap 也许是按照 lazy-load 原则，在首次使用时被初始化（拷贝构造函数除外，我这里仅介绍最通用的场景）。既然如此，我们去看看 put 方法实现，似乎只有一个 putVal 的调用：
 
-public V put\(K key, V value\) {
-
-```
-return putVal\(hash\(key\), key, value, false, true\);
-```
-
+```java
+public V put(K key, V value) {
+    return putVal(hash(key), key, value, false, true);
 }
+```
 
 看来主要的密码似乎藏在 putVal 里面，到底有什么秘密呢？为了节省空间，我这里只截取了 putVal 比较关键的几部分。
 
