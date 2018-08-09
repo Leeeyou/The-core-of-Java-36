@@ -1,8 +1,10 @@
+# 第1讲 \| 谈谈你对Java平台的理解？
+
 从你接触 Java 开发到现在，你对 Java 最直观的印象是什么呢？是它宣传的 “Write once, run anywhere”，还是目前看已经有些过于形式主义的语法呢？你对于 Java 平台到底了解到什么程度？请你先停下来总结思考一下。
 
 今天我要问你的问题是，谈谈你对 Java 平台的理解？“Java 是解释执行”，这句话正确吗？
 
-# 典型回答
+## 典型回答
 
 Java 本身是一种面向对象的语言，最显著的特性有两个方面，一是所谓的“书写一次，到处运行”（Write once, run anywhere），能够非常容易地获得跨平台能力；另外就是垃圾收集（GC, Garbage Collection），Java 通过垃圾收集器（Garbage Collector）回收分配内存，大部分情况下，程序员不需要自己操心内存的分配和回收。
 
@@ -134,7 +136,7 @@ JIT是运行时编译，这样可以对执行次数频繁的dex代码进行编�
 
 ## Java从源码到执行流绊何处？
 
-![](/assets/Java从源码到执行流绊何处？.png)![](/assets/Java从源码到执行流绊何处2？.png) 
+![](/assets/Java从源码到执行流绊何处？.png)![](/assets/Java从源码到执行流绊何处2？.png)
 
 [视频资料](http://v.csdn.hudong.com/s/article.html?arcid=2810640)
 
