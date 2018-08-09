@@ -105,33 +105,23 @@ public class LinkedHashMapSample {
 
 我在上一讲留给你的思考题提到了，构建一个具有优先级的调度系统的问题，其本质就是个典型的优先队列场景，Java 标准库提供了基于二叉堆实现的 PriorityQueue，它们都是依赖于同一种排序机制，当然也包括 TreeMap 的马甲 TreeSet。
 
-类似 hashCode 和 equals 的约定，为了避免模棱两可的情况，自然顺序同样需要符合一个约定，就是 compareTo 的返回值需要和 equals 一致，否则就会出现模棱两可情况。
+**类似 hashCode 和 equals 的约定，为了避免模棱两可的情况，自然顺序同样需要符合一个约定，就是 compareTo 的返回值需要和 equals 一致，否则就会出现模棱两可情况。**
 
 我们可以分析 TreeMap 的 put 方法实现：
 
-public V put\(K key, V value\) {
-
-```
-Entry&lt;K,V&gt; t = …
-
-cmp = k.compareTo\(t.key\);
-
-if \(cmp &lt; 0\)
-
-    t = t.left;
-
-else if \(cmp &gt; 0\)
-
-    t = t.right;
-
-else
-
-    return t.setValue\(value\);
-
-    // ...
-```
-
+```java
+public V put(K key, V value) {
+    Entry<K,V> t = …
+    cmp = k.compareTo(t.key);
+    if (cmp < 0)
+        t = t.left;
+    else if (cmp > 0)
+        t = t.right;
+    else
+        return t.setValue(value);
+        // ...
 }
+```
 
 从代码里，你可以看出什么呢？ 当我不遵守约定时，两个不符合唯一性（equals）要求的对象被当作是同一个（因为，compareTo 返回 0），这会导致歧义的行为表现。
 
