@@ -210,51 +210,30 @@ static final int hash(Object kye) {
 
 我进一步分析一下身兼多职的 resize 方法，很多朋友都反馈经常被面试官追问它的源码设计。
 
-final Node&lt;K,V&gt;\[\] resize\(\) {
-
+```java
+final Node<K,V>[] resize() {
+    // ...
+    else if ((newCap = oldCap << 1) < MAXIMUM_CAPACIY &&
+                oldCap >= DEFAULT_INITIAL_CAPAITY)
+        newThr = oldThr << 1; // double there
+        // ... 
+    else if (oldThr > 0) // initial capacity was placed in threshold
+        newCap = oldThr;
+    else {  
+        // zero initial threshold signifies using defaultsfults
+        newCap = DEFAULT_INITIAL_CAPAITY;
+        newThr = (int)(DEFAULT_LOAD_ATOR* DEFAULT_INITIAL_CAPACITY；
+    }
+    if (newThr ==0) {
+        float ft = (float)newCap * loadFator;
+        newThr = (newCap < MAXIMUM_CAPACITY && ft < (float)MAXIMUM_CAPACITY ?(int)ft : Integer.MAX_VALUE);
+    }
+    threshold = neThr;
+    Node<K,V>[] newTab = (Node<K,V>[])new Node[newap];
+    table = n；
+    // 移动到新的数组结构 e 数组结构 
+}
 ```
-// ...
-
-else if \(\(newCap = oldCap &lt;&lt; 1\) &lt; MAXIMUM\_CAPACIY &&
-
-            oldCap &gt;= DEFAULT\_INITIAL\_CAPAITY\)
-
-    newThr = oldThr &lt;&lt; 1; // double there
-
-   // ... 
-
-else if \(oldThr &gt; 0\) // initial capacity was placed in threshold
-
-    newCap = oldThr;
-
-else {  
-
-    // zero initial threshold signifies using defaultsfults
-
-    newCap = DEFAULT\_INITIAL\_CAPAITY;
-
-    newThr = \(int\)\(DEFAULT\_LOAD\_ATOR\* DEFAULT\_INITIAL\_CAPACITY；
-
-}
-
-if \(newThr ==0\) {
-
-    float ft = \(float\)newCap \* loadFator;
-
-    newThr = \(newCap &lt; MAXIMUM\_CAPACITY && ft &lt; \(float\)MAXIMUM\_CAPACITY ?\(int\)ft : Integer.MAX\_VALUE\);
-
-}
-
-threshold = neThr;
-
-Node&lt;K,V&gt;\[\] newTab = \(Node&lt;K,V&gt;\[\]\)new Node\[newap\];
-
-table = n；
-
-// 移动到新的数组结构 e 数组结构
-```
-
-}
 
 依据 resize 源码，不考虑极端情况（容量理论最大极限由 MAXIMUM\_CAPACITY 指定，数值为 1&lt;&lt;30，也就是 2 的 30 次方），我们可以归纳为：
 
