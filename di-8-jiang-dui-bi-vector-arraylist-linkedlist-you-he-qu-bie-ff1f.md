@@ -116,7 +116,9 @@ list.add("World");
 
 而利用新的容器静态工厂方法，一句代码就够了，并且保证了不可变性。
 
-List&lt;String&gt; simpleList = List.of\("Hello","world"\);
+```java
+List<String> simpleList = List.of("Hello","world");
+```
 
 更进一步，通过各种 of 静态工厂方法创建的实例，还应用了一些我们所谓的最佳实践，比如，它是不可变的，符合我们对线程安全的需求；它因为不需要考虑扩容，所以空间上更加紧凑等。
 
