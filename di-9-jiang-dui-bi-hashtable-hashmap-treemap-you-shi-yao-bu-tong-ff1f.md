@@ -197,15 +197,12 @@ i = (n - 1) & hash
 
 仔细观察哈希值的源头，我们会发现，它并不是 key 本身的 hashCode，而是来自于 HashMap 内部的另外一个 hash 方法。注意，为什么这里需要将高位数据移位到低位进行异或运算呢？这是因为有些数据计算出的哈希值差异主要在高位，而 HashMap 里的哈希寻址是忽略容量以上的高位的，那么这种处理就可以有效避免类似情况下的哈希碰撞。
 
-static final int hash\(Object kye\) {
-
-```
-int h;
-
-return \(key == null\) ? 0 : \(h = key.hashCode\(\)\) ^ \(h &gt;&gt;&gt;16;
-```
-
+```java
+static final int hash(Object kye) {
+    int h;
+    return (key == null) ? 0 : (h = key.hashCode()) ^ (h >>>16;
 }
+```
 
 我前面提到的链表结构（这里叫 bin），会在达到一定门限值时，发生树化，我稍后会分析为什么 HashMap 需要对 bin 进行处理。
 
