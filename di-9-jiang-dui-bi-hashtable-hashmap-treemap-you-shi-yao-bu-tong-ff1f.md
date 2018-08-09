@@ -141,17 +141,14 @@ public V put(K key, V value) {
 
 从非拷贝构造函数的实现来看，这个表格（数组）似乎并没有在最初就初始化好，仅仅设置了一些初始值而已。
 
-public HashMap\(int initialCapacity, float loadFactor\){
-
-```
-// ... 
-
-this.loadFactor = loadFactor;
-
-this.threshold = tableSizeFor\(initialCapacity\);
-```
-
+```java
+public HashMap(int initialCapacity, float loadFactor){  
+    // ... 
+    this.loadFactor = loadFactor;
+    this.threshold = tableSizeFor(initialCapacity);
 }
+
+```
 
 所以，我们深刻怀疑，HashMap 也许是按照 lazy-load 原则，在首次使用时被初始化（拷贝构造函数除外，我这里仅介绍最通用的场景）。既然如此，我们去看看 put 方法实现，似乎只有一个 putVal 的调用：
 
