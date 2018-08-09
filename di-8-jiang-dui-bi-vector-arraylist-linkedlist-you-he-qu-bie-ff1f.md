@@ -78,7 +78,9 @@ LinkedList 顾名思义是 Java 提供的双向链表，所以它不需要像上
 
 我今天介绍的这些集合类，都不是线程安全的，对于 java.util.concurrent 里面的线程安全容器，我在专栏后面会去介绍。但是，并不代表这些集合完全不能支持并发编程的场景，在 Collections 工具类中，提供了一系列的 synchronized 方法，比如
 
-static &lt;T&gt; List&lt;T&gt; synchronizedList\(List&lt;T&gt; list\)
+```java
+static <T> List<T> synchronizedList(List<T> list)
+```
 
 我们完全可以利用类似方法来实现基本的线程安全集合：
 
