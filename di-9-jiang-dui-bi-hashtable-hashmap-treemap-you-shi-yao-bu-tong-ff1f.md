@@ -200,11 +200,11 @@ i = (n - 1) & hash
 ```java
 static final int hash(Object kye) {
     int h;
-    return (key == null) ? 0 : (h = key.hashCode()) ^ (h >>>16;
+    return (key == null) ? 0 : (h = key.hashCode()) ^ (h >>>16);
 }
 ```
 
-我前面提到的链表结构（这里叫 bin），会在达到一定门限值时，发生树化，我稍后会分析为什么 HashMap 需要对 bin 进行处理。
+* 我前面提到的链表结构（这里叫 bin），会在达到一定门限值时，发生树化，我稍后会分析为什么 HashMap 需要对 bin 进行处理。
 
 可以看到，putVal 方法本身逻辑非常集中，从初始化、扩容到树化，全部都和它有关，推荐你阅读源码的时候，可以参考上面的主要逻辑。
 
