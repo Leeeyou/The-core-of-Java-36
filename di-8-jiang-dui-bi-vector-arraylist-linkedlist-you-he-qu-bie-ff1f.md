@@ -114,7 +114,7 @@ list.add("Hello");
 list.add("World");
 ```
 
-而利用新的容器静态工厂方法，一句代码就够了，并且保证了不可变性。
+而利用新的容器静态工厂方法，一句代码就够了，**并且保证了不可变性。**
 
 ```java
 List<String> simpleList = List.of("Hello","world");
