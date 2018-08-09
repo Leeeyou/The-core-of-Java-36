@@ -129,7 +129,7 @@ public V put(K key, V value) {
 
 前面提到，HashMap 设计与实现是个非常高频的面试题，所以我会在这进行相对详细的源码解读，主要围绕：
 
-HashMap 内部实现基本点分析。
+* HashMap 内部实现基本点分析。
 
 容量（capacity）和负载系数（load factor）。
 
