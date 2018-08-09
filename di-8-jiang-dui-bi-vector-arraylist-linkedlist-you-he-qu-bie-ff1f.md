@@ -108,11 +108,11 @@ List list = Collections.synchronizedList(new ArrayList());
 
 在 Java 9 中，Java 标准类库提供了一系列的静态工厂方法，比如，List.of\(\)、Set.of\(\)，大大简化了构建小的容器实例的代码量。根据业界实践经验，我们发现相当一部分集合实例都是容量非常有限的，而且在生命周期中并不会进行修改。但是，在原有的 Java 类库中，我们可能不得不写成：
 
-ArrayList&lt;String&gt;  list = new ArrayList&lt;&gt;\(\);
-
-list.add\("Hello"\);
-
-list.add\("World"\);
+```java
+ArrayList<String>  list = new ArrayList<>();
+list.add("Hello");
+list.add("World");
+```
 
 而利用新的容器静态工厂方法，一句代码就够了，并且保证了不可变性。
 
