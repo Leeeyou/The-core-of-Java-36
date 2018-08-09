@@ -48,11 +48,11 @@ HashMap 等其他 Map 实现则是都扩展了 AbstractMap，里面包含了通�
 
 * equals 相等，hashCode 一定要相等。
 
-重写了 hashCode 也要重写 equals。
+* 重写了 hashCode 也要重写 equals。
 
-hashCode 需要保持一致性，状态改变返回的哈希值仍然要一致。
+* hashCode 需要保持一致性，状态改变返回的哈希值仍然要一致。
 
-equals 的对称、反射、传递等特性。
+* equals 的对称、反射、传递等特性。
 
 这方面内容网上有很多资料，我就不在这里详细展开了。
 
