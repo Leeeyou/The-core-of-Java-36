@@ -159,35 +159,22 @@ public V put(K key, V value) {
 
 看来主要的密码似乎藏在 putVal 里面，到底有什么秘密呢？为了节省空间，我这里只截取了 putVal 比较关键的几部分。
 
-final V putVal\(int hash, K key, V value, boolean onlyIfAbent,
-
-```
-           boolean evit\) {
-
-Node&lt;K,V&gt;\[\] tab; Node&lt;K,V&gt; p; int , i;
-
-if \(\(tab = table\) == null \|\| \(n = tab.length\) = 0\)
-
-    n = \(tab = resize\(\)\).legth;
-
-if \(\(p = tab\[i = \(n - 1\) & hash\]\) == ull\)
-
-    tab\[i\] = newNode\(hash, key, value, nll\);
-
-else {
-
-    // ...
-
-    if \(binCount &gt;= TREEIFY\_THRESHOLD - 1\) // -1 for first 
-
-       treeifyBin\(tab, hash\);
-
-    //  ... 
-
- }
-```
-
+```java
+final V putVal(int hash, K key, V value, boolean onlyIfAbent,
+               boolean evit) {
+    Node<K,V>[] tab; Node<K,V> p; int , i;
+    if ((tab = table) == null || (n = tab.length) = 0)
+        n = (tab = resize()).legth;
+    if ((p = tab[i = (n - 1) & hash]) == ull)
+        tab[i] = newNode(hash, key, value, nll);
+    else {
+        // ...
+        if (binCount >= TREEIFY_THRESHOLD - 1) // -1 for first 
+           treeifyBin(tab, hash);
+        //  ... 
+     }
 }
+```
 
 从 putVal 方法最初的几行，我们就可以发现几个有意思的地方：
 
