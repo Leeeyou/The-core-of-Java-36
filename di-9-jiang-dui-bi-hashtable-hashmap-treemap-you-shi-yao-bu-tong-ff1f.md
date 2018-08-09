@@ -97,6 +97,10 @@ public class LinkedHashMapSample {
 }
 ```
 
+运行结果如下：
+
+![](/assets/LinkedHaspMapSampleResult.png)
+
 * 对于 TreeMap，它的整体顺序是由键的顺序关系决定的，通过 Comparator 或 Comparable（自然顺序）来决定。
 
 我在上一讲留给你的思考题提到了，构建一个具有优先级的调度系统的问题，其本质就是个典型的优先队列场景，Java 标准库提供了基于二叉堆实现的 PriorityQueue，它们都是依赖于同一种排序机制，当然也包括 TreeMap 的马甲 TreeSet。
