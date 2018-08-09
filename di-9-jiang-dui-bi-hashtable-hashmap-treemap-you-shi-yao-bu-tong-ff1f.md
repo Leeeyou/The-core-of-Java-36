@@ -259,7 +259,7 @@ final Node<K,V>[] resize() {
 
 而对于负载因子，我建议：
 
-* 如果没有特别需求，不要轻易进行更改，因为 JDK 自身的默认负载因子是非常符合通用场景的需求的。
+* **如果没有特别需求，不要轻易进行更改，因为 JDK 自身的默认负载因子是非常符合通用场景的需求的。**
 
 * 如果确实需要调整，建议不要设置超过 0.75 的数值，因为会显著增加冲突，降低 HashMap 的性能。
 
@@ -267,23 +267,16 @@ final Node<K,V>[] resize() {
 
 我们前面提到了树化改造，对应逻辑主要在 putVal 和 treeifyBin 中。
 
-final void treeifyBin\(Node&lt;K,V&gt;\[\] tab, int hash\) {
-
-```
-int n, index; Node&lt;K,V&gt; e;
-
-if \(tab == null \|\| \(n = tab.length\) &lt; MIN\_TREEIFY\_CAPACITY\)
-
-    resize\(\);
-
-else if \(\(e = tab\[index = \(n - 1\) & hash\]\) != null\) {
-
-    // 树化改造逻辑
-
+```java
+final void treeifyBin(Node<K,V>[] tab, int hash) {
+    int n, index; Node<K,V> e;
+    if (tab == null || (n = tab.length) < MIN_TREEIFY_CAPACITY)
+        resize();
+    else if ((e = tab[index = (n - 1) & hash]) != null) {
+        // 树化改造逻辑
+    }
 }
 ```
-
-}
 
 上面是精简过的 treeifyBin 示意，综合这两个方法，树化改造的逻辑就非常清晰了，可以理解为，当 bin 的数量大于 TREEIFY\_THRESHOLD 时：
 
