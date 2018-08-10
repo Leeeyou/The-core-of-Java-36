@@ -10,9 +10,9 @@ Java 提供了不同层面的线程安全支持。在传统集合框架内部，
 
 另外，更加普遍的选择是利用并发包提供的线程安全容器类，它提供了：
 
-各种并发容器，比如 ConcurrentHashMap、CopyOnWriteArrayList。
+* 各种并发容器，比如 ConcurrentHashMap、CopyOnWriteArrayList。
 
-各种线程安全队列（Queue/Deque），如 ArrayBlockingQueue、SynchronousQueue。
+* 各种线程安全队列（Queue/Deque），如 ArrayBlockingQueue、SynchronousQueue。
 
 各种有序容器的线程安全版本等。
 
