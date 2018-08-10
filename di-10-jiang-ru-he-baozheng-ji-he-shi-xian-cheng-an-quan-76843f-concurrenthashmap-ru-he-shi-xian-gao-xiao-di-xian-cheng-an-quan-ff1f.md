@@ -79,34 +79,21 @@ private static class SynchronizedMap<K,V>
 
 具体情况，我们一起看看一些 Map 基本操作的源码，这是 JDK 7 比较新的 get 代码。针对具体的优化部分，为方便理解，我直接注释在代码段里，get 操作需要保证的是可见性，所以并没有什么同步逻辑。
 
-public V get\(Object key\) {
-
-```
-    Segment&lt;K,V&gt; s; // manually integrate access methods to reduce overhead
-
-    HashEntry&lt;K,V&gt;\[\] tab;
-
-    int h = hash\(key.hashCode\(\)\);
-
-   // 利用位操作替换普通数学运算
-
-   long u = \(\(\(h &gt;&gt;&gt; segmentShift\) & segmentMask\) &lt;&lt; SSHIFT\) + SBASE;
-
-    // 以 Segment 为单位，进行定位
-
-    // 利用 Unsafe 直接进行 volatile access
-
-    if \(\(s = \(Segment&lt;K,V&gt;\)UNSAFE.getObjectVolatile\(segments, u\)\) != null &&
-
-        \(tab = s.table\) != null\) {
-
-       // 省略
-
-      }
-
-    return null;
-
-}
+```java
+public V get(Object key) {
+        Segment<K,V> s; // manually integrate access methods to reduce overhead
+        HashEntry<K,V>[] tab;
+        int h = hash(key.hashCode());
+       // 利用位操作替换普通数学运算
+       long u = (((h >>> segmentShift) & segmentMask) << SSHIFT) + SBASE;
+        // 以 Segment 为单位，进行定位
+        // 利用 Unsafe 直接进行 volatile access
+        if ((s = (Segment<K,V>)UNSAFE.getObjectVolatile(segments, u)) != null &&
+            (tab = s.table) != null) {
+           // 省略
+          }
+        return null;
+    }
 ```
 
 而对于 put 操作，首先是通过二次哈希避免哈希冲突，然后以 Unsafe 调用方式，直接获取相应的 Segment，然后进行线程安全的 put 操作：
