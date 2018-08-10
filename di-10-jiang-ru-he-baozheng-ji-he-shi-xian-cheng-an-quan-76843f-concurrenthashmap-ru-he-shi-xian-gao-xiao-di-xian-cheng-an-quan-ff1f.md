@@ -154,7 +154,7 @@ final V put(K key, int hash, V value, boolean onlyIfAbsent) {
 
 试想，如果不进行同步，简单的计算所有 Segment 的总值，可能会因为并发 put，导致结果不准确，但是直接锁定所有 Segment 进行计算，就会变得非常昂贵。其实，分离锁也限制了 Map 的初始化等操作。
 
-所以，ConcurrentHashMap 的实现是通过重试机制（RETRIES\_BEFORE\_LOCK，指定重试次数 2），来试图获得可靠值。如果没有监控到发生变化（通过对比 Segment.modCount），就直接返回，否则获取锁进行操作。
+**所以，ConcurrentHashMap 的实现是通过重试机制（RETRIES\_BEFORE\_LOCK，指定重试次数 2），来试图获得可靠值。如果没有监控到发生变化（通过对比 Segment.modCount），就直接返回，否则获取锁进行操作。**
 
 下面我来对比一下，在 Java 8 和之后的版本中，ConcurrentHashMap 发生了哪些变化呢？
 
