@@ -230,7 +230,7 @@ final Node<K,V>[] resize() {
     }
     threshold = neThr;
     Node<K,V>[] newTab = (Node<K,V>[])new Node[newap];
-    table = n；
+    table = n;
     // 移动到新的数组结构 e 数组结构 
 }
 ```
