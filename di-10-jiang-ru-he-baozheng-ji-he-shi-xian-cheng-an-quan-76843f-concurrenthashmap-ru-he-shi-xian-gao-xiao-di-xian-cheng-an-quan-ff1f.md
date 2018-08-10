@@ -114,56 +114,32 @@ public V get(Object key) {
 
 其核心逻辑实现在下面的内部方法中：
 
-final V put\(K key, int hash, V value, boolean onlyIfAbsent\) {
-
-```
-        // scanAndLockForPut 会去查找是否有 key 相同 Node
-
-        // 无论如何，确保获取锁
-
-        HashEntry&lt;K,V&gt; node = tryLock\(\) ? null :
-
-            scanAndLockForPut\(key, hash, value\);
-
-        V oldValue;
-
-        try {
-
-            HashEntry&lt;K,V&gt;\[\] tab = table;
-
-            int index = \(tab.length - 1\) & hash;
-
-            HashEntry&lt;K,V&gt; first = entryAt\(tab, index\);
-
-            for \(HashEntry&lt;K,V&gt; e = first;;\) {
-
-                if \(e != null\) {
-
-                    K k;
-
-                    // 更新已有 value...
-
-                }
-
-                else {
-
-                    // 放置 HashEntry 到特定位置，如果超过阈值，进行 rehash
-
-                    // ...
-
-                }
-
+```java
+final V put(K key, int hash, V value, boolean onlyIfAbsent) {
+    // scanAndLockForPut 会去查找是否有 key 相同 Node
+    // 无论如何，确保获取锁
+    HashEntry<K,V> node = tryLock() ? null :
+        scanAndLockForPut(key, hash, value);
+    V oldValue;
+    try {
+        HashEntry<K,V>[] tab = table;
+        int index = (tab.length - 1) & hash;
+        HashEntry<K,V> first = entryAt(tab, index);
+        for (HashEntry<K,V> e = first;;) {
+            if (e != null) {
+                K k;
+                // 更新已有 value...
             }
-
-        } finally {
-
-            unlock\(\);
-
+            else {
+                // 放置 HashEntry 到特定位置，如果超过阈值，进行 rehash
+                // ...
+            }
         }
-
-        return oldValue;
-
+    } finally {
+        unlock();
     }
+    return oldValue;
+}
 ```
 
 所以，从上面的源码清晰的看出，在进行并发写操作时：
