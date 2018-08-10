@@ -44,27 +44,18 @@ Java 提供了不同层面的线程安全支持。在传统集合框架内部，
 
 看看下面的代码片段，我们发现同步包装器只是利用输入 Map 构造了另一个同步版本，所有操作虽然不再声明成为 synchronized 方法，但是还是利用了“this”作为互斥的 mutex，没有真正意义上的改进！
 
-private static class SynchronizedMap&lt;K,V&gt;
-
-```
-implements Map&lt;K,V&gt;, Serializable {
-
-private final Map&lt;K,V&gt; m;     // Backing Map
-
-final Object      mutex;        // Object on which to synchronize
-
-// …
-
-public int size\(\) {
-
-    synchronized \(mutex\) {return m.size\(\);}
-
+```java
+private static class SynchronizedMap<K,V>
+    implements Map<K,V>, Serializable {
+    private final Map<K,V> m;     // Backing Map
+    final Object      mutex;        // Object on which to synchronize
+    // …
+    public int size() {
+        synchronized (mutex) {return m.size();}
+    }
+ // … 
 }
 ```
-
-// …
-
-}
 
 所以，Hashtable 或者同步包装版本，都只是适合在非高度并发的场景下。
 
