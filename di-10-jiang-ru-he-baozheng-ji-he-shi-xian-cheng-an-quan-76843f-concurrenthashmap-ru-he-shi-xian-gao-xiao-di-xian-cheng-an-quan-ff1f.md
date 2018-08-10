@@ -63,7 +63,7 @@ private static class SynchronizedMap<K,V>
 
 我们再来看看 ConcurrentHashMap 是如何设计实现的，为什么它能大大提高并发效率。
 
-首先，我这里强调，ConcurrentHashMap 的设计实现其实一直在演化，比如在 Java 8 中就发生了非常大的变化（Java 7 其实也有不少更新），所以，我这里将比较分析结构、实现机制等方面，对比不同版本的主要区别。
+**首先，我这里强调，ConcurrentHashMap 的设计实现其实一直在演化，比如在 Java 8 中就发生了非常大的变化（Java 7 其实也有不少更新），所以，我这里将比较分析结构、实现机制等方面，对比不同版本的主要区别。**
 
 早期 ConcurrentHashMap，其实现是基于：
 
