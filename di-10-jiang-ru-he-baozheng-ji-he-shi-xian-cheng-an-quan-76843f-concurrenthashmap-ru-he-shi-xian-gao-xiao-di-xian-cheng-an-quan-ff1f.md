@@ -97,29 +97,18 @@ public V get(Object key) {
 
 而对于 put 操作，首先是通过二次哈希避免哈希冲突，然后以 Unsafe 调用方式，直接获取相应的 Segment，然后进行线程安全的 put 操作：
 
-public V put\(K key, V value\) {
-
-```
-    Segment&lt;K,V&gt; s;
-
-    if \(value == null\)
-
-        throw new NullPointerException\(\);
-
+```java
+ public V put(K key, V value) {
+    Segment<K,V> s;
+    if (value == null)
+        throw new NullPointerException();
     // 二次哈希，以保证数据的分散性，避免哈希冲突
-
-    int hash = hash\(key.hashCode\(\)\);
-
-    int j = \(hash &gt;&gt;&gt; segmentShift\) & segmentMask;
-
-    if \(\(s = \(Segment&lt;K,V&gt;\)UNSAFE.getObject          // nonvolatile; recheck
-
-         \(segments, \(j &lt;&lt; SSHIFT\) + SBASE\)\) == null\) //  in ensureSegment
-
-        s = ensureSegment\(j\);
-
-    return s.put\(key, hash, value, false\);
-
+    int hash = hash(key.hashCode());
+    int j = (hash >>> segmentShift) & segmentMask;
+    if ((s = (Segment<K,V>)UNSAFE.getObject          // nonvolatile; recheck
+            (segments, (j << SSHIFT) + SBASE)) == null) //  in ensureSegment
+        s = ensureSegment(j);
+    return s.put(key, hash, value, false);
 }
 ```
 
