@@ -81,19 +81,18 @@ private static class SynchronizedMap<K,V>
 
 ```java
 public V get(Object key) {
-        Segment<K,V> s; // manually integrate access methods to reduce overhead
-        HashEntry<K,V>[] tab;
-        int h = hash(key.hashCode());
-       // 利用位操作替换普通数学运算
-       long u = (((h >>> segmentShift) & segmentMask) << SSHIFT) + SBASE;
-        // 以 Segment 为单位，进行定位
-        // 利用 Unsafe 直接进行 volatile access
-        if ((s = (Segment<K,V>)UNSAFE.getObjectVolatile(segments, u)) != null &&
-            (tab = s.table) != null) {
-           // 省略
-          }
-        return null;
+    Segment<K,V> s; // manually integrate access methods to reduce overhead
+    HashEntry<K,V>[] tab;
+    int h = hash(key.hashCode());
+    // 利用位操作替换普通数学运算
+    long u = (((h >>> segmentShift) & segmentMask) << SSHIFT) + SBASE;
+    // 以 Segment 为单位，进行定位
+    // 利用 Unsafe 直接进行 volatile access
+    if ((s = (Segment<K,V>)UNSAFE.getObjectVolatile(segments, u)) != null && (tab = s.table) != null) {
+        // 省略
     }
+    return null;
+}
 ```
 
 而对于 put 操作，首先是通过二次哈希避免哈希冲突，然后以 Unsafe 调用方式，直接获取相应的 Segment，然后进行线程安全的 put 操作：
