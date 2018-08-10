@@ -229,55 +229,32 @@ final V putVal(K key, V value, boolean onlyIfAbsent) { if (key == null || value 
 
 请参考下面代码：
 
-private final Node&lt;K,V&gt;\[\] initTable\(\) {
-
-```
-Node&lt;K,V&gt;\[\] tab; int sc;
-
-while \(\(tab = table\) == null \|\| tab.length == 0\) {
-
-    // 如果发现冲突，进行 spin 等待
-
-    if \(\(sc = sizeCtl\) &lt; 0\)
-
-        Thread.yield\(\); 
-
-    // CAS 成功返回 true，则进入真正的初始化逻辑
-
-    else if \(U.compareAndSetInt\(this, SIZECTL, sc, -1\)\) {
-
-        try {
-
-            if \(\(tab = table\) == null \|\| tab.length == 0\) {
-
-                int n = \(sc &gt; 0\) ? sc : DEFAULT\_CAPACITY;
-
-                @SuppressWarnings\("unchecked"\)
-
-                Node&lt;K,V&gt;\[\] nt = \(Node&lt;K,V&gt;\[\]\)new Node&lt;?,?&gt;\[n\];
-
-                table = tab = nt;
-
-                sc = n - \(n &gt;&gt;&gt; 2\);
-
+```java
+private final Node<K,V>[] initTable() {
+    Node<K,V>[] tab; int sc;
+    while ((tab = table) == null || tab.length == 0) {
+        // 如果发现冲突，进行 spin 等待
+        if ((sc = sizeCtl) < 0)
+            Thread.yield(); 
+        // CAS 成功返回 true，则进入真正的初始化逻辑
+        else if (U.compareAndSetInt(this, SIZECTL, sc, -1)) {
+            try {
+                if ((tab = table) == null || tab.length == 0) {
+                    int n = (sc > 0) ? sc : DEFAULT_CAPACITY;
+                    @SuppressWarnings("unchecked")
+                    Node<K,V>[] nt = (Node<K,V>[])new Node<?,?>[n];
+                    table = tab = nt;
+                    sc = n - (n >>> 2);
+                }
+            } finally {
+                sizeCtl = sc;
             }
-
-        } finally {
-
-            sizeCtl = sc;
-
+            break;
         }
-
-        break;
-
     }
-
+    return tab;
 }
-
-return tab;
 ```
-
-}
 
 当 bin 为空时，同样是没有必要锁定，也是以 CAS 操作去放置。
 
