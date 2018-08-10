@@ -172,19 +172,13 @@ final V put(K key, int hash, V value, boolean onlyIfAbsent) {
 
 先看看现在的数据存储内部实现，我们可以发现 Key 是 final 的，因为在生命周期中，一个条目的 Key 发生变化是不可能的；与此同时 val，则声明为 volatile，以保证可见性。
 
-static class Node&lt;K,V&gt; implements Map.Entry&lt;K,V&gt; {
-
-```
+```java
+static class Node<K,V> implements Map.Entry<K,V> {
     final int hash;
-
     final K key;
-
     volatile V val;
-
-    volatile Node&lt;K,V&gt; next;
-
+    volatile Node<K,V> next;
     // … 
-
 }
 ```
 
