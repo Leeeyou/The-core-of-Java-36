@@ -286,15 +286,12 @@ final long sumCount() {
 
 我们发现，虽然思路仍然和以前类似，都是分而治之的进行计数，然后求和处理，但实现却基于一个奇怪的 CounterCell。 难道它的数值，就更加准确吗？数据一致性是怎么保证的？
 
+```java
 static final class CounterCell {
-
-```
-volatile long value;
-
-CounterCell\(long x\) { value = x; }
-```
-
+    volatile long value;
+    CounterCell(long x) { value = x; }
 }
+```
 
 其实，对于 CounterCell 的操作，是基于 java.util.concurrent.atomic.LongAdder 进行的，是一种 JVM 利用空间换取更高效率的方法，利用了Striped64内部的复杂逻辑。这个东西非常小众，大多数情况下，建议还是使用 AtomicLong，足以满足绝大部分应用的性能需求。
 
