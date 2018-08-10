@@ -285,7 +285,6 @@ final V putVal(K key, V value, boolean onlyIfAbsent) { if (key == null || value 
 请参考下面代码：
 
 ```java
-private final Node<K,V>[] initTable() {
     Node<K,V>[] tab; int sc;
     while ((tab = table) == null || tab.length == 0) {
         // 如果发现冲突，进行 spin 等待
@@ -359,6 +358,8 @@ static final class CounterCell {
 ### CAS机制具体指什么？
 
 ### Unsafe 提供的底层能力是什么？
+
+### 怎样判断一个hash算法的好坏？
 
 
 
