@@ -36,7 +36,7 @@ Java 提供了不同层面的线程安全支持。在传统集合框架内部，
 
 ## 知识扩展
 
-1. 为什么需要 ConcurrentHashMap？
+### 1.为什么需要 ConcurrentHashMap？
 
 Hashtable 本身比较低效，因为它的实现基本就是将 put、get、size 等各种方法加上“synchronized”。简单来说，这就导致了所有并发操作都要竞争同一把锁，一个线程在进行同步操作时，其他线程只能等待，大大降低了并发操作的效率。
 
