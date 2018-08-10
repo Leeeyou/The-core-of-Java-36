@@ -164,11 +164,11 @@ final V put(K key, int hash, V value, boolean onlyIfAbsent) {
 
 * 因为不再使用 Segment，初始化操作大大简化，修改为 lazy-load 形式，这样可以有效避免初始开销，解决了老版本很多人抱怨的这一点。
 
-数据存储利用 volatile 来保证可见性。
+* 数据存储利用 volatile 来保证可见性。
 
-使用 CAS 等操作，在特定场景进行无锁并发操作。
+* 使用 CAS 等操作，在特定场景进行无锁并发操作。
 
-使用 Unsafe、LongAdder 之类底层手段，进行极端情况的优化。
+* 使用 Unsafe、LongAdder 之类底层手段，进行极端情况的优化。
 
 先看看现在的数据存储内部实现，我们可以发现 Key 是 final 的，因为在生命周期中，一个条目的 Key 发生变化是不可能的；与此同时 val，则声明为 volatile，以保证可见性。
 
