@@ -95,6 +95,23 @@ public ConcurrentHashMap(int initialCapacity,
 }
 ```
 
+```java
+/**
+* The largest possible table capacity.  This value must be
+* exactly 1<<30 to stay within Java array allocation and indexing
+* bounds for power of two table sizes, and is further required
+* because the top two bits of 32bit hash fields are used for
+* control purposes.
+*/
+private static final int MAXIMUM_CAPACITY = 1 << 30;
+
+/**
+* The default initial table capacity.  Must be a power of 2
+* (i.e., at least 1) and at most MAXIMUM_CAPACITY.
+*/
+private static final int DEFAULT_CAPACITY = 16;
+```
+
 具体情况，我们一起看看一些 Map 基本操作的源码，这是 JDK 7 比较新的 get 代码。针对具体的优化部分，为方便理解，我直接注释在代码段里，get 操作需要保证的是可见性，所以并没有什么同步逻辑。
 
 ```java
