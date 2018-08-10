@@ -262,13 +262,11 @@ private final Node<K,V>[] initTable() {
 
 与此同时，更多细节实现通过使用 Unsafe 进行了优化，例如 tabAt 就是直接利用 getObjectAcquire，避免间接调用的开销。
 
-static final &lt;K,V&gt; Node&lt;K,V&gt; tabAt\(Node&lt;K,V&gt;\[\] tab, int i\) {
-
-```
-return \(Node&lt;K,V&gt;\)U.getObjectAcquire\(tab, \(\(long\)i &lt;&lt; ASHIFT\) + ABASE\);
-```
-
+```java
+static final <K,V> Node<K,V> tabAt(Node<K,V>[] tab, int i) {
+    return (Node<K,V>)U.getObjectAcquire(tab, ((long)i << ASHIFT) + ABASE);
 }
+```
 
 再看看，现在是如何实现 size 操作的。阅读代码你会发现，真正的逻辑是在 sumCount 方法中， 那么 sumCount 做了什么呢？
 
