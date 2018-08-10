@@ -180,7 +180,7 @@ final V putVal(int hash, K key, V value, boolean onlyIfAbent,
 
 * 如果表格是 null，resize 方法会负责初始化它，这从 tab = resize\(\) 可以看出。
 
-* resize 方法兼顾两个职责，创建初始存储表格，或者在容量不满足需求的时候，进行扩容（resize）。
+* **resize 方法兼顾两个职责，创建初始存储表格，或者在容量不满足需求的时候，进行扩容（resize）。**
 
 * 在放置新的键值对的过程中，如果发生下面条件，就会发生扩容。
 
