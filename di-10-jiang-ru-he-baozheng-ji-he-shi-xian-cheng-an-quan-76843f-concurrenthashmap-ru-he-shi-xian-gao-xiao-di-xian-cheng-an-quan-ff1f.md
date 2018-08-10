@@ -270,29 +270,19 @@ static final <K,V> Node<K,V> tabAt(Node<K,V>[] tab, int i) {
 
 再看看，现在是如何实现 size 操作的。阅读代码你会发现，真正的逻辑是在 sumCount 方法中， 那么 sumCount 做了什么呢？
 
-final long sumCount\(\) {
-
-```
-CounterCell\[\] as = counterCells; CounterCell a;
-
-long sum = baseCount;
-
-if \(as != null\) {
-
-    for \(int i = 0; i &lt; as.length; ++i\) {
-
-        if \(\(a = as\[i\]\) != null\)
-
-            sum += a.value;
-
+```java
+final long sumCount() {
+    CounterCell[] as = counterCells; CounterCell a;
+    long sum = baseCount;
+    if (as != null) {
+        for (int i = 0; i < as.length; ++i) {
+            if ((a = as[i]) != null)
+                sum += a.value;
+        }
     }
-
+    return sum;
 }
-
-return sum;
 ```
-
-}
 
 我们发现，虽然思路仍然和以前类似，都是分而治之的进行计数，然后求和处理，但实现却基于一个奇怪的 CounterCell。 难道它的数值，就更加准确吗？数据一致性是怎么保证的？
 
