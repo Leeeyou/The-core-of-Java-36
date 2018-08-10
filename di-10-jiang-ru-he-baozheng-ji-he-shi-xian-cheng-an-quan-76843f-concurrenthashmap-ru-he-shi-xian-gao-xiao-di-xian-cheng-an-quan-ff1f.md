@@ -71,8 +71,6 @@ private static class SynchronizedMap<K,V>
 
 * HashEntry 内部使用 volatile 的 value 字段来保证可见性，也利用了不可变对象的机制以改进利用 Unsafe 提供的底层能力，比如 volatile access，去直接完成部分操作，以最优化性能，毕竟 Unsafe 中的很多操作都是 JVM intrinsic 优化过的。
 
-> Unsafe 提供的底层能力是什么？
-
 你可以参考下面这个早期 ConcurrentHashMap 内部结构的示意图，其核心是利用分段设计，在进行并发操作的时候，只需要锁定相应段，这样就有效避免了类似 Hashtable 整体同步的问题，大大提高了性能。
 
 ![](/assets/1529057120620.jpg)
@@ -360,7 +358,7 @@ static final class CounterCell {
 
 ### CAS机制具体指什么？
 
-
+### Unsafe 提供的底层能力是什么？
 
 
 
