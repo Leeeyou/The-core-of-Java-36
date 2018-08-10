@@ -68,7 +68,7 @@ public int size\(\) {
 
 所以，Hashtable 或者同步包装版本，都只是适合在非高度并发的场景下。
 
-2.ConcurrentHashMap 分析
+## 2.ConcurrentHashMap 分析
 
 我们再来看看 ConcurrentHashMap 是如何设计实现的，为什么它能大大提高并发效率。
 
