@@ -220,7 +220,7 @@ public class NIOServer extends Thread {
 
 * 然后，创建一个 ServerSocketChannel，并且向 Selector 注册，通过指定 SelectionKey.OP\_ACCEPT，告诉调度员，它关注的是新的连接请求。
 
-      注意，为什么我们要明确配置非阻塞模式呢？这是因为阻塞模式下，注册操作是不允许的，会抛出 IllegalBlockingModeException 异常。
+  注意，为什么我们要明确配置非阻塞模式呢？这是因为阻塞模式下，注册操作是不允许的，会抛出 IllegalBlockingModeException 异常。
 
 * Selector 阻塞在 select 操作，当有 Channel 发生接入请求，就会被唤醒。
 
@@ -228,41 +228,33 @@ public class NIOServer extends Thread {
 
 可以看到，在前面两个样例中，IO 都是同步阻塞模式，所以需要多线程以实现多任务处理。而 NIO 则是利用了单线程轮询事件的机制，通过高效地定位就绪的 Channel，来决定做什么，仅仅 select 阶段是阻塞的，可以有效避免大量客户端连接时，频繁线程切换带来的问题，应用的扩展能力有了非常大的提高。下面这张图对这种实现思路进行了形象地说明。
 
+![](/assets/1529654749789.jpg)
+
 在 Java 7 引入的 NIO 2 中，又增添了一种额外的异步 IO 模式，利用事件和回调，处理 Accept、Read 等操作。 AIO 实现看起来是类似这样子：
 
-AsynchronousServerSocketChannel serverSock =        AsynchronousServerSocketChannel.open\(\).bind\(sockAddr\);
-
-serverSock.accept\(serverSock, new CompletionHandler&lt;&gt;\(\) { // 为异步操作指定 CompletionHandler 回调函数
-
+```java
+AsynchronousServerSocketChannel serverSock =        AsynchronousServerSocketChannel.open().bind(sockAddr);
+serverSock.accept(serverSock, new CompletionHandler<>() { // 为异步操作指定 CompletionHandler 回调函数
+    @Override
+    public void completed(AsynchronousSocketChannel sockChannel, AsynchronousServerSocketChannel serverSock) {
+        serverSock.accept(serverSock, this);
+        // 另外一个 write（sock，CompletionHandler{}）
+        sayHelloWorld(sockChannel, Charset.defaultCharset().encode
+                ("Hello World!"));
+    }
+  // 省略其他路径处理方法...
+});
 ```
-@Override
-
-public void completed\(AsynchronousSocketChannel sockChannel, AsynchronousServerSocketChannel serverSock\) {
-
-    serverSock.accept\(serverSock, this\);
-
-    // 另外一个 write（sock，CompletionHandler{}）
-
-    sayHelloWorld\(sockChannel, Charset.defaultCharset\(\).encode
-
-            \("Hello World!"\)\);
-
-}
-```
-
-// 省略其他路径处理方法...
-
-}\);
 
 鉴于其编程要素（如 Future、CompletionHandler 等），我们还没有进行准备工作，为避免理解困难，我会在专栏后面相关概念补充后的再进行介绍，尤其是 Reactor、Proactor 模式等方面将在 Netty 主题一起分析，这里我先进行概念性的对比：
 
-基本抽象很相似，AsynchronousServerSocketChannel 对应于上面例子中的 ServerSocketChannel；AsynchronousSocketChannel 则对应 SocketChannel。
+* 基本抽象很相似，AsynchronousServerSocketChannel 对应于上面例子中的 ServerSocketChannel；AsynchronousSocketChannel 则对应 SocketChannel。
 
-业务逻辑的关键在于，通过指定 CompletionHandler 回调接口，在 accept/read/write 等关键节点，通过事件机制调用，这是非常不同的一种编程思路。
+* 业务逻辑的关键在于，通过指定 CompletionHandler 回调接口，在 accept/read/write 等关键节点，通过事件机制调用，这是非常不同的一种编程思路。
 
 今天我初步对 Java 提供的 IO 机制进行了介绍，概要地分析了传统同步 IO 和 NIO 的主要组成，并根据典型场景，通过不同的 IO 模式进行了实现与拆解。专栏下一讲，我还将继续分析 Java IO 的主题。
 
-一课一练
+## 思考
 
 关于今天我们讨论的题目你做到心中有数了吗？留一道思考题给你，NIO 多路复用的局限性是什么呢？你遇到过相关的问题吗？
 
