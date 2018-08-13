@@ -106,51 +106,48 @@ public short doSomething() {
 
 * 接口分离（Interface Segregation），我们在进行类和接口设计时，如果在一个接口里定义了太多方法，其子类很可能面临两难，就是只有部分方法对它是有意义的，这就破坏了程序的内聚性。
 
-   对于这种情况，可以通过拆分成功能单一的多个接口，将行为进行解耦。在未来维护中，如果某个接口设计有变，不会对使用其他接口的子类构成影响。
+  对于这种情况，可以通过拆分成功能单一的多个接口，将行为进行解耦。在未来维护中，如果某个接口设计有变，不会对使用其他接口的子类构成影响。
 
 * 依赖反转（Dependency Inversion），实体应该依赖于抽象而不是实现。也就是说高层次模块，不应该依赖于低层次模块，而是应该基于抽象。实践这一原则是保证产品代码之间适当耦合度的法宝。
 
-OOP 原则实践中的取舍
+### OOP 原则实践中的取舍
 
 值得注意的是，现代语言的发展，很多时候并不是完全遵守前面的原则的，比如，Java 10 中引入了本地方法类型推断和 var 类型。按照，里氏替换原则，我们通常这样定义变量：
 
-List&lt;String&gt; list = new ArrayList&lt;&gt;\(\);
+```java
+List<String> list = new ArrayList<>();
+```
 
 如果使用 var 类型，可以简化为
 
-var list = new ArrayList&lt;String&gt;\(\);
+```java
+var list = new ArrayList<String>();
+```
 
 但是，list 实际会被推断为“ArrayList &lt; String &gt;”
 
-ArrayList&lt;String&gt; list = new ArrayList&lt;String&gt;\(\);
+```java
+ArrayList<String> list = new ArrayList<String>();
+```
 
 理论上，这种语法上的便利，其实是增强了程序对实现的依赖，但是微小的类型泄漏却带来了书写的便利和代码可读性的提高，所以，实践中我们还是要按照得失利弊进行选择，而不是一味得遵循原则。
 
-OOP 原则在面试题目中的分析
+### OOP 原则在面试题目中的分析
 
 我在以往面试中发现，即使是有多年编程经验的工程师，也还没有真正掌握面向对象设计的基本的原则，如开关原则（Open-Close）。看看下面这段代码，改编自朋友圈盛传的某伟大公司产品代码，你觉得可以利用面向对象设计原则如何改进？
 
+```java
 public class VIPCenter {
-
-void serviceVIP\(T extend User user&gt;\) {
-
-```
- if \(user instanceof SlumDogVIP\) {
-
-    // 穷 X VIP，活动抢的那种
-
-    // do somthing
-
-  } else if\(user instanceof RealVIP\) {
-
-    // do somthing
-
+  void serviceVIP(T extend User user>) {
+     if (user instanceof SlumDogVIP) {
+        // 穷 X VIP，活动抢的那种
+        // do somthing
+      } else if(user instanceof RealVIP) {
+        // do somthing
+      }
+      // ...
   }
-
-  // ...
 ```
-
-}
 
 这段代码的一个问题是，业务逻辑集中在一起，当出现新的用户类型时，比如，大数据发现了我们是肥羊，需要去收获一下， 这就需要直接去修改服务方法代码实现，这可能会意外影响不相关的某个用户类型逻辑。
 
