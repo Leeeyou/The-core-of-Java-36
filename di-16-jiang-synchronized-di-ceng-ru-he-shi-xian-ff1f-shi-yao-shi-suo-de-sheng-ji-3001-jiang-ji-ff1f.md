@@ -72,59 +72,41 @@ Handle h_obj(THREAD, obj);
 -XX:-UseBiasedLocking
 ```
 
-fast\_enter 是我们熟悉的完整锁获取路径，slow\_enter 则是绕过偏斜锁，直接进入轻量级锁获取逻辑。
+* fast\_enter 是我们熟悉的完整锁获取路径，slow\_enter 则是绕过偏斜锁，直接进入轻量级锁获取逻辑。
 
 那么 fast\_enter 是如何实现的呢？同样是通过在代码库搜索，我们可以定位到synchronizer.cpp。 类似 fast\_enter 这种实现，解释器或者动态编译器，都是拷贝这段基础逻辑，所以如果我们修改这部分逻辑，要保证一致性。这部分代码是非常敏感的，微小的问题都可能导致死锁或者正确性问题。
 
-void ObjectSynchronizer::fast\_enter\(Handle obj, BasicLock\* lock,
-
-```
-                                bool attempt\_rebias, TRAPS\) {
-```
-
-if \(UseBiasedLocking\) {
-
-```
-if \(!SafepointSynchronize::is\_at\_safepoint\(\)\) {
-
-  BiasedLocking::Condition cond = BiasedLocking::revoke\_and\_rebias\(obj, attempt\_rebias, THREAD\);
-
-  if \(cond == BiasedLocking::BIAS\_REVOKED\_AND\_REBIASED\) {
-
-    return;
-
+```java
+void ObjectSynchronizer::fast_enter(Handle obj, BasicLock* lock,
+                                    bool attempt_rebias, TRAPS) {
+  if (UseBiasedLocking) {
+    if (!SafepointSynchronize::is_at_safepoint()) {
+      BiasedLocking::Condition cond = BiasedLocking::revoke_and_rebias(obj, attempt_rebias, THREAD);
+      if (cond == BiasedLocking::BIAS_REVOKED_AND_REBIASED) {
+        return;
+      }
+    } else {
+      assert(!attempt_rebias, "can not rebias toward VM thread");
+      BiasedLocking::revoke_at_safepoint(obj);
+    }
+    assert(!obj->mark()->has_bias_pattern(), "biases should be revoked by now");
   }
 
-} else {
-
-  assert\(!attempt\_rebias, "can not rebias toward VM thread"\);
-
-  BiasedLocking::revoke\_at\_safepoint\(obj\);
-
+  slow_enter(obj, lock, THREAD);
 }
-
-assert\(!obj-&gt;mark\(\)-&gt;has\_bias\_pattern\(\), "biases should be revoked by now"\);
 ```
-
-}
-
-slow\_enter\(obj, lock, THREAD\);
-
-}
 
 我来分析下这段逻辑实现：
 
-biasedLocking定义了偏斜锁相关操作，revoke\_and\_rebias 是获取偏斜锁的入口方法，revoke\_at\_safepoint 则定义了当检测到安全点时的处理逻辑。
+* biasedLocking定义了偏斜锁相关操作，revoke\_and\_rebias 是获取偏斜锁的入口方法，revoke\_at\_safepoint 则定义了当检测到安全点时的处理逻辑。
 
-如果获取偏斜锁失败，则进入 slow\_enter。
+* 如果获取偏斜锁失败，则进入 slow\_enter。
 
-这个方法里面同样检查是否开启了偏斜锁，但是从代码路径来看，其实如果关闭了偏斜锁，是不会进入这个方法的，所以算是个额外的保障性检查吧。
+* 这个方法里面同样检查是否开启了偏斜锁，但是从代码路径来看，其实如果关闭了偏斜锁，是不会进入这个方法的，所以算是个额外的保障性检查吧。
 
 另外，如果你仔细查看synchronizer.cpp里，会发现不仅仅是 synchronized 的逻辑，包括从本地代码，也就是 JNI，触发的 Monitor 动作，全都可以在里面找到（jni\_enter/jni\_exit）。
 
 关于biasedLocking的更多细节我就不展开了，明白它是通过 CAS 设置 Mark Word 就完全够用了，对象头中 Mark Word 的结构，可以参考下图：
-
-
 
 顺着锁升降级的过程分析下去，偏斜锁到轻量级锁的过程是如何实现的呢？
 
@@ -195,8 +177,6 @@ deflate\_idle\_monitors是分析锁降级逻辑的入口，这部分行为还在
 fast\_exit 或者 slow\_exit 是对应的锁释放逻辑。
 
 前面分析了 synchronized 的底层实现，理解起来有一定难度，下面我们来看一些相对轻松的内容。 我在上一讲对比了 synchronized 和 ReentrantLock，Java 核心类库中还有其他一些特别的锁类型，具体请参考下面的图。
-
-
 
 你可能注意到了，这些锁竟然不都是实现了 Lock 接口，ReadWriteLock 是一个单独的接口，它通常是代表了一对儿锁，分别对应只读和写操作，标准类库中提供了再入版本的读写锁实现（ReentrantReadWriteLock），对应的语义和 ReentrantLock 比较相似。
 
