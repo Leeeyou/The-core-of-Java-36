@@ -363,11 +363,13 @@ CAS是英文单词Compare And Swap的缩写，翻译过来就是比较并替换�
 
 强烈推荐：
 
-[漫画：什么是 CAS 机制？](https://mp.weixin.qq.com/s?__biz=MzIxMjE5MTE1Nw==&mid=2653192625&idx=1&sn=cbabbd806e4874e8793332724ca9d454&chksm=8c99f36bbbee7a7d169581dedbe09658d0b0edb62d2cbc9ba4c40f706cb678c7d8c768afb666&scene=21#wechat_redirect) 
+[漫画：什么是 CAS 机制？](https://mp.weixin.qq.com/s?__biz=MzIxMjE5MTE1Nw==&mid=2653192625&idx=1&sn=cbabbd806e4874e8793332724ca9d454&chksm=8c99f36bbbee7a7d169581dedbe09658d0b0edb62d2cbc9ba4c40f706cb678c7d8c768afb666&scene=21#wechat_redirect)
 
 [漫画：什么是CAS机制？（进阶篇）](https://mp.weixin.qq.com/s/nRnQKhiSUrDKu3mz3vItWg)
 
 ### Unsafe 提供的底层能力是什么？
+
+sun.misc.Unsafe这个类从过去到现在一直都有着很大的分歧，有些人喜欢它，而有些人则强烈地讨厌它——但关键的一点在于，它帮助JVM和Java生态系统演化成了今天的样子。基本上可以说，Unsafe类为了速度，在Java严格的安全标准方面做了一些妥协。
 
 ### 怎样判断一个hash算法的好坏？
 
