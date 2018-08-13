@@ -28,25 +28,27 @@ Spring Bean 生命周期比较复杂，可以分为创建和销毁两个过程�
 
 你可以参考下面示意图理解这个具体过程和先后顺序。
 
+![](/assets/1534127486862.jpg)
+
 第二，Spring Bean 的销毁过程会依次调用 DisposableBean 的 destroy 方法和 Bean 自身定制的 destroy 方法。
 
 Spring Bean 有五个作用域，其中最基础的有下面两种：
 
-Singleton，这是 Spring 的默认作用域，也就是为每个 IOC 容器创建唯一的一个 Bean 实例。
+* Singleton，这是 Spring 的默认作用域，也就是为每个 IOC 容器创建唯一的一个 Bean 实例。
 
-Prototype，针对每个 getBean 请求，容器都会单独创建一个 Bean 实例。
+* Prototype，针对每个 getBean 请求，容器都会单独创建一个 Bean 实例。
 
-从 Bean 的特点来看，Prototype 适合有状态的 Bean，而 Singleton 则更适合无状态的情况。另外，使用 Prototype 作用域需要经过仔细思考，毕竟频繁创建和销毁 Bean 是有明显开销的。
+      从 Bean 的特点来看，Prototype 适合有状态的 Bean，而 Singleton 则更适合无状态的情况。另外，使用 Prototype 作用域需要经过仔细思考，毕竟频繁创建和销毁 Bean 是有明显开销的。
 
 如果是 Web 容器，则支持另外三种作用域：
 
-Request，为每个 HTTP 请求创建单独的 Bean 实例。
+* Request，为每个 HTTP 请求创建单独的 Bean 实例。
 
-Session，很显然 Bean 实例的作用域是 Session 范围。
+* Session，很显然 Bean 实例的作用域是 Session 范围。
 
-GlobalSession，用于 Portlet 容器，因为每个 Portlet 有单独的 Session，GlobalSession 提供一个全局性的 HTTP Session。
+* GlobalSession，用于 Portlet 容器，因为每个 Portlet 有单独的 Session，GlobalSession 提供一个全局性的 HTTP Session。
 
-考点分析
+## 考点分析
 
 今天我选取的是一个入门性质的高频 Spring 面试题目，我认为相比于记忆题目典型回答里的细节步骤，理解和思考 Bean 生命周期所体现出来的 Spring 设计和机制更有意义。
 
