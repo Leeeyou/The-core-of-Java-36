@@ -17,10 +17,8 @@
 * 第14讲 \| 谈谈你知道的设计模式？ 
 * 第15讲 \| synchronized和ReentrantLock有什么区别呢？
 * 周末福利 \| 谈谈我对Java学习和面试的看法
-* 第16讲 \| synchronized底层如何实现？什么是锁的升级、降级？
-* 第17讲 \| 一个线程两次调用start\(\)方法会出现什么情况？
-
-
+* [第16讲 \| synchronized底层如何实现？什么是锁的升级、降级？](di-16-jiang-synchronized-di-ceng-ru-he-shi-xian-ff1f-shi-yao-shi-suo-de-sheng-ji-3001-jiang-ji-ff1f.md)
+* [第17讲 \| 一个线程两次调用start\(\)方法会出现什么情况？](di-17-jiang-yi-ge-xian-cheng-liang-ci-diao-yong-start-fang-fa-hui-chu-xian-shi-yao-qing-kuang-ff1f.md)
 
 * [第18讲 \| 什么情况下Java程序会产生死锁？如何定位、修复？](di-18-jiang-shi-yao-qing-kuang-xia-java-cheng-xu-hui-chan-sheng-si-suo-ff1f-ru-he-ding-wei-3001-xiu-fu-ff1f.md)
 * [第19讲 \| Java并发包提供了哪些并发工具类？](di-19-jiang-java-bing-fa-bao-ti-gong-le-na-xie-bing-fa-gong-ju-lei-ff1f.md)
