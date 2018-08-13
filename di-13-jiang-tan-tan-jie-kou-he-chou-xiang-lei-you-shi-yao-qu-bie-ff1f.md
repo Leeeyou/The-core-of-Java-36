@@ -16,17 +16,13 @@ Java 是非常典型的面向对象语言，曾经有一段时间，程序员整
 
 Java 类实现 interface 使用 implements 关键词，继承 abstract class 则是使用 extends 关键词，我们可以参考 Java 标准库中的 ArrayList。
 
-public class ArrayList&lt;E&gt; extends AbstractList&lt;E&gt;
-
-```
-    implements List&lt;E&gt;, RandomAccess, Cloneable, java.io.Serializable
-```
-
+```java
+public class ArrayList<E> extends AbstractList<E>
+        implements List<E>, RandomAccess, Cloneable, java.io.Serializable
 {
-
 //...
-
 }
+```
 
 ## 考点分析
 
