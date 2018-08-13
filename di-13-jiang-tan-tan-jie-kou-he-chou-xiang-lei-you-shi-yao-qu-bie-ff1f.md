@@ -56,25 +56,17 @@ Java 8 增加了函数式编程的支持，所以又增加了一类定义，即�
 
 你可以参考下面代码片段：
 
-public interface Collection&lt;E&gt; extends Iterable&lt;E&gt; {
-
+```java
+public interface Collection<E> extends Iterable<E> {
+     /**
+     * Returns a sequential Stream with this collection as its source 
+     * ...
+     **/
+     default Stream<E> stream() {
+         return StreamSupport.stream(spliterator(), false);
+     }
+  }
 ```
- /\*\*
-
- \* Returns a sequential Stream with this collection as its source 
-
- \* ...
-
- \*\*/
-
- default Stream&lt;E&gt; stream\(\) {
-
-     return StreamSupport.stream\(spliterator\(\), false\);
-
- }
-```
-
-}
 
 面向对象设计
 
