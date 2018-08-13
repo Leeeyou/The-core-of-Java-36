@@ -14,8 +14,8 @@
 * [第11讲 \| Java提供了哪些IO方式？ NIO如何实现多路复用？](di-11-jiang-java-ti-gong-le-na-xie-io-fang-shi-ff1f-nio-ru-he-shi-xian-duo-lu-fu-yong-ff1f.md)
 * [第12讲 \| Java有几种文件拷贝方式？哪一种最高效？](di-12-jiang-java-you-ji-zhong-wen-jian-kao-bei-fang-shi-ff1f-na-yi-zhong-zui-gao-xiao-ff1f.md)
 * [第13讲 \| 谈谈接口和抽象类有什么区别？](di-13-jiang-tan-tan-jie-kou-he-chou-xiang-lei-you-shi-yao-qu-bie-ff1f.md)
-* 第14讲 \| 谈谈你知道的设计模式？ 
-* 第15讲 \| synchronized和ReentrantLock有什么区别呢？
+* [第14讲 \| 谈谈你知道的设计模式？ ](di-14-jiang-tan-tan-ni-zhi-dao-de-she-ji-mo-shi-ff1f.md)
+* [第15讲 \| synchronized和ReentrantLock有什么区别呢？](di-15-jiang-synchronized-he-reentrantlock-you-shi-yao-qu-bie-ni-ff1f.md)
 * [周末福利 \| 谈谈我对Java学习和面试的看法](zhou-mo-fu-li-tan-tan-wo-dui-java-xue-xi-he-mian-shi-de-kan-fa.md)
 * [第16讲 \| synchronized底层如何实现？什么是锁的升级、降级？](di-16-jiang-synchronized-di-ceng-ru-he-shi-xian-ff1f-shi-yao-shi-suo-de-sheng-ji-3001-jiang-ji-ff1f.md)
 * [第17讲 \| 一个线程两次调用start\(\)方法会出现什么情况？](di-17-jiang-yi-ge-xian-cheng-liang-ci-diao-yong-start-fang-fa-hui-chu-xian-shi-yao-qing-kuang-ff1f.md)
@@ -37,4 +37,6 @@
 * [第33讲 \| 后台服务出现明显“变慢”，谈谈你的诊断思路？](di-33-jiang-hou-tai-fu-wu-chu-xian-ming-xian-201c-bian-man-201d-ff0c-tan-tan-ni-de-zhen-duan-si-lu-ff1f.md)
 * [第34讲 \| 有人说“Lambda能让Java程序慢30倍”，你怎么看？](di-34-jiang-you-ren-shuo-201c-lambda-neng-rang-java-cheng-xu-man-30-bei-201d-ff0c-ni-zen-yao-kan-ff1f.md)
 * [第35讲 \| JVM优化Java代码时都做了很么？](/di-35-jiang-jvm-you-hua-java-dai-ma-shi-du-zuo-le-shi-yao-ff1f.md)
+
+
 
