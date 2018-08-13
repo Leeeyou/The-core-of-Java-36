@@ -155,13 +155,13 @@ try {
 
 ReentrantLock 相比 synchronized，因为可以像普通对象一样使用，所以可以利用其提供的各种便利方法，进行精细的同步操作，甚至是实现 synchronized 难以表达的用例，如：
 
-带超时的获取锁尝试。
+* 带超时的获取锁尝试。
 
-可以判断是否有线程，或者某个特定线程，在排队等待获取锁。
+* 可以判断是否有线程，或者某个特定线程，在排队等待获取锁。
 
-可以响应中断请求。
+* 可以响应中断请求。
 
-...
+* ...
 
 这里我特别想强调条件变量（java.util.concurrent.Condition），如果说 ReentrantLock 是 synchronized 的替代选择，Condition 则是将 wait、notify、notifyAll 等操作转化为相应的对象，将复杂而晦涩的同步操作转变为直观可控的对象行为。
 
@@ -169,83 +169,55 @@ ReentrantLock 相比 synchronized，因为可以像普通对象一样使用，�
 
 我们参考下面的源码，首先，通过再入锁获取条件变量：
 
-/\*\* Condition for waiting takes \*/
-
+```java
+/** Condition for waiting takes */
 private final Condition notEmpty;
 
-/\*\* Condition for waiting puts \*/
-
+/** Condition for waiting puts */
 private final Condition notFull;
 
-public ArrayBlockingQueue\(int capacity, boolean fair\) {
-
-```
-if \(capacity &lt;= 0\)
-
-    throw new IllegalArgumentException\(\);
-
-this.items = new Object\[capacity\];
-
-lock = new ReentrantLock\(fair\);
-
-notEmpty = lock.newCondition\(\);
-
-notFull =  lock.newCondition\(\);
-```
-
+public ArrayBlockingQueue(int capacity, boolean fair) {
+    if (capacity <= 0)
+        throw new IllegalArgumentException();
+    this.items = new Object[capacity];
+    lock = new ReentrantLock(fair);
+    notEmpty = lock.newCondition();
+    notFull =  lock.newCondition();
 }
+```
 
 两个条件变量是从同一再入锁创建出来，然后使用在特定操作中，如下面的 take 方法，判断和等待条件满足：
 
-public E take\(\) throws InterruptedException {
-
-```
-final ReentrantLock lock = this.lock;
-
-lock.lockInterruptibly\(\);
-
-try {
-
-    while \(count == 0\)
-
-        notEmpty.await\(\);
-
-    return dequeue\(\);
-
-} finally {
-
-    lock.unlock\(\);
-
+```java
+public E take() throws InterruptedException {
+    final ReentrantLock lock = this.lock;
+    lock.lockInterruptibly();
+    try {
+        while (count == 0)
+            notEmpty.await();
+        return dequeue();
+    } finally {
+        lock.unlock();
+    }
 }
 ```
-
-}
 
 当队列为空时，试图 take 的线程的正确行为应该是等待入队发生，而不是直接返回，这是 BlockingQueue 的语义，使用条件 notEmpty 就可以优雅地实现这一逻辑。
 
 那么，怎么保证入队触发后续 take 操作呢？请看 enqueue 实现：
 
-private void enqueue\(E e\) {
-
-```
-// assert lock.isHeldByCurrentThread\(\);
-
-// assert lock.getHoldCount\(\) == 1;
-
-// assert items\[putIndex\] == null;
-
-final Object\[\] items = this.items;
-
-items\[putIndex\] = e;
-
-if \(++putIndex == items.length\) putIndex = 0;
-
-count++;
-
-notEmpty.signal\(\); // 通知等待的线程，非空条件已经满足
-```
-
+```java
+private void enqueue(E e) {
+    // assert lock.isHeldByCurrentThread();
+    // assert lock.getHoldCount() == 1;
+    // assert items[putIndex] == null;
+    final Object[] items = this.items;
+    items[putIndex] = e;
+    if (++putIndex == items.length) putIndex = 0;
+    count++;
+    notEmpty.signal(); // 通知等待的线程，非空条件已经满足
 }
+```
 
 通过 signal/await 的组合，完成了条件判断和通知等待线程，非常顺畅就完成了状态流转。注意，signal 和 await 成对调用非常重要，不然假设只有 await 动作，线程会一直等待直到被打断（interrupt）。
 
