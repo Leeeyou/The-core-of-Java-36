@@ -108,75 +108,54 @@ void ObjectSynchronizer::fast_enter(Handle obj, BasicLock* lock,
 
 关于biasedLocking的更多细节我就不展开了，明白它是通过 CAS 设置 Mark Word 就完全够用了，对象头中 Mark Word 的结构，可以参考下图：
 
+![](/assets/1530514749728.jpg)
+
 顺着锁升降级的过程分析下去，偏斜锁到轻量级锁的过程是如何实现的呢？
 
 我们来看看 slow\_enter 到底做了什么。
 
-void ObjectSynchronizer::slow\_enter\(Handle obj, BasicLock\* lock, TRAPS\) {
+```java
+void ObjectSynchronizer::slow_enter(Handle obj, BasicLock* lock, TRAPS) {
+  markOop mark = obj->mark();
+ if (mark->is_neutral()) {
+       // 将目前的 Mark Word 复制到 Displaced Header 上
+    lock->set_displaced_header(mark);
+    // 利用 CAS 设置对象的 Mark Word
+    if (mark == obj()->cas_set_mark((markOop) lock, mark)) {
+      TEVENT(slow_enter: release stacklock);
+      return;
+    }
+    // 检查存在竞争
+  } else if (mark->has_locker() &&
+             THREAD->is_lock_owned((address)mark->locker())) {
+    // 清除
+    lock->set_displaced_header(NULL);
+    return;
+  }
 
-markOop mark = obj-&gt;mark\(\);
-
-if \(mark-&gt;is\_neutral\(\)\) {
-
-```
-   // 将目前的 Mark Word 复制到 Displaced Header 上
-
-lock-&gt;set\_displaced\_header\(mark\);
-
-// 利用 CAS 设置对象的 Mark Word
-
-if \(mark == obj\(\)-&gt;cas\_set\_mark\(\(markOop\) lock, mark\)\) {
-
-  TEVENT\(slow\_enter: release stacklock\);
-
-  return;
-
+  // 重置 Displaced Header
+  lock->set_displaced_header(markOopDesc::unused_mark());
+  ObjectSynchronizer::inflate(THREAD,
+                              obj(),
+                              inflate_cause_monitor_enter)->enter(THREAD);
 }
-
-// 检查存在竞争
 ```
-
-} else if \(mark-&gt;has\_locker\(\) &&
-
-```
-         THREAD-&gt;is\_lock\_owned\(\(address\)mark-&gt;locker\(\)\)\) {
-
-// 清除
-
-lock-&gt;set\_displaced\_header\(NULL\);
-
-return;
-```
-
-}
-
-// 重置 Displaced Header
-
-lock-&gt;set\_displaced\_header\(markOopDesc::unused\_mark\(\)\);
-
-ObjectSynchronizer::inflate\(THREAD,
-
-```
-                          obj\(\),
-
-                          inflate\_cause\_monitor\_enter\)-&gt;enter\(THREAD\);
-```
-
-}
 
 请结合我在代码中添加的注释，来理解如何从试图获取轻量级锁，逐步进入锁膨胀的过程。你可以发现这个处理逻辑，和我在这一讲最初介绍的过程是十分吻合的。
 
-设置 Displaced Header，然后利用 cas\_set\_mark 设置对象 Mark Word，如果成功就成功获取轻量级锁。
+* 设置 Displaced Header，然后利用 cas\_set\_mark 设置对象 Mark Word，如果成功就成功获取轻量级锁。
 
-否则 Displaced Header，然后进入锁膨胀阶段，具体实现在 inflate 方法中。
+* 否则 Displaced Header，然后进入锁膨胀阶段，具体实现在 inflate 方法中。
 
 今天就不介绍膨胀的细节了，我这里提供了源代码分析的思路和样例，考虑到应用实践，再进一步增加源代码解读意义不大，有兴趣的同学可以参考我提供的synchronizer.cpp链接，例如：
 
-deflate\_idle\_monitors是分析锁降级逻辑的入口，这部分行为还在进行持续改进，因为其逻辑是在安全点内运行，处理不当可能拖长 JVM 停顿（STW，stop-the-world）的时间。
+* deflate\_idle\_monitors是分析锁降级逻辑的入口，这部分行为还在进行持续改进，因为其逻辑是在安全点内运行，处理不当可能拖长 JVM 停顿（STW，stop-the-world）的时间。
 
-fast\_exit 或者 slow\_exit 是对应的锁释放逻辑。
+* fast\_exit 或者 slow\_exit 是对应的锁释放逻辑。
 
 前面分析了 synchronized 的底层实现，理解起来有一定难度，下面我们来看一些相对轻松的内容。 我在上一讲对比了 synchronized 和 ReentrantLock，Java 核心类库中还有其他一些特别的锁类型，具体请参考下面的图。
+
+![](/assets/1530514761478.jpg)
 
 你可能注意到了，这些锁竟然不都是实现了 Lock 接口，ReadWriteLock 是一个单独的接口，它通常是代表了一对儿锁，分别对应只读和写操作，标准类库中提供了再入版本的读写锁实现（ReentrantReadWriteLock），对应的语义和 ReentrantLock 比较相似。
 
@@ -190,57 +169,32 @@ Java 并发包提供的读写锁等扩展了锁的能力，它所基于的原理
 
 下面是一个基于读写锁实现的数据结构，当数据量较大，并发读多、并发写少的时候，能够比纯同步版本凸显出优势。
 
+```java
 public class RWSample {
-
-```
-private final Map&lt;String, String&gt; m = new TreeMap&lt;&gt;\(\);
-
-private final ReentrantReadWriteLock rwl = new ReentrantReadWriteLock\(\);
-
-private final Lock r = rwl.readLock\(\);
-
-private final Lock w = rwl.writeLock\(\);
-
-public String get\(String key\) {
-
-    r.lock\(\);
-
-    System.out.println\(" 读锁锁定！"\);
-
-    try {
-
-        return m.get\(key\);
-
-    } finally {
-
-        r.unlock\(\);
-
-    }
-
-}
-
-
-
-public String put\(String key, String entry\) {
-
-    w.lock\(\);
-
-System.out.println\(" 写锁锁定！"\);
-
+    private final Map<String, String> m = new TreeMap<>();
+    private final ReentrantReadWriteLock rwl = new ReentrantReadWriteLock();
+    private final Lock r = rwl.readLock();
+    private final Lock w = rwl.writeLock();
+    public String get(String key) {
+        r.lock();
+        System.out.println(" 读锁锁定！");
         try {
-
-            return m.put\(key, entry\);
-
+            return m.get(key);
         } finally {
-
-            w.unlock\(\);
-
+            r.unlock();
         }
-
     }
 
-// …
-
+    public String put(String key, String entry) {
+        w.lock();
+    System.out.println(" 写锁锁定！");
+            try {
+                return m.put(key, entry);
+            } finally {
+                w.unlock();
+            }
+        }
+    // …
 }
 ```
 
@@ -250,61 +204,35 @@ System.out.println\(" 写锁锁定！"\);
 
 所以，JDK 在后期引入了 StampedLock，在提供类似读写锁的同时，还支持优化读模式。优化读基于假设，大多数情况下读操作并不会和写操作冲突，其逻辑是先试着修改，然后通过 validate 方法确认是否进入了写模式，如果没有进入，就成功避免了开销；如果进入，则尝试获取读锁。请参考我下面的样例代码。
 
+```java
 public class StampedSample {
+    private final StampedLock sl = new StampedLock();
 
-```
-private final StampedLock sl = new StampedLock\(\);
-
-
-
-void mutate\(\) {
-
-    long stamp = sl.writeLock\(\);
-
-    try {
-
-        write\(\);
-
-    } finally {
-
-        sl.unlockWrite\(stamp\);
-
-    }
-
-}
-
-
-
-Data access\(\) {
-
-    long stamp = sl.tryOptimisticRead\(\);
-
-    Data data = read\(\);
-
-    if \(!sl.validate\(stamp\)\) {
-
-        stamp = sl.readLock\(\);
-
+    void mutate() {
+        long stamp = sl.writeLock();
         try {
-
-            data = read\(\);
-
+            write();
         } finally {
-
-            sl.unlockRead\(stamp\);
-
+            sl.unlockWrite(stamp);
         }
-
     }
 
-    return data;
-
+    Data access() {
+        long stamp = sl.tryOptimisticRead();
+        Data data = read();
+        if (!sl.validate(stamp)) {
+            stamp = sl.readLock();
+            try {
+                data = read();
+            } finally {
+                sl.unlockRead(stamp);
+            }
+        }
+        return data;
+    }
+    // …
 }
-
-// …
 ```
-
-}
 
 注意，这里的 writeLock 和 unLockWrite 一定要保证成对调用。
 
