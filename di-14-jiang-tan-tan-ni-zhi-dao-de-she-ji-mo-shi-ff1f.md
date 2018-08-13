@@ -38,20 +38,14 @@ public BufferedInputStream(InputStream in)
 
 接下来再看第二个例子。创建型模式尤其是工厂模式，在我们的代码中随处可见，我举个相对不同的 API 设计实践。比如，JDK 最新版本中 HTTP/2 Client API，下面这个创建 HttpRequest 的过程，就是典型的构建器模式（Builder），通常会被实现成fluent 风格的 API，也有人叫它方法链。
 
-HttpRequest request = HttpRequest.newBuilder\(new URI\(uri\)\)
-
-```
-                 .header\(headerAlice, valueAlice\)
-
-                 .headers\(headerBob, value1Bob,
-
-                  headerCarl, valueCarl,
-
-                  headerBob, value2Bob\)
-
-                 .GET\(\)
-
-                 .build\(\);
+```java
+HttpRequest request = HttpRequest.newBuilder(new URI(uri))
+                     .header(headerAlice, valueAlice)
+                     .headers(headerBob, value1Bob,
+                      headerCarl, valueCarl,
+                      headerBob, value2Bob)
+                     .GET()
+                     .build();
 ```
 
 使用构建器模式，可以比较优雅地解决构建复杂对象的麻烦，这里的“复杂”是指类似需要输入的参数组合较多，如果用构造函数，我们往往需要为每一种可能的输入参数组合实现相应的构造函数，一系列复杂的构造函数会让代码阅读性和可维护性变得很差。
@@ -60,9 +54,9 @@ HttpRequest request = HttpRequest.newBuilder\(new URI\(uri\)\)
 
 更进一步进行设计模式考察，面试官可能会：
 
-希望你写一个典型的设计模式实现。这虽然看似简单，但即使是最简单的单例，也能够综合考察代码基本功。
+* 希望你写一个典型的设计模式实现。这虽然看似简单，但即使是最简单的单例，也能够综合考察代码基本功。
 
-考察典型的设计模式使用，尤其是结合标准库或者主流开源框架，考察你对业界良好实践的掌握程度。
+* 考察典型的设计模式使用，尤其是结合标准库或者主流开源框架，考察你对业界良好实践的掌握程度。
 
 在面试时如果恰好问到你不熟悉的模式，你可以稍微引导一下，比如介绍你在产品中使用了什么自己相对熟悉的模式，试图解决什么问题，它们的优点和缺点等。
 
@@ -72,17 +66,12 @@ HttpRequest request = HttpRequest.newBuilder\(new URI\(uri\)\)
 
 我们来实现一个日常非常熟悉的单例设计模式。看起来似乎很简单，那么下面这个样例符合基本需求吗？
 
+```java
 public class Singleton {
-
-```
-   private static Singleton instance = new Singleton\(\);
-
-   public static Singleton getInstance\(\) {
-
-      return instance;
-
-   }
-
+    private static Singleton instance = new Singleton();
+    public static Singleton getInstance() {
+        return instance;
+    }
 }
 ```
 
@@ -92,71 +81,46 @@ public class Singleton {
 
 专栏第 10 讲介绍 ConcurrentHashMap 时，提到过标准类库中很多地方使用懒加载（lazy-load），改善初始内存开销，单例同样适用，下面是修正后的改进版本。
 
+```java
 public class Singleton {
-
-```
     private static Singleton instance;
-
-    private Singleton\(\) {
-
+    private Singleton() {
     }
-
-    public static Singleton getInstance\(\) {
-
-        if \(instance == null\) {
-
-        instance = new Singleton\(\);
-
+    public static Singleton getInstance() {
+        if (instance == null) {
+        instance = new Singleton();
         }
-
     return instance;
-
     }
-
 }
 ```
 
 这个实现在单线程环境不存在问题，但是如果处于并发场景，就需要考虑线程安全，最熟悉的就莫过于“双检锁”，其要点在于：
 
-这里的 volatile 能够提供可见性，以及保证 getInstance 返回的是初始化完全的对象。
+* 这里的 volatile 能够提供可见性，以及保证 getInstance 返回的是初始化完全的对象。
 
-在同步之前进行 null 检查，以尽量避免进入相对昂贵的同步块。
+* 在同步之前进行 null 检查，以尽量避免进入相对昂贵的同步块。
 
-直接在 class 级别进行同步，保证线程安全的类方法调用。
+* 直接在 class 级别进行同步，保证线程安全的类方法调用。
 
+```java
 public class Singleton {
-
-```
-private static volatile Singleton singleton = null;
-
-private Singleton\(\) {
-
-}
-
-
-
-public static Singleton getSingleton\(\) {
-
-    if \(singleton == null\) { // 尽量避免重复进入同步块
-
-        synchronized \(Singleton.class\) { // 同步.class，意味着对同步类方法调用
-
-            if \(singleton == null\) {
-
-                singleton = new Singleton\(\);
-
-            }
-
-        }
-
+    private static volatile Singleton singleton = null;
+    private Singleton() {
     }
 
-    return singleton;
-
+    public static Singleton getSingleton() {
+        if (singleton == null) { // 尽量避免重复进入同步块
+            synchronized (Singleton.class) { // 同步.class，意味着对同步类方法调用
+                if (singleton == null) {
+                    singleton = new Singleton();
+                }
+            }
+        }
+        return singleton;
+    }
 }
 ```
-
-}
 
 在这段代码中，争论较多的是 volatile 修饰静态变量，当 Singleton 类本身有多个成员变量时，需要保证初始化过程完成后，才能被 get 到。
 
@@ -164,65 +128,49 @@ public static Singleton getSingleton\(\) {
 
 当然，也有一些人推荐利用内部类持有静态对象的方式实现，其理论依据是对象初始化过程中隐含的初始化锁（有兴趣的话你可以参考jls-12.4.2 中对 LC 的说明），这种和前面的双检锁实现都能保证线程安全，不过语法稍显晦涩，未必有特别的优势。
 
+```java
 public class Singleton {
+    private Singleton(){}
+    public static Singleton getSingleton(){
+        return Holder.singleton;
+    }
 
-```
-private Singleton\(\){}
-
-public static Singleton getSingleton\(\){
-
-    return Holder.singleton;
-
-}
-
-
-
-private static class Holder {
-
-    private static Singleton singleton = new Singleton\(\);
-
+    private static class Holder {
+        private static Singleton singleton = new Singleton();
+    }
 }
 ```
-
-}
 
 所以，可以看出，即使是看似最简单的单例模式，在增加各种高标准需求之后，同样需要非常多的实现考量。
 
 上面是比较学究的考察，其实实践中未必需要如此复杂，如果我们看 Java 核心类库自己的单例实现，比如java.lang.Runtime，你会发现：
 
-它并没使用复杂的双检锁之类。
+* 它并没使用复杂的双检锁之类。
 
-静态实例被声明为 final，这是被通常实践忽略的，一定程度保证了实例不被篡改（专栏第 6 讲介绍过，反射之类可以绕过私有访问限制），也有有限的保证执行顺序的语义。
+* 静态实例被声明为 final，这是被通常实践忽略的，一定程度保证了实例不被篡改（专栏第 6 讲介绍过，反射之类可以绕过私有访问限制），也有有限的保证执行顺序的语义。
 
-private static final Runtime currentRuntime = new Runtime\(\);
-
+```java
+private static final Runtime currentRuntime = new Runtime();
 private static Version version;
-
 // …
-
-public static Runtime getRuntime\(\) {
-
-```
-return currentRuntime;
-```
-
+public static Runtime getRuntime() {
+    return currentRuntime;
 }
-
-/\*\* Don't let anyone else instantiate this class \*/
-
-private Runtime\(\) {}
+/** Don't let anyone else instantiate this class */
+private Runtime() {}
+```
 
 前面说了不少代码实践，下面一起来简要看看主流开源框架，如 Spring 等如何在 API 设计中使用设计模式。你至少要有个大体的印象，如：
 
-BeanFactory和ApplicationContext应用了工厂模式。
+* BeanFactory和ApplicationContext应用了工厂模式。
 
-在 Bean 的创建中，Spring 也为不同 scope 定义的对象，提供了单例和原型等模式实现。
+* 在 Bean 的创建中，Spring 也为不同 scope 定义的对象，提供了单例和原型等模式实现。
 
-我在专栏第 6 讲介绍的 AOP 领域则是使用了代理模式、装饰器模式、适配器模式等。
+* 我在专栏第 6 讲介绍的 AOP 领域则是使用了代理模式、装饰器模式、适配器模式等。
 
-各种事件监听器，是观察者模式的典型应用。
+* 各种事件监听器，是观察者模式的典型应用。
 
-类似 JdbcTemplate 等则是应用了模板模式。
+* 类似 JdbcTemplate 等则是应用了模板模式。
 
 今天，我与你回顾了设计模式的分类和主要类型，并从 Java 核心类库、开源框架等不同角度分析了其采用的模式，并结合单例的不同实现，分析了如何实现符合线程安全等需求的单例，希望可以对你的工程实践有所帮助。另外，我想最后补充的是，设计模式也不是银弹，要避免滥用或者过度设计。
 
