@@ -38,7 +38,7 @@ Spring Bean 有五个作用域，其中最基础的有下面两种：
 
 * Prototype，针对每个 getBean 请求，容器都会单独创建一个 Bean 实例。
 
-      从 Bean 的特点来看，Prototype 适合有状态的 Bean，而 Singleton 则更适合无状态的情况。另外，使用 Prototype 作用域需要经过仔细思考，毕竟频繁创建和销毁 Bean 是有明显开销的。
+  从 Bean 的特点来看，Prototype 适合有状态的 Bean，而 Singleton 则更适合无状态的情况。另外，使用 Prototype 作用域需要经过仔细思考，毕竟频繁创建和销毁 Bean 是有明显开销的。
 
 如果是 Web 容器，则支持另外三种作用域：
 
