@@ -34,4 +34,5 @@
 * [第35讲 \| JVM优化Java代码时都做了很么？](/di-35-jiang-jvm-you-hua-java-dai-ma-shi-du-zuo-le-shi-yao-ff1f.md)
 * [第14讲 \| 谈谈你知道的设计模式？](di-14-jiang-tan-tan-ni-zhi-dao-de-she-ji-mo-shi-ff1f.md)
 * [第15讲 \| synchronized和ReentrantLock有什么区别呢？](di-15-jiang-synchronized-he-reentrantlock-you-shi-yao-qu-bie-ni-ff1f.md)
+* [周末福利 \| 谈谈我对Java学习和面试的看法](zhou-mo-fu-li-tan-tan-wo-dui-java-xue-xi-he-mian-shi-de-kan-fa.md)
 
