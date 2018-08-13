@@ -1,8 +1,10 @@
+# 第22讲 \| AtomicInteger底层实现原理是什么？如何在自己的产品代码中应用CAS操作？
+
 在今天这一讲中，我来分析一下并发包内部的组成，一起来看看各种同步结构、线程池等，是基于什么原理来设计和实现的。
 
 今天我要问你的问题是，AtomicInteger 底层实现原理是什么？如何在自己的产品代码中应用 CAS 操作？
 
-# 典型回答
+## 典型回答
 
 AtomicIntger 是对 int 类型的一个封装，提供原子性的访问和更新操作，其原子性操作的实现是基于 CAS（compare-and-swap）技术。
 
@@ -46,7 +48,7 @@ public final boolean compareAndSet(int expectedValue, int newValue)
 
 **CAS 是 Java 并发中所谓 lock-free 机制的基础。**
 
-# 考点分析
+## 考点分析
 
 今天的问题有点偏向于 Java 并发机制的底层了，虽然我们在开发中未必会涉及 CAS 的实现层面，但是理解其机制，掌握如何在 Java 中运用该技术，还是十分有必要的，尤其是这也是个并发编程的面试热点。
 
@@ -60,7 +62,7 @@ public final boolean compareAndSet(int expectedValue, int newValue)
 
 * 对 ReentrantLock、CyclicBarrier 等并发结构底层的实现技术的理解。
 
-# 知识扩展
+## 知识扩展
 
 关于 CAS 的使用，你可以设想这样一个场景：在数据库产品中，为保证索引的一致性，一个常见的选择是，保证只有一个线程能够排他性地修改一个索引分区，如何在数据库抽象层面实现呢？
 
@@ -234,7 +236,7 @@ final boolean acquireQueued(final Node node, int arg) {
 
 今天我介绍了 Atomic 数据类型的底层技术 CAS，并通过实例演示了如何在产品代码中利用 CAS，最后介绍了并发包的基础技术 AQS，希望对你有所帮助。
 
-# 思考
+## 思考
 
 关于今天我们讨论的题目你做到心中有数了吗？今天布置一个源码阅读作业，AQS 中 Node 的 waitStatus 有什么作用？
 
