@@ -153,55 +153,33 @@ public class VIPCenter {
 
 利用开关原则，我们可以尝试改造为下面的代码：
 
+```java
 public class VIPCenter {
-
-private Map&lt;User.TYPE, ServiceProvider&gt; providers;
-
-void serviceVIP\(T extend User user） {
-
+   private Map<User.TYPE, ServiceProvider> providers;
+   void serviceVIP(T extend User user） {
+      providers.get(user.getType()).service(user);
+   }
+ }
+ interface ServiceProvider{
+   void service(T extend User user) ;
+ }
+ class SlumDogVIPServiceProvider implements ServiceProvider{
+   void service(T extend User user){
+     // do somthing
+   }
+ }
+ class RealVIPServiceProvider implements ServiceProvider{
+   void service(T extend User user) {
+     // do something
+   }
+ } 
 ```
-  providers.get\(user.getType\(\)\).service\(user\);
-```
-
-}
-
-}
-
-interface ServiceProvider{
-
-void service\(T extend User user\) ;
-
-}
-
-class SlumDogVIPServiceProvider implements ServiceProvider{
-
-void service\(T extend User user\){
-
-```
- // do somthing
-```
-
-}
-
-}
-
-class RealVIPServiceProvider implements ServiceProvider{
-
-void service\(T extend User user\) {
-
-```
- // do something
-```
-
-}
-
-}
 
 上面的示例，将不同对象分类的服务方法进行抽象，把业务逻辑的紧耦合关系拆开，实现代码的隔离保证了方便的扩展。
 
 今天我对 Java 面向对象技术进行了梳理，对比了抽象类和接口，分析了 Java 语言在接口层面的演进和相应程序设计实现，最后回顾并实践了面向对象设计的基本原则，希望对你有所帮助。
 
-一课一练
+## 思考
 
 关于接口和抽象类的区别，你做到心中有数了吗？给你布置一个思考题，思考一下自己的产品代码，有没有什么地方违反了基本设计原则？那些一改就崩的代码，是否遵循了开关原则？
 
