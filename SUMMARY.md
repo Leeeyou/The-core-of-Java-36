@@ -42,4 +42,5 @@
 * [第38讲 \| 对比Java标准NIO类库，你知道Netty是如何实现更高性能的吗？](di-38-jiang-duibi-java-biao-zhun-nio-lei-ku-ff0c-ni-zhi-dao-netty-shi-ru-he-shi-xian-geng-gao-xing-neng-de-ma-ff1f.md)
 * [第39讲 \| 谈谈常用的分布式ID的设计方案？Snowflake是否受冬令时切换影响？](di-39-jiang-tan-tan-chang-yong-de-fen-bu-shi-id-de-she-ji-fang-an-ff1f-snowflake-shi-fou-shou-dong-ling-shi-qie-huan-ying-xiang-ff1f.md)
 * [结束语 \| 技术没有终点](jie-shu-yu-ji-zhu-mei-you-zhong-dian.md)
+* [开篇词 \| 以面试题为切入点，有效提升你的Java内功](kai-pian-ci-yi-mian-shi-ti-wei-qie-ru-dian-ff0c-you-xiao-ti-sheng-ni-de-java-nei-gong.md)
 
