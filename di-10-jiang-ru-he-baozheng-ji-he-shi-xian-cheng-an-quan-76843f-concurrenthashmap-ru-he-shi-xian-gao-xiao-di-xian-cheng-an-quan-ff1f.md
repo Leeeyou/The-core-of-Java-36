@@ -361,11 +361,11 @@ static final class CounterCell {
 
 CAS是英文单词Compare And Swap的缩写，翻译过来就是比较并替换。CAS机制当中使用了3个基本操作数：内存地址V，旧的预期值A，要修改的新值B。更新一个变量的时候，只有当变量的预期值A和内存地址V当中的实际值相同时，才会将内存地址V对应的值修改为B。
 
-强烈推荐：漫画：什么是 CAS 机制？ https://mp.weixin.qq.com/s?\_\_biz=MzIxMjE5MTE1Nw==&mid=2653192625&idx=1&sn=cbabbd806e4874e8793332724ca9d454&chksm=8c99f36bbbee7a7d169581dedbe09658d0b0edb62d2cbc9ba4c40f706cb678c7d8c768afb666&scene=21\#wechat\_redirect
+强烈推荐：
 
+[漫画：什么是 CAS 机制？](https://mp.weixin.qq.com/s?__biz=MzIxMjE5MTE1Nw==&mid=2653192625&idx=1&sn=cbabbd806e4874e8793332724ca9d454&chksm=8c99f36bbbee7a7d169581dedbe09658d0b0edb62d2cbc9ba4c40f706cb678c7d8c768afb666&scene=21#wechat_redirect) 
 
-
-漫画：什么是CAS机制？（进阶篇）https://mp.weixin.qq.com/s/nRnQKhiSUrDKu3mz3vItWg
+[漫画：什么是CAS机制？（进阶篇）](https://mp.weixin.qq.com/s/nRnQKhiSUrDKu3mz3vItWg)
 
 ### Unsafe 提供的底层能力是什么？
 
