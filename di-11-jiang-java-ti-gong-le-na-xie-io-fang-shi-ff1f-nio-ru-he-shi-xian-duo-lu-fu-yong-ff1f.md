@@ -211,7 +211,8 @@ public class NIOServer extends Thread {
         }
     }
     private void sayHelloWorld(ServerSocketChannel server) throws IOException {
-        try (SocketChannel client = server.accept();) {          client.write(Charset.defaultCharset().encode("Hello world!"));
+        try (SocketChannel client = server.accept();) {          
+            client.write(Charset.defaultCharset().encode("Hello world!"));
         }
     }
    // 省略了与前面类似的 main
@@ -224,20 +225,20 @@ public class NIOServer extends Thread {
 
 * 然后，创建一个 ServerSocketChannel，并且向 Selector 注册，通过指定 SelectionKey.OP\_ACCEPT，**告诉调度员，它关注的是新的连接请求**。
 
-  注意，为什么我们要明确配置非阻塞模式呢？这是因为阻塞模式下，注册操作是不允许的，会抛出 IllegalBlockingModeException 异常。
+  **注意，为什么我们要明确配置非阻塞模式呢？这是因为阻塞模式下，注册操作是不允许的，会抛出 IllegalBlockingModeException 异常。**
 
 * Selector 阻塞在 select 操作，当有 Channel 发生接入请求，就会被唤醒。
 
 * 在 sayHelloWorld 方法中，通过 SocketChannel 和 Buffer 进行数据操作，在本例中是发送了一段字符串。
 
-可以看到，在前面两个样例中，IO 都是同步阻塞模式，所以需要多线程以实现多任务处理。而 NIO 则是利用了单线程轮询事件的机制，通过高效地定位就绪的 Channel，来决定做什么，仅仅 select 阶段是阻塞的，可以有效避免大量客户端连接时，频繁线程切换带来的问题，应用的扩展能力有了非常大的提高。下面这张图对这种实现思路进行了形象地说明。
+可以看到，在前面两个样例中，IO 都是同步阻塞模式，所以需要多线程以实现多任务处理。而 NIO 则是利用了单线程轮询事件的机制，通过高效地定位就绪的 Channel，来决定做什么，仅仅 select 阶段是阻塞的，可以有效避免大量客户端连接时，频繁线程切换带来的问题，应用的扩展能力有了非常大的提高。下面这张图对这种实现思路进行了形象地说明。~~_**这里SocketChannel和Selector的多对一关系怎么来的，每次创建一个client，不就会创建一个selector吗？所以会存在多个seletor？**_~~
 
 ![](/assets/1529654749789.jpg)
 
 在 Java 7 引入的 NIO 2 中，又增添了一种额外的异步 IO 模式，利用事件和回调，处理 Accept、Read 等操作。 AIO 实现看起来是类似这样子：
 
 ```java
-AsynchronousServerSocketChannel serverSock =        AsynchronousServerSocketChannel.open().bind(sockAddr);
+AsynchronousServerSocketChannel serverSock = AsynchronousServerSocketChannel.open().bind(sockAddr);
 serverSock.accept(serverSock, new CompletionHandler<>() { // 为异步操作指定 CompletionHandler 回调函数
     @Override
     public void completed(AsynchronousSocketChannel sockChannel, AsynchronousServerSocketChannel serverSock) {
