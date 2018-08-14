@@ -252,9 +252,9 @@ JDK 9 的输出片段如下，“+” 表示的就是 diff 命令发现的分配
 > channel.read\(bufferArray\);
 >
 > 注意:该方法适用于请求头长度固定。
->
->
->
+
+
+
 > **分散\(scatter\):**
 >
 > 从Channel中读取数据，"分散"的写入到多个Buffer中。
