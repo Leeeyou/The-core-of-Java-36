@@ -222,7 +222,7 @@ public class NIOServer extends Thread {
 
 * 首先，通过 Selector.open\(\) 创建一个 Selector，作为类似调度员的角色。
 
-* 然后，创建一个 ServerSocketChannel，并且向 Selector 注册，通过指定 SelectionKey.OP\_ACCEPT，告诉调度员，它关注的是新的连接请求。
+* 然后，创建一个 ServerSocketChannel，并且向 Selector 注册，通过指定 SelectionKey.OP\_ACCEPT，**告诉调度员，它关注的是新的连接请求**。
 
   注意，为什么我们要明确配置非阻塞模式呢？这是因为阻塞模式下，注册操作是不允许的，会抛出 IllegalBlockingModeException 异常。
 
