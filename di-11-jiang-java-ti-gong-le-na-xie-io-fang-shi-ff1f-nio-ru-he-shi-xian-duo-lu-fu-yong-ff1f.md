@@ -239,7 +239,7 @@ public class NIOServer extends Thread {
 
 * 在 sayHelloWorld 方法中，通过 SocketChannel 和 Buffer 进行数据操作，在本例中是发送了一段字符串。
 
-可以看到，在前面两个样例中，IO 都是同步阻塞模式，所以需要多线程以实现多任务处理。而 NIO 则是利用了单线程轮询事件的机制，通过高效地定位就绪的 Channel，来决定做什么，仅仅 select 阶段是阻塞的，可以有效避免大量客户端连接时，频繁线程切换带来的问题，应用的扩展能力有了非常大的提高。下面这张图对这种实现思路进行了形象地说明。~~_**这里SocketChannel和Selector的多对一关系怎么来的，每次创建一个client，不就会创建一个selector吗？所以会存在多个seletor？**_~~
+可以看到，在前面两个样例中，IO 都是同步阻塞模式，所以需要多线程以实现多任务处理。而 NIO 则是利用了单线程轮询事件的机制，通过高效地定位就绪的 Channel，来决定做什么，仅仅 select 阶段是阻塞的，可以有效避免大量客户端连接时，频繁线程切换带来的问题，应用的扩展能力有了非常大的提高。下面这张图对这种实现思路进行了形象地说明。~~_**这里SocketChannel和Selector的多对一关系怎么来的，每次创建一个client，不就会创建一个selector吗？所以会存在多个seletor？找一个Selector的例子**_~~
 
 ![](/assets/1529654749789.jpg)
 
