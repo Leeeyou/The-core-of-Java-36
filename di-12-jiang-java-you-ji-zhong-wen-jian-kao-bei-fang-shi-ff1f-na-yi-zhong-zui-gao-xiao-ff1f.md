@@ -172,7 +172,7 @@ Buffer 有几个基本属性：
 
 * Direct Buffer：如果我们看 Buffer 的方法定义，你会发现它定义了 isDirect\(\) 方法，返回当前 Buffer 是否是 Direct 类型。**这是因为 Java 提供了堆内和堆外（Direct）Buffer，我们可以以它的 allocate 或者 allocateDirect 方法直接创建。**
 
-* MappedByteBuffer：它将文件按照指定大小直接映射为内存区域，当程序访问这个内存区域时将直接操作这块儿文件数据，省去了将数据从内核空间向用户空间传输的损耗。我们可以使用FileChannel.map创建 MappedByteBuffer，它本质上也是种 Direct Buffer。
+* MappedByteBuffer：它将文件按照指定大小直接映射为内存区域，当程序访问这个内存区域时将直接操作这块儿文件数据，**省去了将数据从内核空间向用户空间传输的损耗**。我们可以使用FileChannel.map创建 MappedByteBuffer，它本质上也是种 Direct Buffer。
 
 在实际使用中，Java 会尽量对 Direct Buffer 仅做本地 IO 操作，对于很多大数据量的 IO 密集操作，可能会带来非常大的性能优势，因为：
 
