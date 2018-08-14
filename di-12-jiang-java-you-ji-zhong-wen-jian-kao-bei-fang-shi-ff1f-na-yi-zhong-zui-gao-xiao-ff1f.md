@@ -91,12 +91,9 @@ transferTo 的传输过程是：
 其实，这个问题的答案还真不是那么直观，因为实际上有几个不同的 copy 方法。
 
 ```java
-public static Path copy(Path source, Path target, CopyOption... options)
-    throws IOException
-public static long copy(InputStream in, Path target, CopyOption... options)
-    throws IOException
-public static long copy(Path source, OutputStream out) 
-throws IOException
+public static Path copy(Path source, Path target, CopyOption... options) throws IOException
+public static long copy(InputStream in, Path target, CopyOption... options) throws IOException
+public static long copy(Path source, OutputStream out) throws IOException
 ```
 
 可以看到，copy 不仅仅是支持文件之间操作，没有人限定输入输出流一定是针对文件的，这是两个很实用的工具方法。
