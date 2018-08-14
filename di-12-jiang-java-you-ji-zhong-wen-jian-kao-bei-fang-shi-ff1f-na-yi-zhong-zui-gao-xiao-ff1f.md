@@ -223,7 +223,7 @@ jcmd <pid> VM.native_memory detail.diff
 
 我们可以在 Internal 部分发现 Direct Buffer 内存使用的信息，这是因为其底层实际是利用 unsafe\_allocatememory。严格说，这不是 JVM 内部使用的内存，所以在 JDK 11 以后，其实它是归类在 other 部分里。
 
-JDK 9 的输出片段如下，“+”表示的就是 diff 命令发现的分配变化：
+JDK 9 的输出片段如下，“+” 表示的就是 diff 命令发现的分配变化：
 
 ```java
 -Internal (reserved=679KB +4KB, committed=679KB +4KB)
