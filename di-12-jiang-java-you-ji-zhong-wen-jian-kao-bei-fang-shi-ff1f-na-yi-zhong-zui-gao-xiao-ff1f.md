@@ -172,7 +172,7 @@ Buffer 有几个基本属性：
 
 * Direct Buffer：如果我们看 Buffer 的方法定义，你会发现它定义了 isDirect\(\) 方法，返回当前 Buffer 是否是 Direct 类型。**这是因为 Java 提供了堆内和堆外（Direct）Buffer，我们可以以它的 allocate 或者 allocateDirect 方法直接创建。**
 
-* MappedByteBuffer：它将文件按照指定大小直接映射为内存区域，当程序访问这个内存区域时将直接操作这块儿文件数据，**省去了将数据从内核空间向用户空间传输的损耗**。我们可以使用FileChannel.map创建 MappedByteBuffer，它本质上也是种 Direct Buffer。
+* MappedByteBuffer：它将文件按照指定大小直接映射为内存区域，当程序访问这个内存区域时将直接操作这块儿文件数据，**省去了将数据从内核空间向用户空间传输的损耗**。**我们可以使用FileChannel.map创建 MappedByteBuffer，它本质上也是种 Direct Buffer。**
 
 在实际使用中，Java 会尽量对 Direct Buffer 仅做本地 IO 操作，对于很多大数据量的 IO 密集操作，可能会带来非常大的性能优势，因为：
 
@@ -180,7 +180,7 @@ Buffer 有几个基本属性：
 
 * 减少了堆内对象存储的可能额外维护工作，所以访问效率可能有所提高。
 
-但是请注意，Direct Buffer 创建和销毁过程中，都会比一般的堆内 Buffer 增加部分开销，所以通常都建议用于长期使用、数据较大的场景。
+**但是请注意，Direct Buffer 创建和销毁过程中，都会比一般的堆内 Buffer 增加部分开销，所以通常都建议用于长期使用、数据较大的场景。**
 
 使用 Direct Buffer，我们需要清楚它对内存和 JVM 参数的影响。首先，因为它不在堆上，所以 Xmx 之类参数，其实并不能影响 Direct Buffer 等堆外成员所使用的内存额度，我们可以使用下面参数设置大小：
 
