@@ -160,9 +160,9 @@ Buffer 有几个基本属性：
 
 * 当我们写入几个字节的数据时，position 就会跟着水涨船高，但是它不可能超过 limit 的大小。
 
-* 如果我们想把前面写入的数据读出来，需要调用 flip 方法，将 position 设置为 0，limit 设置为以前的 position 那里。
+* **如果我们想把前面写入的数据读出来，需要调用 flip 方法，将 position 设置为 0，limit 设置为以前的 position 那里。**
 
-* 如果还想从头再读一遍，可以调用 rewind，让 limit 不变，position 再次设置为 0。
+* **如果还想从头再读一遍，可以调用 rewind，让 limit 不变，position 再次设置为 0。**
 
 更进一步的详细使用，我建议参考相关教程。
 
@@ -170,7 +170,7 @@ Buffer 有几个基本属性：
 
 我这里重点介绍两种特别的 Buffer。
 
-* Direct Buffer：如果我们看 Buffer 的方法定义，你会发现它定义了 isDirect\(\) 方法，返回当前 Buffer 是否是 Direct 类型。这是因为 Java 提供了堆内和堆外（Direct）Buffer，我们可以以它的 allocate 或者 allocateDirect 方法直接创建。
+* Direct Buffer：如果我们看 Buffer 的方法定义，你会发现它定义了 isDirect\(\) 方法，返回当前 Buffer 是否是 Direct 类型。**这是因为 Java 提供了堆内和堆外（Direct）Buffer，我们可以以它的 allocate 或者 allocateDirect 方法直接创建。**
 
 * MappedByteBuffer：它将文件按照指定大小直接映射为内存区域，当程序访问这个内存区域时将直接操作这块儿文件数据，省去了将数据从内核空间向用户空间传输的损耗。我们可以使用FileChannel.map创建 MappedByteBuffer，它本质上也是种 Direct Buffer。
 
