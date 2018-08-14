@@ -239,3 +239,23 @@ JDK 9 的输出片段如下，“+” 表示的就是 diff 命令发现的分配
 
 关于今天我们讨论的题目你做到心中有数了吗？你可以思考下，如果我们需要在 channel 读取的过程中，将不同片段写入到相应的 Buffer 里面（类似二进制消息分拆成消息头、消息体等），可以采用 NIO 的什么机制做到呢？
 
+> 可以利用NIO分散-scatter机制来写入不同buffer。
+>
+>
+>
+> Code:
+>
+> ByteBuffer header = ByteBuffer.allocate\(128\);
+>
+> ByteBuffer body = ByteBuffer.allocate\(1024\);
+>
+> ByteBuffer\[\] bufferArray = {header, body};
+>
+> channel.read\(bufferArray\);
+>
+>
+>
+> 注意:该方法适用于请求头长度固定。
+
+
+
