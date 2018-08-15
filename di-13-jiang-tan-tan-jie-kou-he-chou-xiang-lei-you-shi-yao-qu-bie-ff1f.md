@@ -48,11 +48,11 @@ Java 相比于其他面向对象语言，如 C++，设计上有一些基本区�
 
 从表面看，这似乎和 Annotation 异曲同工，也确实如此，它的好处是简单直接。对于 Annotation，因为可以指定参数和值，在表达能力上要更强大一些，所以更多人选择使用 Annotation。
 
-Java 8 增加了函数式编程的支持，所以又增加了一类定义，即所谓 functional interface，简单说就是只有一个抽象方法的接口，通常建议使用 @FunctionalInterface Annotation 来标记。Lambda 表达式本身可以看作是一类 functional interface，某种程度上这和面向对象可以算是两码事。我们熟知的 Runnable、Callable 之类，都是 functional interface，这里不再多介绍了，有兴趣你可以参考：[https://www.oreilly.com/learning/java-8-functional-interfaces](https://www.oreilly.com/learning/java-8-functional-interfaces) 。
+Java 8 增加了函数式编程的支持，所以又增加了一类定义，**即所谓 functional interface，简单说就是只有一个抽象方法的接口**，通常建议使用 @FunctionalInterface Annotation 来标记。Lambda 表达式本身可以看作是一类 functional interface，某种程度上这和面向对象可以算是两码事。我们熟知的 Runnable、Callable 之类，都是 functional interface，这里不再多介绍了，有兴趣你可以参考：[https://www.oreilly.com/learning/java-8-functional-interfaces](https://www.oreilly.com/learning/java-8-functional-interfaces) 。
 
 还有一点可能让人感到意外，严格说，Java 8 以后，接口也是可以有方法实现的！
 
-从 Java 8 开始，interface 增加了对 default method 的支持。Java 9 以后，甚至可以定义 private default method。Default method 提供了一种二进制兼容的扩展已有接口的办法。比如，我们熟知的 java.util.Collection，它是 collection 体系的 root interface，在 Java 8 中添加了一系列 default method，主要是增加 Lambda、Stream 相关的功能。我在专栏前面提到的类似 Collections 之类的工具类，很多方法都适合作为 default method 实现在基础接口里面。
+**从 Java 8 开始，interface 增加了对 default method 的支持**。**Java 9 以后，甚至可以定义 private default method**。Default method 提供了一种二进制兼容的扩展已有接口的办法。比如，我们熟知的 java.util.Collection，它是 collection 体系的 root interface，在 Java 8 中添加了一系列 default method，主要是增加 Lambda、Stream 相关的功能。我在专栏前面提到的类似 Collections 之类的工具类，很多方法都适合作为 default method 实现在基础接口里面。
 
 你可以参考下面代码片段：
 
