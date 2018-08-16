@@ -3,10 +3,10 @@
 这里是将极客时间上杨晓峰老师的专栏文章，在这里整理出来方便自己后续复习用（仅用于学习）。文章分为5大模块：
 
 > Java 基础：我会围绕 Java 语言基本特性和机制，由点带面，让你构建牢固的 Java 技术工底。  
-Java 进阶：将围绕并发编程、Java 虚拟机等领域展开，助你攻坚大厂 Java 面试的核心阵地。  
-Java 应用开发扩展：从数据库编程、主流开源框架、分布式开发等，帮你掌握 Java 开发的十八般兵器。  
-Java 安全基础：让你理解常见的应用安全问题和处理方法，掌握如何写出符合大厂规范的安全代码。  
-Java 性能基础：你将掌握相关工具、方法论与基础实践。  
+> Java 进阶：将围绕并发编程、Java 虚拟机等领域展开，助你攻坚大厂 Java 面试的核心阵地。  
+> Java 应用开发扩展：从数据库编程、主流开源框架、分布式开发等，帮你掌握 Java 开发的十八般兵器。  
+> Java 安全基础：让你理解常见的应用安全问题和处理方法，掌握如何写出符合大厂规范的安全代码。  
+> Java 性能基础：你将掌握相关工具、方法论与基础实践。
 
 作为Android开发人员来说，有部分内容更多偏向后台开发，有点难度，对于这部分内容，我自己是量力而行。很多知识点以前只是听说、或者是了解概念，这次在专栏中，收获满满；只要用心读，保持清晰的头脑，应该还会有进一步的提升。
 
@@ -56,3 +56,6 @@ Java 性能基础：你将掌握相关工具、方法论与基础实践。
 * [第38讲 \| 对比Java标准NIO类库，你知道Netty是如何实现更高性能的吗？](https://github.com/LeeeYou/The-core-of-Java-36/blob/master/di-38-jiang-duibi-java-biao-zhun-nio-lei-ku-ff0c-ni-zhi-dao-netty-shi-ru-he-shi-xian-geng-gao-xing-neng-de-ma-ff1f.md)
 * [第39讲 \| 谈谈常用的分布式ID的设计方案？Snowflake是否受冬令时切换影响？](https://github.com/LeeeYou/The-core-of-Java-36/blob/master/di-39-jiang-tan-tan-chang-yong-de-fen-bu-shi-id-de-she-ji-fang-an-ff1f-snowflake-shi-fou-shou-dong-ling-shi-qie-huan-ying-xiang-ff1f.md)
 * [结束语 \| 技术没有终点](https://github.com/LeeeYou/The-core-of-Java-36/blob/master/jie-shu-yu-ji-zhu-mei-you-zhong-dian.md)
+
+
+
