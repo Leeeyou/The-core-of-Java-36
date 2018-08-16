@@ -18,7 +18,7 @@
 
 这个问题主要是考察你对设计模式的了解和掌握程度，更多相关内容你可以参考：[https://en.wikipedia.org/wiki/Design\_Patterns。](https://en.wikipedia.org/wiki/Design_Patterns。)
 
-我建议可以在回答时适当地举些例子，更加清晰地说明典型模式到底是什么样子，典型使用场景是怎样的。这里举个 Java 基础类库中的例子供你参考。
+**我建议可以在回答时适当地举些例子，更加清晰地说明典型模式到底是什么样子，典型使用场景是怎样的。**这里举个 Java 基础类库中的例子供你参考。
 
 首先，专栏第 11 讲刚介绍过 IO 框架，我们知道 InputStream 是一个抽象类，标准类库中提供了 FileInputStream、ByteArrayInputStream 等各种不同的子类，分别从不同角度对 InputStream 进行了功能扩展，这是典型的装饰器模式应用案例。
 
