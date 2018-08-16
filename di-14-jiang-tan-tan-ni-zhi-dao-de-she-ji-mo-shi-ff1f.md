@@ -126,7 +126,7 @@ public class Singleton {
 
 在现代 Java 中，内存排序模型（JMM）已经非常完善，通过 volatile 的 write 或者 read，能保证所谓的 happen-before，也就是避免常被提到的指令重排。换句话说，**构造对象的 store 指令能够被保证一定在 volatile read 之前**。
 
-> 指令重排：https://blog.csdn.net/blueheart20/article/details/52117761
+> 指令重排：[https://blog.csdn.net/blueheart20/article/details/52117761](https://blog.csdn.net/blueheart20/article/details/52117761)
 
 当然，也有一些人推荐利用内部类持有静态对象的方式实现，其理论依据是对象初始化过程中隐含的初始化锁（有兴趣的话你可以参考jls-12.4.2 中对 LC 的说明），这种和前面的双检锁实现都能保证线程安全，不过语法稍显晦涩，未必有特别的优势。
 
@@ -179,4 +179,6 @@ private Runtime() {}
 ## 思考
 
 关于设计模式你做到心中有数了吗？你可以思考下，在业务代码中，经常发现大量 XXFacade，外观模式是解决什么问题？适用于什么场景？
+
+参考leeeyou.xyz的[【设计模式09】外观模式](http://leeeyou.xyz/2016/10/03/blog-2016-10-03-HeadFirst09-%E5%A4%96%E8%A7%82%E6%A8%A1%E5%BC%8F/)
 
