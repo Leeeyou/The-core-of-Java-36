@@ -180,5 +180,5 @@ private Runtime() {}
 
 关于设计模式你做到心中有数了吗？你可以思考下，在业务代码中，经常发现大量 XXFacade，外观模式是解决什么问题？适用于什么场景？
 
-参考leeeyou.xyz的[【设计模式09】外观模式](http://leeeyou.xyz/2016/10/03/blog-2016-10-03-HeadFirst09-%E5%A4%96%E8%A7%82%E6%A8%A1%E5%BC%8F/)
+参考leeeyou.xyz的[【设计模式09】外观模式](http://leeeyou.xyz/2016/10/03/blog-2016-10-03-HeadFirst09-外观模式/) ， 比如Glide.with\(\)，retrofit.create\(\)
 
