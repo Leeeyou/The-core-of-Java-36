@@ -48,11 +48,11 @@ Java 相比于其他面向对象语言，如 C++，设计上有一些基本区�
 
 从表面看，这似乎和 Annotation 异曲同工，也确实如此，它的好处是简单直接。对于 Annotation，因为可以指定参数和值，在表达能力上要更强大一些，所以更多人选择使用 Annotation。
 
-Java 8 增加了函数式编程的支持，所以又增加了一类定义，即所谓 functional interface，简单说就是只有一个抽象方法的接口，通常建议使用 @FunctionalInterface Annotation 来标记。Lambda 表达式本身可以看作是一类 functional interface，某种程度上这和面向对象可以算是两码事。我们熟知的 Runnable、Callable 之类，都是 functional interface，这里不再多介绍了，有兴趣你可以参考：[https://www.oreilly.com/learning/java-8-functional-interfaces](https://www.oreilly.com/learning/java-8-functional-interfaces) 。
+Java 8 增加了函数式编程的支持，所以又增加了一类定义，**即所谓 functional interface，简单说就是只有一个抽象方法的接口**，通常建议使用 @FunctionalInterface Annotation 来标记。Lambda 表达式本身可以看作是一类 functional interface，某种程度上这和面向对象可以算是两码事。我们熟知的 Runnable、Callable 之类，都是 functional interface，这里不再多介绍了，有兴趣你可以参考：[https://www.oreilly.com/learning/java-8-functional-interfaces](https://www.oreilly.com/learning/java-8-functional-interfaces) 。
 
 还有一点可能让人感到意外，严格说，Java 8 以后，接口也是可以有方法实现的！
 
-从 Java 8 开始，interface 增加了对 default method 的支持。Java 9 以后，甚至可以定义 private default method。Default method 提供了一种二进制兼容的扩展已有接口的办法。比如，我们熟知的 java.util.Collection，它是 collection 体系的 root interface，在 Java 8 中添加了一系列 default method，主要是增加 Lambda、Stream 相关的功能。我在专栏前面提到的类似 Collections 之类的工具类，很多方法都适合作为 default method 实现在基础接口里面。
+**从 Java 8 开始，interface 增加了对 default method 的支持**。**Java 9 以后，甚至可以定义 private default method**。Default method 提供了一种二进制兼容的扩展已有接口的办法。比如，我们熟知的 java.util.Collection，它是 collection 体系的 root interface，在 Java 8 中添加了一系列 default method，主要是增加 Lambda、Stream 相关的功能。我在专栏前面提到的类似 Collections 之类的工具类，很多方法都适合作为 default method 实现在基础接口里面。
 
 你可以参考下面代码片段：
 
@@ -74,11 +74,11 @@ public interface Collection<E> extends Iterable<E> {
 
 我们一定要清楚面向对象的基本要素：封装、继承、多态。
 
-封装的目的是隐藏事务内部的实现细节，以便提高安全性和简化编程。封装提供了合理的边界，避免外部调用者接触到内部的细节。我们在日常开发中，因为无意间暴露了细节导致的难缠 bug 太多了，比如在多线程环境暴露内部状态，导致的并发修改问题。从另外一个角度看，封装这种隐藏，也提供了简化的界面，避免太多无意义的细节浪费调用者的精力。
+**封装的目的是隐藏事务内部的实现细节，以便提高安全性和简化编程**。封装提供了合理的边界，避免外部调用者接触到内部的细节。我们在日常开发中，因为无意间暴露了细节导致的难缠 bug 太多了，比如在多线程环境暴露内部状态，导致的并发修改问题。从另外一个角度看，封装这种隐藏，也提供了简化的界面，避免太多无意义的细节浪费调用者的精力。
 
 继承是代码复用的基础机制，类似于我们对于马、白马、黑马的归纳总结。但要注意，继承可以看作是非常紧耦合的一种关系，父类代码修改，子类行为也会变动。在实践中，过度滥用继承，可能会起到反效果。
 
-多态，你可能立即会想到重写（override）和重载（overload）、向上转型。简单说，重写是父子类中相同名字和参数的方法，不同的实现；重载则是相同名字的方法，但是不同的参数，本质上这些方法签名是不一样的，为了更好说明，请参考下面的样例代码：
+多态，你可能立即会想到重写（override）和重载（overload）、向上转型。简单说，**重写是父子类中相同名字和参数的方法，不同的实现；重载则是相同名字的方法，但是不同的参数**，本质上这些方法签名是不一样的，为了更好说明，请参考下面的样例代码：
 
 ```java
 public int doSomething() {
@@ -100,15 +100,15 @@ public short doSomething() {
 
 * 单一职责（Single Responsibility），类或者对象最好是只有单一职责，在程序设计中如果发现某个类承担着多种义务，可以考虑进行拆分。
 
-* 开关原则（Open-Close, Open for extension, close for modification），设计要对扩展开放，对修改关闭。换句话说，程序设计应保证平滑的扩展性，尽量避免因为新增同类功能而修改已有实现，这样可以少产出些回归（regression）问题。
+* 开关原则（Open-Close, Open for extension, close for modification），设计要对扩展开放，对修改关闭。换句话说，**程序设计应保证平滑的扩展性，尽量避免因为新增同类功能而修改已有实现，这样可以少产出些回归（regression）问题**。
 
 * 里氏替换（Liskov Substitution），这是面向对象的基本要素之一，进行继承关系抽象时，凡是可以用父类或者基类的地方，都可以用子类替换。
 
-* 接口分离（Interface Segregation），我们在进行类和接口设计时，如果在一个接口里定义了太多方法，其子类很可能面临两难，就是只有部分方法对它是有意义的，这就破坏了程序的内聚性。
+* 接口分离（Interface Segregation），我们在进行类和接口设计时，**如果在一个接口里定义了太多方法，其子类很可能面临两难，就是只有部分方法对它是有意义的，这就破坏了程序的内聚性**。
 
   对于这种情况，可以通过拆分成功能单一的多个接口，将行为进行解耦。在未来维护中，如果某个接口设计有变，不会对使用其他接口的子类构成影响。
 
-* 依赖反转（Dependency Inversion），实体应该依赖于抽象而不是实现。也就是说高层次模块，不应该依赖于低层次模块，而是应该基于抽象。实践这一原则是保证产品代码之间适当耦合度的法宝。
+* 依赖反转（Dependency Inversion），实体应该依赖于抽象而不是实现。也就是说高层次模块，不应该依赖于低层次模块，而是应该基于抽象。实践这一原则是保证产品代码之间适当耦合度的法宝。**依赖反转实际上是对面向接口编程最好的体现。**对于这个概念不清楚的话，可以参考这里：[轻松学，浅析依赖倒置（DIP）、控制反转\(IOC\)和依赖注入\(DI\)](https://blog.csdn.net/briblue/article/details/75093382)。
 
 ### OOP 原则实践中的取舍
 
@@ -175,11 +175,13 @@ public class VIPCenter {
  }
 ```
 
-上面的示例，将不同对象分类的服务方法进行抽象，把业务逻辑的紧耦合关系拆开，实现代码的隔离保证了方便的扩展。
+上面的示例，**将不同对象分类的服务方法进行抽象，把业务逻辑的紧耦合关系拆开，实现代码的隔离保证了方便的扩展**。
 
 今天我对 Java 面向对象技术进行了梳理，对比了抽象类和接口，分析了 Java 语言在接口层面的演进和相应程序设计实现，最后回顾并实践了面向对象设计的基本原则，希望对你有所帮助。
 
 ## 思考
 
 关于接口和抽象类的区别，你做到心中有数了吗？给你布置一个思考题，思考一下自己的产品代码，有没有什么地方违反了基本设计原则？那些一改就崩的代码，是否遵循了开关原则？
+
+感觉在项目代码中，无处不在违反者SOLID原则，特别是OID这三个是解耦合的法宝，需要好好实践改造。~~o\(&gt;\_&lt;\)o ~~
 
