@@ -276,3 +276,9 @@ public class StampedSample {
 
 ![](/assets/atomic.png)
 
+
+
+参考[自旋锁和使线程休眠的非自旋锁各有什么适用场景？ - 郭无心的回答 - 知乎](https://www.zhihu.com/question/38857029/answer/78480263)
+
+参考[自旋锁原理及java自旋锁](https://blog.csdn.net/sunp823/article/details/49886051)
+
