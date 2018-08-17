@@ -109,7 +109,7 @@ synchronized (this) {
 }
 ```
 
-如果用 javap 反编译，可以看到类似片段，利用 monitorenter/monitorexit 对实现了同步的语义：
+如果用 javap 反编译，可以看到类似片段，**利用 monitorenter/monitorexit 对实现了同步的语义**：
 
 ```java
 11: astore_1
