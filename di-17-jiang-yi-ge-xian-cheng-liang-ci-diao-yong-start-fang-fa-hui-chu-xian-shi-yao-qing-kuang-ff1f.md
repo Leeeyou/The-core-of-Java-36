@@ -199,8 +199,7 @@ public class TestHello {
         }
     }
 }
-
 ```
 
-
+![](/assets/测试HelloWorld的线程数.png)
 
