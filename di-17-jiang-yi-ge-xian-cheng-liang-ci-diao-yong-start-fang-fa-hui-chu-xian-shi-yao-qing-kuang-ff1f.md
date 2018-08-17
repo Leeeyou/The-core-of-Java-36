@@ -52,7 +52,7 @@ public final native void wait(long timeout) throws InterruptedException;
 
 在具体实现中，线程还分为内核线程、用户线程，Java 的线程实现其实是与虚拟机相关的。对于我们最熟悉的 Sun/Oracle JDK，其线程也经历了一个演进过程，基本上在 Java 1.2 之后，JDK 已经抛弃了所谓的Green Thread，也就是用户调度的线程，现在的模型是一对一映射到操作系统内核线程。
 
-如果我们来看 Thread 的源码，你会发现其基本操作逻辑大都是以 JNI 形式调用的本地代码。
+如果我们来看 Thread 的源码，你会发现其基本操作逻辑大都是**以 JNI 形式调用的本地代码**。
 
 ```java
 private native void start0();
