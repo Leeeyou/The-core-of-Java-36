@@ -161,7 +161,7 @@ private void set(ThreadLocal<?> key, Object value) {
 
     tab[i] = new Entry(key, value);
     int sz = ++size;
-//  扫描并清理发现的废弃条目，并检查容量是否超限
+    //  扫描并清理发现的废弃条目，并检查容量是否超限
     if (!cleanSomeSlots(i, sz) && sz >= threshold)
         rehash();// 清理废弃条目，如果仍然超限，则扩容（加倍）
 }
