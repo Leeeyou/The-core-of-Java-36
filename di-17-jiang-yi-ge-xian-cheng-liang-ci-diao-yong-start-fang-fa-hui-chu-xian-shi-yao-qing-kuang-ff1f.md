@@ -153,7 +153,7 @@ private void set(ThreadLocal<?> key, Object value) {
     for (Entry e = tab[i];; …) {
         //…
         if (k == null) {
-// 替换废弃条目
+            // 替换废弃条目
             replaceStaleEntry(key, value, i);
             return;
         }
