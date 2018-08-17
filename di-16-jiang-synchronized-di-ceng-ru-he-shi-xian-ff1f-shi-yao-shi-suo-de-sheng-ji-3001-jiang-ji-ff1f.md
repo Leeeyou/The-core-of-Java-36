@@ -262,3 +262,5 @@ public class StampedSample {
 
 在java1.5版本及以上的并发框架java.util.concurrent 的atmoic包下的类基本都是自旋锁的实现，由于原理是CAS，所以是非阻塞的框架。
 
+![](/assets/atomic.png)
+
