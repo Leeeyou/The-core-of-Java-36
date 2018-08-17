@@ -229,5 +229,5 @@ private void enqueue(E e) {
 
 关于今天我们讨论的 synchronized 和 ReentrantLock 你做到心中有数了吗？思考一下，你使用过 ReentrantLock 中的哪些方法呢？分别解决什么问题？
 
-当初处理视频直播的时候，处理控件的点击逻辑采用了ReentrantLock 处理，
+当初处理视频直播的时候，处理播放控件的点击逻辑采用了ReentrantLock 处理，
 
