@@ -179,5 +179,28 @@ private void set(ThreadLocal<?> key, Object value) {
 
 关于今天我们讨论的题目你做到心中有数了吗？今天我准备了一个有意思的问题，写一个最简单的打印 HelloWorld 的程序，说说看，运行这个应用，Java 至少会创建几个线程呢？然后思考一下，如何明确验证你的结论，真实情况很可能令你大跌眼镜哦。
 
+```java
+public class TestHello {
+    public static void main(String[] args) {
+        System.out.println("Hello Thread");
+
+        ThreadGroup group = Thread.currentThread().getThreadGroup();
+        ThreadGroup topGroup = group;
+        while (group != null) {
+            topGroup = group;
+            group = group.getParent();
+        }
+
+        int nowThreads = topGroup.activeCount();
+        Thread[] threads = new Thread[nowThreads];
+        topGroup.enumerate(threads);
+        for (int i = 0; i < nowThreads; i++) {
+            System.out.println("线程 " + i + " : " + threads[i].getName());
+        }
+    }
+}
+
+```
+
 
 
