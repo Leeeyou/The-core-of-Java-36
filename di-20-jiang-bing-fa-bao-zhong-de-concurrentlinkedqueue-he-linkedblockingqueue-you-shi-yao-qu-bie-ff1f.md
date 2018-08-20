@@ -16,7 +16,7 @@
 
 * 而 LinkedBlockingQueue 内部则是基于锁，并提供了 BlockingQueue 的等待性方法。
 
-不知道你有没有注意到，java.util.concurrent 包提供的容器（Queue、List、Set）、Map，从命名上可以大概区分为 Concurrent、CopyOnWrite和 Blocking\* 等三类，同样是线程安全容器，可以简单认为：
+不知道你有没有注意到，java.util.concurrent 包提供的容器（Queue、List、Set）、Map，从命名上可以大概区分为 Concurrent、CopyOnWrite和 Blocking 等三类，同样是线程安全容器，可以简单认为：
 
 * Concurrent 类型没有类似 CopyOnWrite 之类容器相对较重的修改开销。
 
