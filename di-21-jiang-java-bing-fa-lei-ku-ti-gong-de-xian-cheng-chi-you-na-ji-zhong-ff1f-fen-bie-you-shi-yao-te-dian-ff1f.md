@@ -20,6 +20,8 @@ Executors 目前提供了 5 种不同的线程池创建配置：
 
 * newWorkStealingPool\(int parallelism\)，这是一个经常被人忽略的线程池，Java 8 才加入这个创建方法，其内部会构建ForkJoinPool，利用Work-Stealing算法，并行地处理任务，**不保证处理顺序**。
 
+更多知识点参考[leeeyou.xyz](http://leeeyou.xyz/2017/04/14/blog-2017-04-14-Java%E4%B9%8B%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E6%B1%87%E6%80%BB/#ThreadPool%E7%94%A8%E6%B3%95%E4%B8%8E%E4%BC%98%E5%8A%BF)
+
 ## 考点分析
 
 Java 并发包中的 Executor 框架无疑是并发编程中的重点，今天的题目考察的是对几种标准线程池的了解，我提供的是一个针对最常见的应用方式的回答。
