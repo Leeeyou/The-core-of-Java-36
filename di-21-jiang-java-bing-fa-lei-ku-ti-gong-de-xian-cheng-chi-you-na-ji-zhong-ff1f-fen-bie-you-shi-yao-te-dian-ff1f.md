@@ -20,7 +20,7 @@ Executors 目前提供了 5 种不同的线程池创建配置：
 
 * newWorkStealingPool\(int parallelism\)，这是一个经常被人忽略的线程池，Java 8 才加入这个创建方法，其内部会构建ForkJoinPool，利用Work-Stealing算法，并行地处理任务，**不保证处理顺序**。
 
-更多知识点参考[leeeyou.xyz](http://leeeyou.xyz/2017/04/14/blog-2017-04-14-Java%E4%B9%8B%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E6%B1%87%E6%80%BB/#ThreadPool%E7%94%A8%E6%B3%95%E4%B8%8E%E4%BC%98%E5%8A%BF)
+更多知识点参考[leeeyou.xyz](http://leeeyou.xyz/2017/04/14/blog-2017-04-14-Java之基础知识汇总/#ThreadPool用法与优势)
 
 ## 考点分析
 
@@ -54,7 +54,7 @@ Executor 框架可不仅仅是线程池，我觉得至少下面几点值得深�
 void execute(Runnable command);
 ```
 
-Executor 的设计是源于 Java 早期线程 API 使用的教训，开发者在实现应用逻辑时，被太多线程创建、调度等不相关细节所打扰。就像我们进行 HTTP 通信，如果还需要自己操作 TCP 握手，开发效率低下，质量也难以保证。
+    Executor 的设计是源于 Java 早期线程 API 使用的教训，开发者在实现应用逻辑时，被太多线程创建、调度等不相关细节所打扰。就像我们进行 HTTP 通信，如果还需要自己操作 TCP 握手，开发效率低下，质量也难以保证。
 
 * ExecutorService 则更加完善，不仅提供 service 的管理功能，比如 shutdown 等方法，也提供了更加全面的提交任务机制，如返回Future而不是 void 的 submit 方法。
 
