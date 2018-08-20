@@ -204,7 +204,7 @@ CountDownLatch 的调度方式相对简单，后一批次的线程进行 await�
 
 ![](/assets/import.png)
 
-在实际应用中的条件依赖，往往没有这么别扭，CountDownLatch 用于线程间等待操作结束是非常简单普遍的用法。通过 countDown/await 组合进行通信是很高效的，通常不建议使用例子里那个循环等待方式。
+在实际应用中的条件依赖，往往没有这么别扭，**CountDownLatch 用于线程间等待操作结束是非常简单普遍的用法**。通过 countDown/await 组合进行通信是很高效的，通常不建议使用例子里那个循环等待方式。
 
 如果用 CyclicBarrier 来表达这个场景呢？我们知道 CyclicBarrier 其实反映的是线程并行运行时的协调，在下面的示例里，从逻辑上，5 个工作线程其实更像是代表了 5 个可以就绪的空车，而不再是 5 个乘客，对比前面 CountDownLatch 的例子更有助于我们区别它们的抽象模型，请看下面的示例代码：
 
@@ -246,7 +246,7 @@ public class CyclicBarrierSample {
 }
 ```
 
-为了让输出更能表达运行时序，我使用了 CyclicBarrier 特有的 barrierAction，当屏障被触发时，Java 会自动调度该动作。因为 CyclicBarrier 会自动进行重置，所以这个逻辑其实可以非常自然的支持更多排队人数。其编译输出如下：
+为了让输出更能表达运行时序，我使用了 CyclicBarrier 特有的 barrierAction，当屏障被触发时，Java 会自动调度该动作。因为 **CyclicBarrier 会自动进行重置**，所以这个逻辑其实可以非常自然的支持更多排队人数。其编译输出如下：
 
 ![](/assets/搜狗截图20180709095425.png)
 
