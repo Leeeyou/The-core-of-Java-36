@@ -12,7 +12,7 @@
 
 * Concurrent 类型基于 lock-free，在常见的多线程访问场景，一般可以提供较高吞吐量。
 
-  * Lock-Free 编程的一个重要效果就是，在一系列访问 Lock-Free 操作的线程中，如果某一个线程被挂起，那么其绝对不会阻止其他线程继续运行。
+  * _Lock-Free 编程的一个重要效果就是，在一系列访问 Lock-Free 操作的线程中，如果某一个线程被挂起，那么其绝对不会阻止其他线程继续运行。_
 
 * 而 LinkedBlockingQueue 内部则是基于锁，并提供了 BlockingQueue 的等待性方法。
 
