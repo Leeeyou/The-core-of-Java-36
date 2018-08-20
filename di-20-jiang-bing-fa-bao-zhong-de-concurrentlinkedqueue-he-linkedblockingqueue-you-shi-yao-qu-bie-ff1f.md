@@ -205,6 +205,51 @@ public class ConsumerProducer {
 }
 ```
 
+```java
+Produced new item: Message0
+    Consumed item: Message0
+Produced new item: Message1
+Produced new item: Message2
+    Consumed item: Message1
+Produced new item: Message3
+Produced new item: Message4
+    Consumed item: Message2
+Produced new item: Message5
+Produced new item: Message6
+    Consumed item: Message3
+Produced new item: Message7
+    Consumed item: Message4
+Produced new item: Message8
+    Consumed item: Message5
+Produced new item: Message9
+    Consumed item: Message6
+Produced new item: Message10
+    Consumed item: Message7
+Produced new item: Message11
+    Consumed item: Message8
+Produced new item: Message12
+    Consumed item: Message9
+Produced new item: Message13
+    Consumed item: Message10
+Produced new item: Message14
+    Consumed item: Message11
+Produced new item: Message15
+    Consumed item: Message12
+Produced new item: Message16
+    Consumed item: Message13
+Produced new item: Message17
+    Consumed item: Message14
+Produced new item: Message18
+    Consumed item: Message15
+Produced new item: Message19
+    Consumed item: Message16
+Time to say good bye!
+    Consumed item: Message17
+    Consumed item: Message18
+    Consumed item: Message19
+Got exit message, bye!
+```
+
 上面是一个典型的生产者 - 消费者样例，如果使用非 Blocking 的队列，那么我们就要自己去实现轮询、条件判断（如检查 poll 返回值是否 null）等逻辑，如果没有特别的场景要求，Blocking 实现起来代码更加简单、直观。
 
 前面介绍了各种队列实现，在日常的应用开发中，如何进行选择呢？
