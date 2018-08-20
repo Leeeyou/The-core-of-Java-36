@@ -136,7 +136,7 @@ public E take() throws InterruptedException {
 
 ### 队列使用场景与典型用例
 
-在实际开发中，我提到过 Queue 被广泛使用在生产者 - 消费者场景，比如利用 BlockingQueue 来实现，由于其提供的等待机制，我们可以少操心很多协调工作，你可以参考下面样例代码：
+在实际开发中，我提到过 Queue 被广泛使用在生产者 - 消费者场景，比如**利用 BlockingQueue 来实现，由于其提供的等待机制，我们可以少操心很多协调工作**，你可以参考下面样例代码：
 
 ```java
 import java.util.concurrent.ArrayBlockingQueue;
