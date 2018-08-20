@@ -211,13 +211,13 @@ public void execute(Runnable command) {
 
 > 通过看源码可以得知，core和max都是1，而且通过FinalizableDelegatedExecutorService进行了包装，保证线程池无法修改。同时shutdown方法通过调用interruptIdleWorkers方法，去停掉没有工作的线程，而shutdownNow方法是直接粗暴的停掉所有线程。无论是shutdown还是shutdownNow都不会进行等待，都会直接将线程池状态设置成shutdown或者stop，如果需要等待，需要调用awaitTernination方法。查找了一下threadFactory的使用，只找到了在worker创建的时候，用来初始化了线程。
 >
->
->
 > 作者回复
 >
 > 不错，很棒的总结；
 >
 > 我问threadFactory次数，其实是问worker都在什么情况下会被创建，比如，比较特别的，任务抛异常时；随便自定义一个threadfactory，模拟提交任务就能体会到
+>
+> ![](/assets/newSingleThreadExecutor.png)
 
 
 
