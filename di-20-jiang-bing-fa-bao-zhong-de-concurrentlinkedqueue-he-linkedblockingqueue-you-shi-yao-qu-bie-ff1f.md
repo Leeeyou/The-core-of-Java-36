@@ -89,7 +89,7 @@ public ArrayBlockingQueue(int capacity, boolean fair)
 
 * DelayedQueue 和 LinkedTransferQueue 同样是无边界的队列。对于无边界的队列，有一个自然的结果，就是 put 操作永远也不会发生其他 BlockingQueue 的那种等待情况。
 
-如果我们分析不同队列的底层实现，BlockingQueue 基本都是基于锁实现，一起来看看典型的 LinkedBlockingQueue。
+如果我们分析不同队列的底层实现，**BlockingQueue 基本都是基于锁实现**，一起来看看典型的 LinkedBlockingQueue。
 
 ```java
 /** Lock held by take, poll, etc */
@@ -130,7 +130,7 @@ public E take() throws InterruptedException {
 }
 ```
 
-类似 ConcurrentLinkedQueue 等，则是基于 CAS 的无锁技术，不需要在每个操作时使用锁，所以扩展性表现要更加优异。
+**类似 ConcurrentLinkedQueue 等，则是基于 CAS 的无锁技术，不需要在每个操作时使用锁，所以扩展性表现要更加优异**。
 
 相对比较另类的 SynchronousQueue，在 Java 6 中，其实现发生了非常大的变化，利用 CAS 替换掉了原本基于锁的逻辑，同步开销比较小。它是 Executors.newCachedThreadPool\(\) 的默认队列。
 
