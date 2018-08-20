@@ -294,5 +294,9 @@ final void setArray(Object[] a) {
 
 你使用过类似 CountDownLatch 的同步结构解决实际问题吗？谈谈你的使用场景和心得。
 
-一个页面有A、B、C三个请求，其中请求C需要请求A和请求B的返回数据作为参数，用过CountdownLatch解决
+一个页面有A、B、C三个请求，其中请求C需要请求A和请求B的返回数据作为参数，用过CountdownLatch解决。
+
+
+
+Android中多线程上传图片到阿里云，将每个线程返回的图片url地址，组成成一个数组传给服务端。
 
