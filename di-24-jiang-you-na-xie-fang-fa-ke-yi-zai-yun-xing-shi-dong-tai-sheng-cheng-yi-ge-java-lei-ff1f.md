@@ -169,7 +169,7 @@ cw.toByteArray();
 
 * ORM 框架
 
-* IOC 容器
+* IOC 容器\(Dagger\)
 
 * 部分 Profiler 工具，或者运行时诊断工具等
 
