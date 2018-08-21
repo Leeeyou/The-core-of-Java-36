@@ -167,9 +167,9 @@ cw.toByteArray();
 
 * 各种 Mock 框架
 
-* ORM 框架
+* ORM 框架\(OrmLite、GreenDAO\)
 
-* IOC 容器\(Dagger\)
+* IOC 容器\(Dagger、ButterKnife\)
 
 * 部分 Profiler 工具，或者运行时诊断工具等
 
