@@ -205,7 +205,7 @@ final boolean nonfairTryAcquire(int acquires) {
 }
 ```
 
-接下来我再来分析 acquireQueued，如果前面的 tryAcquire 失败，代表着锁争抢失败，进入排队竞争阶段。这里就是我们所说的，利用 FIFO 队列，实现线程间对锁的竞争的部分，算是是 AQS 的核心逻辑。
+接下来我再来分析 acquireQueued，如果**前面的 tryAcquire 失败，代表着锁争抢失败**，**进入排队竞争阶段**。这里就是我们所说的，利**用 FIFO 队列，实现线程间对锁的竞争的部分，算是是 AQS 的核心逻辑**。
 
 当前线程会被包装成为一个排他模式的节点（EXCLUSIVE），通过 addWaiter 方法添加到队列中。acquireQueued 的逻辑，简要来说，就是如果当前节点的前面是头节点，则试图获取锁，一切顺利则成为新的头节点；否则，有必要则等待，具体处理逻辑请参考我添加的注释。
 
