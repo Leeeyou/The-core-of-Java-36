@@ -121,7 +121,7 @@ public static Object newProxyInstance(ClassLoader loader,
 
 我们分析一下，动态代码生成是具体发生在什么阶段呢？
 
-不错，就是在 newProxyInstance 生成代理类实例的时候。我选取了 JDK 自己采用的 ASM 作为示例，一起来看看用 ASM 实现的简要过程，请参考下面的示例代码片段。
+不错，就是**在 newProxyInstance 生成代理类实例的时候**。我选取了 JDK 自己采用的 ASM 作为示例，一起来看看用 ASM 实现的简要过程，请参考下面的示例代码片段。
 
 第一步，生成对应的类，其实和我们去写 Java 代码很类似，只不过改为用 ASM 方法和指定参数，代替了我们书写的源码。
 
