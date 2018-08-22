@@ -14,7 +14,7 @@
 -XX:+UseSerialGC
 ```
 
-* ParNew GC，很明显是个新生代 GC 实现，它实际是 Serial GC 的多线程版本，最常见的应用场景是配合老年代的 CMS GC 工作，下面是对应参数
+* ParNew GC，很明显是个新生代 GC 实现，它实际是 Serial GC 的多线程版本，**最常见的应用场景是配合老年代的 CMS GC 工作**，下面是对应参数
 
 ```java
 -XX:+UseConcMarkSweepGC -XX:+UseParNewGC
