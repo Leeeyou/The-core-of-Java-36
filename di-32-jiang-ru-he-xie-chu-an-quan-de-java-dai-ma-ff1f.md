@@ -77,7 +77,7 @@ throw new RuntimeException(hostname + port + “ doesn’t response”);
 
 针对序列化，通常建议：
 
-* 敏感信息不要被序列化！在编码中，建议使用 transient 关键字将其保护起来。
+* **敏感信息不要被序列化！在编码中，建议使用 transient 关键字将其保护起来**。
 
 * 反序列化中，建议在 readObject 中实现与对象构件过程相同的安全检查和数据检查。
 
