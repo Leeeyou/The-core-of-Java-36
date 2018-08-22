@@ -205,7 +205,7 @@ JVM 内部结构就介绍到这里，主要目的是为了加深理解，很多�
 
 > java.lang.Runtime 有freeMemory\(\)、totalMemory\(\)等方法可以获取到内存情况。
 >
-> AndroidStudio中使用DDMS的GUI
+> AndroidStudio中使用DDMS
 
 
 
