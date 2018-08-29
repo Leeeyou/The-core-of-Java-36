@@ -388,5 +388,5 @@ sun.misc.Unsafe这个类从过去到现在一直都有着很大的分歧，有�
 
 ### 关于Volatile的正确使用
 
-参考：\[正确使用 Volatile 变量\]\(https://www.ibm.com/developerworks/cn/java/j-jtp06197.html\)
+参考：[正确使用 Volatile 变量](https://www.ibm.com/developerworks/cn/java/j-jtp06197.html)
 
