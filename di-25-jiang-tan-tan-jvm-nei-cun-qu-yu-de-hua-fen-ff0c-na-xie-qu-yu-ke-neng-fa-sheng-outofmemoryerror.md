@@ -134,7 +134,7 @@ package jvm;
 import java.util.Date;
 
 public class ConstantPoolTest {
-      
+
     private final int a = 10;  
     private final int b = 10;  
     private float c = 11f;  
@@ -371,7 +371,6 @@ Constant pool:
         line 37: 5
 }
 SourceFile: "ConstantPoolTest.java"
-
 ```
 
 
