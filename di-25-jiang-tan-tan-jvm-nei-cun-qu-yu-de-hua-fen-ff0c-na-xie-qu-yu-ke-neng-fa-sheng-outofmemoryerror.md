@@ -124,3 +124,9 @@ Class文件的常量池存放的是编译器能确定的各种字面量以及符
 
 [Class文件中的常量池详解（下）](https://blog.csdn.net/luanlouis/article/details/40301985)
 
+### javac命令和javap命令的使用
+
+
+
+javac是用来编译.java文件的。javap主要用于帮助开发者深入了解Java编译器的机制，有-c 和 -v 两个选项。
+
