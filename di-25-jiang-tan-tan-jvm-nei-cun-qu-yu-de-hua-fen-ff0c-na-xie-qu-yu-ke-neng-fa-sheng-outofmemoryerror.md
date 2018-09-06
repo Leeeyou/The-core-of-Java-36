@@ -112,6 +112,8 @@ JVM 内部的概念庞杂，对于初学者比较晦涩，我的建议是在工�
 
 ### Class文件的常量池与运行时常量池的区别？
 
+Class文件的常量池存放的是编译器
+
 ### Class文件常量池具体是怎样存放数据的？
 
 [Class文件中的常量池](https://blog.csdn.net/luanlouis/article/details/40148053)
