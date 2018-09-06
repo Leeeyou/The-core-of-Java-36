@@ -128,3 +128,251 @@ Class文件的常量池存放的是编译器能确定的各种字面量以及符
 
 javac是用来编译.java文件的。javap主要用于帮助开发者深入了解Java编译器的机制，有-c 和 -v 两个选项。-c 分解方法代码，即显示每个方法具体的字节码；-v 指定显示更进一步的详细信息。
 
+```java
+package jvm;
+
+import java.util.Date;
+
+public class ConstantPoolTest {
+      
+    private final int a = 10;  
+    private final int b = 10;  
+    private float c = 11f;  
+    private float d = 11f;  
+    private float e = 11f;
+    private long f = -6076574518398440533L;
+    private long g = -6076574518398440533L;
+    private double h = 10.1234567890D;
+    private double i = 10.1234567890D;
+    private String s1 = "JVM principle";
+    private String s2 = "JVM principle";
+    private Date date =new Date();
+
+    private String name;
+    private int age;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+}
+```
+
+javap后如下所示：
+
+```java
+D:\Project\IntellJ2\DemoIO\src\jvm>javap -v ConstantPoolTest.class
+Classfile /D:/Project/IntellJ2/DemoIO/src/jvm/ConstantPoolTest.class
+  Last modified 2018-8-31; size 1097 bytes
+  MD5 checksum 399e413b50c9f22646af81e7165ac046
+  Compiled from "ConstantPoolTest.java"
+public class jvm.ConstantPoolTest
+  minor version: 0
+  major version: 52
+  flags: ACC_PUBLIC, ACC_SUPER
+Constant pool:
+   #1 = Methodref          #25.#62        // java/lang/Object."<init>":()V
+   #2 = Fieldref           #24.#63        // jvm/ConstantPoolTest.a:I
+   #3 = Fieldref           #24.#64        // jvm/ConstantPoolTest.b:I
+   #4 = Float              11.0f
+   #5 = Fieldref           #24.#65        // jvm/ConstantPoolTest.c:F
+   #6 = Fieldref           #24.#66        // jvm/ConstantPoolTest.d:F
+   #7 = Fieldref           #24.#67        // jvm/ConstantPoolTest.e:F
+   #8 = Long               -6076574518398440533l
+  #10 = Fieldref           #24.#68        // jvm/ConstantPoolTest.f:J
+  #11 = Fieldref           #24.#69        // jvm/ConstantPoolTest.g:J
+  #12 = Double             10.123456789d
+  #14 = Fieldref           #24.#70        // jvm/ConstantPoolTest.h:D
+  #15 = Fieldref           #24.#71        // jvm/ConstantPoolTest.i:D
+  #16 = String             #72            // JVM principle
+  #17 = Fieldref           #24.#73        // jvm/ConstantPoolTest.s1:Ljava/lang/String;
+  #18 = Fieldref           #24.#74        // jvm/ConstantPoolTest.s2:Ljava/lang/String;
+  #19 = Class              #75            // java/util/Date
+  #20 = Methodref          #19.#62        // java/util/Date."<init>":()V
+  #21 = Fieldref           #24.#76        // jvm/ConstantPoolTest.date:Ljava/util/Date;
+  #22 = Fieldref           #24.#77        // jvm/ConstantPoolTest.name:Ljava/lang/String;
+  #23 = Fieldref           #24.#78        // jvm/ConstantPoolTest.age:I
+  #24 = Class              #79            // jvm/ConstantPoolTest
+  #25 = Class              #80            // java/lang/Object
+  #26 = Utf8               a
+  #27 = Utf8               I
+  #28 = Utf8               ConstantValue
+  #29 = Integer            10
+  #30 = Utf8               b
+  #31 = Utf8               c
+  #32 = Utf8               F
+  #33 = Utf8               d
+  #34 = Utf8               e
+  #35 = Utf8               f
+  #36 = Utf8               J
+  #37 = Utf8               g
+  #38 = Utf8               h
+  #39 = Utf8               D
+  #40 = Utf8               i
+  #41 = Utf8               s1
+  #42 = Utf8               Ljava/lang/String;
+  #43 = Utf8               s2
+  #44 = Utf8               date
+  #45 = Utf8               Ljava/util/Date;
+  #46 = Utf8               name
+  #47 = Utf8               age
+  #48 = Utf8               <init>
+  #49 = Utf8               ()V
+  #50 = Utf8               Code
+  #51 = Utf8               LineNumberTable
+  #52 = Utf8               getName
+  #53 = Utf8               ()Ljava/lang/String;
+  #54 = Utf8               setName
+  #55 = Utf8               (Ljava/lang/String;)V
+  #56 = Utf8               getAge
+  #57 = Utf8               ()I
+  #58 = Utf8               setAge
+  #59 = Utf8               (I)V
+  #60 = Utf8               SourceFile
+  #61 = Utf8               ConstantPoolTest.java
+  #62 = NameAndType        #48:#49        // "<init>":()V
+  #63 = NameAndType        #26:#27        // a:I
+  #64 = NameAndType        #30:#27        // b:I
+  #65 = NameAndType        #31:#32        // c:F
+  #66 = NameAndType        #33:#32        // d:F
+  #67 = NameAndType        #34:#32        // e:F
+  #68 = NameAndType        #35:#36        // f:J
+  #69 = NameAndType        #37:#36        // g:J
+  #70 = NameAndType        #38:#39        // h:D
+  #71 = NameAndType        #40:#39        // i:D
+  #72 = Utf8               JVM principle
+  #73 = NameAndType        #41:#42        // s1:Ljava/lang/String;
+  #74 = NameAndType        #43:#42        // s2:Ljava/lang/String;
+  #75 = Utf8               java/util/Date
+  #76 = NameAndType        #44:#45        // date:Ljava/util/Date;
+  #77 = NameAndType        #46:#42        // name:Ljava/lang/String;
+  #78 = NameAndType        #47:#27        // age:I
+  #79 = Utf8               jvm/ConstantPoolTest
+  #80 = Utf8               java/lang/Object
+{
+  public jvm.ConstantPoolTest();
+    descriptor: ()V
+    flags: ACC_PUBLIC
+    Code:
+      stack=3, locals=1, args_size=1
+         0: aload_0
+         1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+         4: aload_0
+         5: bipush        10
+         7: putfield      #2                  // Field a:I
+        10: aload_0
+        11: bipush        10
+        13: putfield      #3                  // Field b:I
+        16: aload_0
+        17: ldc           #4                  // float 11.0f
+        19: putfield      #5                  // Field c:F
+        22: aload_0
+        23: ldc           #4                  // float 11.0f
+        25: putfield      #6                  // Field d:F
+        28: aload_0
+        29: ldc           #4                  // float 11.0f
+        31: putfield      #7                  // Field e:F
+        34: aload_0
+        35: ldc2_w        #8                  // long -6076574518398440533l
+        38: putfield      #10                 // Field f:J
+        41: aload_0
+        42: ldc2_w        #8                  // long -6076574518398440533l
+        45: putfield      #11                 // Field g:J
+        48: aload_0
+        49: ldc2_w        #12                 // double 10.123456789d
+        52: putfield      #14                 // Field h:D
+        55: aload_0
+        56: ldc2_w        #12                 // double 10.123456789d
+        59: putfield      #15                 // Field i:D
+        62: aload_0
+        63: ldc           #16                 // String JVM principle
+        65: putfield      #17                 // Field s1:Ljava/lang/String;
+        68: aload_0
+        69: ldc           #16                 // String JVM principle
+        71: putfield      #18                 // Field s2:Ljava/lang/String;
+        74: aload_0
+        75: new           #19                 // class java/util/Date
+        78: dup
+        79: invokespecial #20                 // Method java/util/Date."<init>":()V
+        82: putfield      #21                 // Field date:Ljava/util/Date;
+        85: return
+      LineNumberTable:
+        line 5: 0
+        line 7: 4
+        line 8: 10
+        line 9: 16
+        line 10: 22
+        line 11: 28
+        line 12: 34
+        line 13: 41
+        line 14: 48
+        line 15: 55
+        line 16: 62
+        line 17: 68
+        line 18: 74
+
+  public java.lang.String getName();
+    descriptor: ()Ljava/lang/String;
+    flags: ACC_PUBLIC
+    Code:
+      stack=1, locals=1, args_size=1
+         0: aload_0
+         1: getfield      #22                 // Field name:Ljava/lang/String;
+         4: areturn
+      LineNumberTable:
+        line 24: 0
+
+  public void setName(java.lang.String);
+    descriptor: (Ljava/lang/String;)V
+    flags: ACC_PUBLIC
+    Code:
+      stack=2, locals=2, args_size=2
+         0: aload_0
+         1: aload_1
+         2: putfield      #22                 // Field name:Ljava/lang/String;
+         5: return
+      LineNumberTable:
+        line 28: 0
+        line 29: 5
+
+  public int getAge();
+    descriptor: ()I
+    flags: ACC_PUBLIC
+    Code:
+      stack=1, locals=1, args_size=1
+         0: aload_0
+         1: getfield      #23                 // Field age:I
+         4: ireturn
+      LineNumberTable:
+        line 32: 0
+
+  public void setAge(int);
+    descriptor: (I)V
+    flags: ACC_PUBLIC
+    Code:
+      stack=2, locals=2, args_size=2
+         0: aload_0
+         1: iload_1
+         2: putfield      #23                 // Field age:I
+         5: return
+      LineNumberTable:
+        line 36: 0
+        line 37: 5
+}
+SourceFile: "ConstantPoolTest.java"
+
+```
+
+
+
