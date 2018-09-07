@@ -26,7 +26,7 @@
 
 * Parrallel GC，在早期 JDK 8 等版本中，它是 server 模式 JVM 的默认 GC 选择，也被称作是吞吐量优先的 GC。它的算法和 Serial GC 比较相似，尽管实现要复杂的多，**其特点是新生代和老年代 GC 都是并行进行的**，在常见的服务器环境中更加高效。开启选项是：-XX:+UseParallelGC。
 
-另外，Parallel GC 引入了开发者友好的配置项，我们可以直接设置暂停时间或吞吐量等目标，JVM 会自动进行适应性调整，例如下面参数：
+    另外，Parallel GC 引入了开发者友好的配置项，我们可以直接设置暂停时间或吞吐量等目标，JVM 会自动进行适应性调整，例如下面参数：
 
 ```java
 -XX:MaxGCPauseMillis=value
