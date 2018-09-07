@@ -28,7 +28,7 @@
 -XX:+UseParallelGC
 ```
 
-另外，Parallel GC 引入了开发者友好的配置项，我们可以直接设置暂停时间或吞吐量等目标，JVM 会自动进行适应性调整，例如下面参数：
+       另外，Parallel GC 引入了开发者友好的配置项，我们可以直接设置暂停时间或吞吐量等目标，JVM 会自动进行适应性调整，例如下面参数：
 
 ```java
 -XX:MaxGCPauseMillis=value
