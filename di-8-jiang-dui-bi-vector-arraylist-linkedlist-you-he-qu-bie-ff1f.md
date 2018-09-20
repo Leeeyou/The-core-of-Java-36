@@ -22,6 +22,31 @@ private static int newCapacity(int currentCapacity) {
 }
 ```
 
+Vector的扩容源码如下所示：
+
+```
+    private void growBy(int required) {
+        int adding = 0;
+        if (capacityIncrement <= 0) {
+            if ((adding = elementData.length) == 0) {
+                adding = required;
+            }
+            while (adding < required) {
+                adding += adding;
+            }
+        } else {
+            adding = (required / capacityIncrement) * capacityIncrement;
+            if (adding < required) {
+                adding += capacityIncrement;
+            }
+        }
+        E[] newData = newElementArray(elementData.length + adding);
+        System.arraycopy(elementData, 0, newData, 0, elementCount);
+        elementData = newData;
+    }
+
+```
+
 LinkedList 顾名思义是 Java 提供的双向链表，所以它不需要像上面两种那样调整容量，它也不是线程安全的。
 
 ## 考点分析
