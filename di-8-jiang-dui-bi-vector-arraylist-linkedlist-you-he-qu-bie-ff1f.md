@@ -12,6 +12,16 @@ Vector 是 Java 早期提供的线程安全的动态数组，如果不需要线�
 
 ArrayList 是应用更加广泛的动态数组实现，它本身不是线程安全的，所以性能要好很多。与 Vector 近似，ArrayList 也是可以根据需要调整容量，不过两者的调整逻辑有所区别，Vector 在扩容时会提高 1 倍，而 ArrayList 则是增加 50%。
 
+ArrayList的扩容源码如下所示：
+
+```
+private static int newCapacity(int currentCapacity) {
+        int increment = (currentCapacity < (MIN_CAPACITY_INCREMENT / 2) ?
+                MIN_CAPACITY_INCREMENT : currentCapacity >> 1);
+        return currentCapacity + increment;
+}
+```
+
 LinkedList 顾名思义是 Java 提供的双向链表，所以它不需要像上面两种那样调整容量，它也不是线程安全的。
 
 ## 考点分析
