@@ -106,7 +106,14 @@ TreeSet构造函数源码如下：
 public TreeSet() {
     backingMap = new TreeMap<E, Object>();
 }
+```
 
+Hastset构造函数源码如下：
+
+```
+public HashSet() {
+    this(new HashMap<E, HashSet<E>>());
+}
 ```
 
 就像前面提到过的，我们需要对各种具体集合实现，至少了解基本特征和典型使用场景，以 Set 的几个实现为例：
