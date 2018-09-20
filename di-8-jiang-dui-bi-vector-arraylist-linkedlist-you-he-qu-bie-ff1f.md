@@ -108,7 +108,7 @@ public TreeSet() {
 }
 ```
 
-Hashset构造函数源码如下：
+HashSet构造函数源码如下：
 
 ```
 public HashSet() {
