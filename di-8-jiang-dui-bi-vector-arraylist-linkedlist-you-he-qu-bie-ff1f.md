@@ -138,7 +138,7 @@ static <T> List<T> synchronizedList(List<T> list)
 List list = Collections.synchronizedList(new ArrayList());
 ```
 
-它的实现，基本就是将每个基本方法，比如 get、set、add 之类，都通过 synchronizd 添加基本的同步支持，非常简单粗暴，但也非常实用。注意这些方法创建的线程安全集合，都符合迭代时 fail-fast 行为，当发生意外的并发修改时，尽早抛出 ConcurrentModificationException 异常，以避免不可预计的行为。[Java 集合系列04之 fail-fast总结\(通过ArrayList来说明fail-fast的原理、解决办法\)](https://www.cnblogs.com/skywang12345/p/3308762.html)
+它的实现，基本就是将每个基本方法，比如 get、set、add 之类，都通过 synchronizd 添加基本的同步支持，非常简单粗暴，但也非常实用。注意这些方法创建的线程安全集合，都符合迭代时 fail-fast 行为，当发生意外的并发修改时，尽早抛出 ConcurrentModificationException 异常，以避免不可预计的行为。“fail-fast”机制参考 ： [Java 集合系列04之 fail-fast总结\(通过ArrayList来说明fail-fast的原理、解决办法\)](https://www.cnblogs.com/skywang12345/p/3308762.html)
 
 另外一个经常会被考察到的问题，就是理解 Java 提供的默认排序算法，具体是什么排序方式以及设计思路等。
 
