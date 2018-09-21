@@ -240,41 +240,44 @@ static class Node<K,V> implements Map.Entry<K,V> {
 我这里就不再介绍 get 方法和构造函数了，相对比较简单，直接看并发的 put 是如何实现的。
 
 ```java
-final V putVal(K key, V value, boolean onlyIfAbsent) { if (key == null || value == null) throw new NullPointerException();
-    int hash = spread(key.hashCode());
-    int binCount = 0;
-    for (Node<K,V>[] tab = table;;) {
-        Node<K,V> f; int n, i, fh; K fk; V fv;
-        if (tab == null || (n = tab.length) == 0)
-            tab = initTable();
-        else if ((f = tabAt(tab, i = (n - 1) & hash)) == null) {
-            // 利用 CAS 去进行无锁线程安全操作，如果 bin 是空的
-            if (casTabAt(tab, i, null, new Node<K,V>(hash, key, value)))
-                break; 
-        }
-        else if ((fh = f.hash) == MOVED)
-            tab = helpTransfer(tab, f);
-        else if (onlyIfAbsent // 不加锁，进行检查
-                 && fh == hash
-                 && ((fk = f.key) == key || (fk != null && key.equals(fk)))
-                 && (fv = f.val) != null)
-            return fv;
-        else {
-            V oldVal = null;
-            synchronized (f) {
-                   // 细粒度的同步修改操作... 
-                }
-            }
-            // Bin 超过阈值，进行树化
-            if (binCount != 0) {
-                if (binCount >= TREEIFY_THRESHOLD)
-                    treeifyBin(tab, i);
-                if (oldVal != null)
-                    return oldVal;
+final V putVal(K key, V value, boolean onlyIfAbsent) {
+    if (key == null || value == null) throw new NullPointerException();{
+        int hash = spread(key.hashCode());
+        int binCount = 0;
+        for (Node<K,V>[] tab = table;;) {
+            Node<K,V> f; int n, i, fh; K fk; V fv;
+            if (tab == null || (n = tab.length) == 0)
+                tab = initTable();
+            else if ((f = tabAt(tab, i = (n - 1) & hash)) == null) {
+                // 利用 CAS 去进行无锁线程安全操作，如果 bin 是空的
+                if (casTabAt(tab, i, null, new Node<K,V>(hash, key, value)))
                 break;
             }
         }
     }
+    else if ((fh = f.hash) == MOVED)
+       tab = helpTransfer(tab, f);
+    else if (onlyIfAbsent // 不加锁，进行检查
+        && fh == hash
+        && ((fk = f.key) == key || (fk != null && key.equals(fk)))
+        && (fv = f.val) != null)
+        return fv;
+    else {
+        V oldVal = null;
+        synchronized (f) {
+        // 细粒度的同步修改操作...
+        }
+    }
+
+    // Bin 超过阈值，进行树化
+    if (binCount != 0) {
+        if (binCount >= TREEIFY_THRESHOLD)
+        treeifyBin(tab, i);
+        if (oldVal != null)
+        return oldVal;
+        break;
+    }
+    
     addCount(1L, binCount);
     return null;
 }
