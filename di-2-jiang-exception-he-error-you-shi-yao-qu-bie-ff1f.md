@@ -38,7 +38,7 @@ Exception 又分为可检查（checked）异常和不检查（unchecked）异常
 >
 > * NoClassDefFoundError是Error，是unchecked，因此也不需要使用try-catch或者finally语句块包围；而ClassNotFoundException是受检异常（checked Exception），因此需要使用try-catch语句块或者try-finally语句块包围，否则会导致编译错误。
 >
-> * NoClassDefFoundError是链接错误，发生在链接阶段，当解析引用的时候找不到对应的类，就会抛出java.lang.NoClassDefFoundError。可能的原因就是存在多个类加载器 or 多个目标类 or jar包名称被修改 or 对应类在编译过后被删除。![](/assets/44770-9e407a91a7b18f6e.jpg)
+> * NoClassDefFoundError是链接错误，发生在链接阶段，当解析引用的时候找不到对应的类，就会抛出java.lang.NoClassDefFoundError。**可能的原因就是存在多个类加载器 or 多个目标类 or jar包名称被修改 or 对应类在编译过后被删除**。![](/assets/44770-9e407a91a7b18f6e.jpg)
 >
 > * ClassNotFoundException是异常，发生在运行阶段，调用Class.forName\(\)、ClassLoader.findSystemClass\(\)和ClassLoader.loadClass\(\)等方法时可能会引起java.lang.ClassNotFoundException
 >
