@@ -127,7 +127,7 @@ try {
 ```java
 public void readPreferences(String fileName){
  //...perform operations... 
- InputStream in = new FileInputStream\(fileName\);
+ InputStream in = new FileInputStream(fileName);
  //...read the preferences file...
 }
 ```
