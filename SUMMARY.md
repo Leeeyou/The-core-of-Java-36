@@ -37,10 +37,12 @@
 * [第32讲 \| 如何写出安全的Java代码？](di-32-jiang-ru-he-xie-chu-an-quan-de-java-dai-ma-ff1f.md)
 * [第33讲 \| 后台服务出现明显“变慢”，谈谈你的诊断思路？](di-33-jiang-hou-tai-fu-wu-chu-xian-ming-xian-201c-bian-man-201d-ff0c-tan-tan-ni-de-zhen-duan-si-lu-ff1f.md)
 * [第34讲 \| 有人说“Lambda能让Java程序慢30倍”，你怎么看？](di-34-jiang-you-ren-shuo-201c-lambda-neng-rang-java-cheng-xu-man-30-bei-201d-ff0c-ni-zen-yao-kan-ff1f.md)
-* [第35讲 \| JVM优化Java代码时都做了很么？](/di-35-jiang-jvm-you-hua-java-dai-ma-shi-du-zuo-le-shi-yao-ff1f.md)
+* 第35讲 \| JVM优化Java代码时都做了什么？
 * [第36讲 \| 谈谈MySQL支持的事务隔离级别，以及悲观锁和乐观锁的原理和应用场景？](di-36-jiang-tan-tan-mysql-zhi-chi-de-shi-wu-ge-li-ji-bie-ff0c-yi-ji-bei-guan-suo-he-le-guan-suo-de-yuan-li-he-ying-yong-chang-jing-ff1f.md)
 * [第37讲 \| 谈谈Spring Bean的生命周期和作用域？](di-37-jiang-tan-tan-spring-bean-de-sheng-ming-zhou-qi-he-zuo-yong-yu-ff1f.md)
 * [第38讲 \| 对比Java标准NIO类库，你知道Netty是如何实现更高性能的吗？](di-38-jiang-duibi-java-biao-zhun-nio-lei-ku-ff0c-ni-zhi-dao-netty-shi-ru-he-shi-xian-geng-gao-xing-neng-de-ma-ff1f.md)
 * [第39讲 \| 谈谈常用的分布式ID的设计方案？Snowflake是否受冬令时切换影响？](di-39-jiang-tan-tan-chang-yong-de-fen-bu-shi-id-de-she-ji-fang-an-ff1f-snowflake-shi-fou-shou-dong-ling-shi-qie-huan-ying-xiang-ff1f.md)
 * [结束语 \| 技术没有终点](jie-shu-yu-ji-zhu-mei-you-zhong-dian.md)
+
+
 
