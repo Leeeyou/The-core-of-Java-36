@@ -78,7 +78,7 @@ public static void copyFileByChannel(File source, File dest) throws
 
 所以，这种方式会带来一定的额外开销，可能会降低 IO 效率。
 
-**而基于 NIO transferTo 的实现方式，在 Linux 和 Unix 上，则会使用到零拷贝技术，数据传输并不需要用户态参与，省去了上下文切换的开销和不必要的内存拷贝，进而可能提高应用拷贝性能。**注意，transferTo 不仅仅是可以用在文件拷贝中，与其类似的，例如读取磁盘文件，然后进行 Socket 发送，同样可以享受这种机制带来的性能和扩展性提高。
+**而基于 NIO transferTo 的实现方式，在 Linux 和 Unix 上，则会使用到零拷贝技术，数据传输并不需要用户态参与，省去了上下文切换的开销和不必要的内存拷贝，进而可能提高应用拷贝性能**。注意，transferTo 不仅仅是可以用在文件拷贝中，与其类似的，例如读取磁盘文件，然后进行 Socket 发送，同样可以享受这种机制带来的性能和扩展性提高。
 
 transferTo 的传输过程是：
 
@@ -254,7 +254,7 @@ channel.read(bufferArray);
 注意:该方法适用于请求头长度固定。
 
 > 分散\(scatter\)：从Channel中读取数据，"分散"的写入到多个Buffer中。
-
+>
 > 聚集\(gather\)：从多个Buffer中读取数据"聚集"在一起，写入到一个Channel中。
 
 
